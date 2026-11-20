@@ -45,11 +45,8 @@ jobs:
       - run: npm install --no-audit --no-fund
       - name: Database changes
         run: node scripts/apply-sql.mjs
-      - uses: supabase/setup-cli@v1
-        with:
-          version: latest
       - name: Server functions
-        run: supabase functions deploy --project-ref vkrnrupiidbnqxrehrty --use-api
+        run: npx --yes supabase@2 functions deploy --project-ref vkrnrupiidbnqxrehrty --use-api
 
   build:
     needs: backend
