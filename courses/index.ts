@@ -1,5 +1,8 @@
 import { aieng } from './aieng'
+import { analytics } from './analytics'
+import { cloud } from './cloud'
 import { cyber } from './cyber'
+import { ml } from './ml'
 import type { Course } from './types'
 
-export const COURSES: Course[] = [aieng, cyber]
+export const COURSES: Course[] = [aieng, ml, analytics, cyber, cloud]

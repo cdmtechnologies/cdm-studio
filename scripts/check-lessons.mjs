@@ -41,7 +41,7 @@ async function run(html, checks) {
 
 let bad = 0
 // the free tracks' answers live in lesson-solutions.mjs; certified courses carry their own (never shipped)
-const all = [...TRACKS.flatMap((t) => t.lessons).filter((l) => !l.paid && !l.id.match(/^(cyber|aieng)-/)), ...COURSES.flatMap((c) => c.lessons.map((l) => ({ ...l, sol: l.solution })))]
+const all = [...TRACKS.flatMap((t) => t.lessons).filter((l) => !l.paid && !COURSES.some((c) => l.id.startsWith(c.id + '-'))), ...COURSES.flatMap((c) => c.lessons.map((l) => ({ ...l, sol: l.solution })))]
 for (const l of all) {
   if (l.kind !== 'code') continue
   const sol = l.sol !== undefined ? () => l.sol : SOLUTIONS[l.id]

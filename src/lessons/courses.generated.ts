@@ -161,6 +161,310 @@ export const COURSES: Track[] = [
     ]
   },
   {
+    "id": "ml",
+    "title": "Machine learning foundations",
+    "blurb": "Understand how machines learn from data by building the core algorithms yourself: regression, classification, evaluation and fairness.",
+    "colour": "rose",
+    "emoji": "🧠",
+    "course": {
+      "level": "Intermediate",
+      "hours": 10,
+      "free": 2,
+      "skills": [
+        "Features, labels and datasets",
+        "Train/test splits",
+        "Linear regression",
+        "Classification with k-nearest neighbours",
+        "Accuracy, precision and recall",
+        "Overfitting and fairness"
+      ],
+      "careers": [
+        "Junior data scientist",
+        "ML engineer (entry)",
+        "Data analyst using ML",
+        "AI product analyst"
+      ],
+      "examQuestions": 20
+    },
+    "lessons": [
+      {
+        "id": "ml-what-is-ml",
+        "title": "What machine learning really is",
+        "minutes": 20,
+        "kind": "read",
+        "outline": "Rules vs learning, features and labels, the three kinds of machine learning.",
+        "body": "## From rules to examples\n\nNormal software follows **rules a person wrote**: *if the basket is over ₦50,000, give 5% off.* Machine learning (ML) is different: you give the computer **examples**, and it **finds the rule** itself.\n\n- Spam filters learned from millions of emails marked \"spam\" or \"not spam\".\n- Loan apps learn which applicants repaid from past loans.\n- Your phone's keyboard learned which word you usually type next.\n\nML is useful when the rule is too complicated to write by hand, or when it changes over time.\n\n## The vocabulary\n\nImagine a table of past house sales in Abuja:\n\n| size (m²) | bedrooms | area | price (₦m) |\n|---|---|---|---|\n| 120 | 3 | Gwarinpa | 85 |\n| 300 | 5 | Maitama | 420 |\n\n- Each **row** is an **example** (also called a sample or record).\n- The input columns (size, bedrooms, area) are **features**.\n- The column we want to predict (price) is the **label** or **target**.\n- A **model** is the rule learned from the examples: give it features, it predicts the label.\n- **Training** means finding the model; **inference** (or prediction) means using it on new examples.\n\n## Three kinds of machine learning\n\n1. **Supervised learning**: examples come with labels. *Regression* predicts a number (price, demand); *classification* predicts a category (spam / not spam, will repay / will default).\n2. **Unsupervised learning**: no labels; find structure. *Clustering* groups similar customers; *anomaly detection* spots unusual transactions.\n3. **Reinforcement learning**: an agent learns by trial and reward (games, robots, some recommendation systems).\n\nLarge language models like Claude are trained mostly with self-supervised learning (predicting the next word), then improved with human feedback.\n\n## Garbage in, garbage out\n\nA model can only be as good as its data. If the data is **too small**, **wrong**, **old** or **unfair** (for example, only from one city or one group of people), the model will be too. Most of a data scientist's time goes into collecting and cleaning data, not into algorithms.\n\nIn this course you will build the core algorithms in plain JavaScript, so you understand what libraries like scikit-learn, TensorFlow and PyTorch do for you.",
+        "quiz": [
+          {
+            "q": "Predicting tomorrow's sales in naira is…",
+            "options": [
+              "Classification",
+              "Regression",
+              "Clustering"
+            ],
+            "answer": 1,
+            "why": "A number is predicted: regression."
+          },
+          {
+            "q": "In a table predicting loan repayment, \"repaid: yes/no\" is the…",
+            "options": [
+              "Feature",
+              "Label",
+              "Model"
+            ],
+            "answer": 1,
+            "why": "The value we want to predict is the label."
+          },
+          {
+            "q": "Grouping customers by buying habits with no labels is…",
+            "options": [
+              "Supervised learning",
+              "Unsupervised learning (clustering)",
+              "Reinforcement learning"
+            ],
+            "answer": 1,
+            "why": "No labels: unsupervised."
+          }
+        ]
+      },
+      {
+        "id": "ml-data-prep",
+        "title": "Preparing data: cleaning, scaling and splitting",
+        "minutes": 25,
+        "kind": "code",
+        "outline": "Remove bad rows, scale features with min-max, and split data into training and test sets.",
+        "body": "## Clean before you learn\n\nReal data has missing values, typing mistakes and outliers. Common first steps:\n\n- **Drop or fill missing values** (here we drop rows with any missing number)\n- **Scale features** so a big-number feature (price in naira) does not drown a small one (bedrooms). **Min-max scaling** maps each value to between 0 and 1: `(x - min) / (max - min)`.\n- **Split** the data: train the model on one part, and test it on data it has **never seen**. Testing on the training data is like marking an exam with the answers the student memorised.\n\nA common split is 80% training, 20% test. Shuffle first, so the test set is not just \"the last month\". For tests to be repeatable, use a fixed **seed** for the shuffle; here we keep it simple and split in order after you shuffle elsewhere.\n\n## Your task\n\n1. `clean(rows)`: keep only rows where **every** value is a finite number (`Number.isFinite`).\n2. `minMax(values)`: return the values scaled to 0..1. If all values are the same, return all zeros.\n3. `split(rows, testShare)`: return `{ train, test }` where `test` is the **last** `Math.round(rows.length * testShare)` rows and `train` is the rest, without changing the original array.",
+        "task": "Write clean, minMax and split.",
+        "starter": "<script>\n  function clean(rows) {\n  }\n  function minMax(values) {\n  }\n  function split(rows, testShare) {\n  }\n</script>\n",
+        "checks": [
+          {
+            "label": "clean drops rows with missing or bad numbers",
+            "test": "return JSON.stringify(clean([[1, 2], [3, null], [NaN, 4], [5, 6], [7, Infinity]])) === '[[1,2],[5,6]]'"
+          },
+          {
+            "label": "minMax scales to 0..1",
+            "test": "return JSON.stringify(minMax([10, 20, 30])) === '[0,0.5,1]'"
+          },
+          {
+            "label": "minMax of equal values is zeros",
+            "test": "return JSON.stringify(minMax([4, 4])) === '[0,0]'"
+          },
+          {
+            "label": "split 80/20",
+            "test": "const r = split([1,2,3,4,5,6,7,8,9,10], 0.2); return JSON.stringify(r.test) === '[9,10]' && r.train.length === 8"
+          },
+          {
+            "label": "split does not change the original",
+            "test": "const a = [1,2,3,4,5]; split(a, 0.4); return a.length === 5"
+          }
+        ],
+        "hint": "clean: rows.filter(r => r.every(v => Number.isFinite(v))). minMax: const lo = Math.min(...values), hi = Math.max(...values); return values.map(v => hi === lo ? 0 : (v - lo) / (hi - lo)). split: const n = Math.round(rows.length * testShare); return { train: rows.slice(0, rows.length - n), test: rows.slice(rows.length - n) }"
+      },
+      {
+        "id": "ml-regression",
+        "title": "Linear regression from scratch",
+        "minutes": 30,
+        "kind": "code",
+        "outline": "Fit a straight line with least squares, predict, and measure error with MAE and RMSE.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "ml-knn",
+        "title": "Classification with k-nearest neighbours",
+        "minutes": 30,
+        "kind": "code",
+        "outline": "Distance between examples, majority voting, and build a k-NN classifier.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "ml-metrics",
+        "title": "Is the model any good? Accuracy, precision, recall",
+        "minutes": 25,
+        "kind": "code",
+        "outline": "The confusion matrix and why accuracy can lie, with a fraud-detection example.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "ml-overfitting",
+        "title": "Overfitting, validation and fairness",
+        "minutes": 25,
+        "kind": "code",
+        "outline": "Why models memorise, k-fold cross-validation, and check a model for unfair error rates between groups.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "ml-clustering",
+        "title": "Unsupervised learning: k-means clustering",
+        "minutes": 30,
+        "kind": "code",
+        "outline": "Group customers without labels by building the k-means algorithm.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "ml-deploy",
+        "title": "From notebook to product: deploying ML and your career",
+        "minutes": 20,
+        "kind": "read",
+        "outline": "Python tools, deployment, monitoring for drift, and how to get an ML job.",
+        "body": "",
+        "paid": true
+      }
+    ]
+  },
+  {
+    "id": "analytics",
+    "title": "Data analytics for business",
+    "blurb": "Turn spreadsheets into decisions: clean data, summarise it, find trends, build KPIs and tell the story with charts.",
+    "colour": "amber",
+    "emoji": "📈",
+    "course": {
+      "level": "Beginner",
+      "hours": 9,
+      "free": 2,
+      "skills": [
+        "Asking good business questions",
+        "Data cleaning",
+        "Descriptive statistics",
+        "Pivot tables and grouping",
+        "Trends, growth and moving averages",
+        "KPIs and dashboards",
+        "Data storytelling"
+      ],
+      "careers": [
+        "Data analyst",
+        "Business analyst",
+        "Finance / sales analyst",
+        "Operations analyst"
+      ],
+      "examQuestions": 20
+    },
+    "lessons": [
+      {
+        "id": "analytics-questions",
+        "title": "The analyst's job: from questions to decisions",
+        "minutes": 15,
+        "kind": "read",
+        "outline": "The analytics process, kinds of analysis, and how to ask questions that lead to action.",
+        "body": "## Analysts sell decisions, not charts\n\nA shop owner does not want \"a dashboard\". She wants to know **which branch to restock, which product to stop, and whether last month's promo paid off**. The analyst's job is to turn data into a decision someone can act on.\n\n## The process\n\n1. **Ask**: what decision is being made, by whom, and by when?\n2. **Get the data**: POS exports, spreadsheets, bank statements, forms. Know where each number comes from.\n3. **Clean**: fix types, duplicates, blanks and mistakes (most of the work).\n4. **Analyse**: summarise, compare, look for trends and outliers.\n5. **Share**: a short story with one clear message, the numbers that prove it, and a recommendation.\n6. **Act and measure**: did the decision work?\n\n## Four kinds of analysis\n\n- **Descriptive**: what happened? *Sales were ₦4.2m in October.*\n- **Diagnostic**: why? *Garki fell because the generator broke for a week.*\n- **Predictive**: what will happen? *December will be about 30% above October.*\n- **Prescriptive**: what should we do? *Stock 40% more rice in Wuse before the holidays.*\n\n## Good questions are SMART\n\nSpecific, measurable, action-oriented, relevant and time-bound. Weak: *\"How are sales?\"* Strong: *\"Which 5 products lost the most revenue in Q3 compared with Q2, by branch, so we can decide what to reorder for Q4?\"*\n\n## Tools\n\nSpreadsheets (Excel, Google Sheets) take you far. Then SQL to pull data from databases, a BI tool (Power BI, Looker Studio, Tableau) for dashboards, and Python for heavier work. CDM Studio's **Data** page lets you practise on your own files right now. In this course you will build the core calculations in code, so the logic behind every tool is clear.",
+        "quiz": [
+          {
+            "q": "\"Sales will be about 30% higher in December\" is…",
+            "options": [
+              "Descriptive",
+              "Predictive",
+              "Diagnostic"
+            ],
+            "answer": 1,
+            "why": "It says what will happen."
+          },
+          {
+            "q": "Which question is the strongest?",
+            "options": [
+              "How is the business doing?",
+              "Which 5 products lost the most revenue in Q3 vs Q2, by branch, to plan Q4 orders?",
+              "Can you make a chart?"
+            ],
+            "answer": 1,
+            "why": "Specific, measurable, tied to a decision and a time."
+          },
+          {
+            "q": "Most of an analyst's time usually goes to…",
+            "options": [
+              "Choosing chart colours",
+              "Getting and cleaning data",
+              "Writing emails"
+            ],
+            "answer": 1,
+            "why": "Data preparation dominates real work."
+          }
+        ]
+      },
+      {
+        "id": "analytics-cleaning",
+        "title": "Cleaning messy data",
+        "minutes": 25,
+        "kind": "code",
+        "outline": "Fix money written as text, trim names, standardise categories and remove duplicates.",
+        "body": "## Real data is messy\n\nA POS export or a sheet many people type into usually has:\n\n- Money as text: `\"₦1,200\"`, `\"1200 \"`, `\"N1,200.50\"`\n- Names typed differently: `\"Indomie\"`, `\" indomie\"`, `\"INDOMIE \"`\n- Duplicate rows from exporting twice\n- Blank or impossible values (a negative quantity, a date in 2062)\n\nIf you sum before cleaning, the totals are simply wrong.\n\n## Rules of thumb\n\n1. **Keep the raw file** untouched; clean a copy.\n2. **Make each column one type**: numbers as numbers, dates as dates.\n3. **Standardise text**: trim spaces, consistent capitals, one name per thing.\n4. **Remove exact duplicates**, but check: two identical sales might be real.\n5. **Write down every rule** you applied, so others can trust the result.\n\n## Your task\n\n1. `toNumber(text)`: remove `₦`, `N` at the start, commas and spaces, then convert. Return `null` if it is not a valid number. Real numbers pass through unchanged.\n2. `tidyName(text)`: trim, collapse inner spaces, and make it Title Case (`\" INDOMIE  noodles\"` → `\"Indomie Noodles\"`).\n3. `dedupe(rows)`: remove rows that are exactly the same as an earlier row (compare with `JSON.stringify`), keeping the first.",
+        "task": "Write toNumber, tidyName and dedupe.",
+        "starter": "<script>\n  function toNumber(text) {\n  }\n  function tidyName(text) {\n  }\n  function dedupe(rows) {\n  }\n</script>\n",
+        "checks": [
+          {
+            "label": "money text becomes a number",
+            "test": "return toNumber('₦1,200') === 1200 && toNumber(' N1,200.50 ') === 1200.5 && toNumber('3500') === 3500"
+          },
+          {
+            "label": "numbers pass through",
+            "test": "return toNumber(42) === 42"
+          },
+          {
+            "label": "nonsense becomes null",
+            "test": "return toNumber('abc') === null && toNumber('') === null"
+          },
+          {
+            "label": "names are tidied",
+            "test": "return tidyName('  INDOMIE   noodles ') === 'Indomie Noodles' && tidyName('milk') === 'Milk'"
+          },
+          {
+            "label": "exact duplicates removed, first kept",
+            "test": "return JSON.stringify(dedupe([['a', 1], ['b', 2], ['a', 1], ['a', 2]])) === '[[\"a\",1],[\"b\",2],[\"a\",2]]'"
+          }
+        ],
+        "hint": "toNumber: if (typeof text === 'number') return text; const s = String(text).trim().replace(/^[₦N]/, '').replace(/[,\\s]/g, ''); if (s === '') return null; const n = Number(s); return Number.isFinite(n) ? n : null"
+      },
+      {
+        "id": "analytics-stats",
+        "title": "Descriptive statistics that matter",
+        "minutes": 25,
+        "kind": "code",
+        "outline": "Mean, median, percentiles and spotting outliers with the IQR rule.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "analytics-pivot",
+        "title": "Pivot tables: grouping and summarising",
+        "minutes": 25,
+        "kind": "code",
+        "outline": "Build the logic of a pivot table: totals by row and column categories, plus share of total.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "analytics-trends",
+        "title": "Trends: growth, moving averages and seasonality",
+        "minutes": 25,
+        "kind": "code",
+        "outline": "Period-on-period growth, compound growth and smoothing noisy daily sales with a moving average.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "analytics-kpis",
+        "title": "KPIs and dashboards",
+        "minutes": 25,
+        "kind": "code",
+        "outline": "Choose the right KPIs and compute average basket, repeat rate, gross margin and stock cover.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "analytics-story",
+        "title": "Data storytelling and your analyst career",
+        "minutes": 20,
+        "kind": "prompt",
+        "outline": "Turn analysis into a one-page story with a recommendation, and plan your path into analytics jobs.",
+        "body": "",
+        "paid": true
+      }
+    ]
+  },
+  {
     "id": "cyber",
     "title": "Cybersecurity essentials",
     "blurb": "Protect people, businesses and websites: passwords, phishing, encryption, secure web code and incident response.",
@@ -324,6 +628,161 @@ export const COURSES: Track[] = [
         "minutes": 15,
         "kind": "read",
         "outline": "Roles in security, the certifications employers ask for, and how to build proof of skill.",
+        "body": "",
+        "paid": true
+      }
+    ]
+  },
+  {
+    "id": "cloud",
+    "title": "Cloud and DevOps essentials",
+    "blurb": "How modern apps are hosted, deployed and kept running: cloud services, Git, CI/CD, containers, monitoring and cost control.",
+    "colour": "sky",
+    "emoji": "☁️",
+    "course": {
+      "level": "Beginner",
+      "hours": 8,
+      "free": 2,
+      "skills": [
+        "Cloud service models (IaaS, PaaS, SaaS)",
+        "Git and version control",
+        "CI/CD pipelines",
+        "Containers and Docker",
+        "Configuration and secrets",
+        "Monitoring, logs and uptime",
+        "Cloud cost control"
+      ],
+      "careers": [
+        "Cloud support associate",
+        "Junior DevOps engineer",
+        "Site reliability (entry)",
+        "IT administrator"
+      ],
+      "examQuestions": 20
+    },
+    "lessons": [
+      {
+        "id": "cloud-basics",
+        "title": "What \"the cloud\" really is",
+        "minutes": 15,
+        "kind": "read",
+        "outline": "Data centres, regions, IaaS/PaaS/SaaS and the shared responsibility model.",
+        "body": "## Someone else's computers, rented by the minute\n\n\"The cloud\" is large data centres run by companies such as **Amazon Web Services (AWS)**, **Microsoft Azure** and **Google Cloud**, plus many smaller providers. Instead of buying servers, you rent computing, storage and services and pay for what you use.\n\nWhy businesses use it:\n\n- **No big upfront cost**: start small, grow when customers grow\n- **Scale**: handle a Black Friday rush, then scale back down\n- **Reliability**: data copied across buildings and cities\n- **Speed**: a new server or database in minutes, not weeks\n\n## Regions and availability zones\n\nProviders group data centres into **regions** (for example Europe-West, South Africa, US-East), each with several **availability zones** (separate buildings with their own power). Pick a region close to your users for speed, and consider where data must live by law (Nigeria's NDPA has rules on transferring personal data abroad).\n\n## Service models\n\n- **IaaS** (infrastructure): you rent virtual machines and manage the operating system yourself. *AWS EC2, Azure VMs.*\n- **PaaS** (platform): you give your code; the provider runs it. *Netlify, Vercel, Heroku, Supabase, Google App Engine.*\n- **SaaS** (software): you just use the app. *Gmail, Microsoft 365, CDM ERP.*\n- **Serverless / functions**: small pieces of code that run on demand and cost nothing when idle. *Supabase Edge Functions, AWS Lambda.* CDM Studio's AI builder runs this way.\n\n## Shared responsibility\n\nThe provider secures the buildings, hardware and its platform. **You** remain responsible for your accounts, passwords, access rights, data, and how you configure services. Most cloud breaches come from **customer mistakes**: a public storage bucket, a leaked key, an admin account without two-step sign-in.",
+        "quiz": [
+          {
+            "q": "You upload code and the provider runs it without you managing servers. This is…",
+            "options": [
+              "IaaS",
+              "PaaS",
+              "On-premises"
+            ],
+            "answer": 1,
+            "why": "Platform as a service."
+          },
+          {
+            "q": "Who is responsible for a storage bucket you left public?",
+            "options": [
+              "The cloud provider",
+              "You, the customer",
+              "Nobody"
+            ],
+            "answer": 1,
+            "why": "Configuration is the customer's side of shared responsibility."
+          },
+          {
+            "q": "Why choose a region close to your users?",
+            "options": [
+              "Lower latency (faster responses) and data rules",
+              "It is always cheaper",
+              "It is required for HTML"
+            ],
+            "answer": 0,
+            "why": "Distance adds delay; laws may restrict data location."
+          }
+        ]
+      },
+      {
+        "id": "cloud-git",
+        "title": "Git and version control",
+        "minutes": 25,
+        "kind": "read",
+        "outline": "Commits, branches, pull requests and the workflow every tech team uses.",
+        "body": "## Never lose work again\n\n**Git** records every change to your project as a **commit** (a snapshot with a message). You can see who changed what and why, and go back to any earlier version. **GitHub**, **GitLab** and **Bitbucket** host Git repositories online and add collaboration tools.\n\n## The core commands\n\n```bash\ngit clone https://github.com/you/shop.git   # copy a repository to your computer\ngit status                                   # what changed?\ngit add index.html                           # choose changes for the next commit\ngit commit -m \"Add WhatsApp order button\"   # save a snapshot with a clear message\ngit push                                     # send commits to GitHub\ngit pull                                     # get others' commits\n```\n\n## Branches and pull requests\n\nA **branch** is a separate line of work. The team keeps `main` working at all times:\n\n1. Create a branch: `git switch -c add-delivery-fee`\n2. Commit your changes there\n3. Push and open a **pull request (PR)**: teammates review, automated tests run\n4. **Merge** into main when approved\n\nIf two people change the same lines, Git reports a **merge conflict**; you choose the correct version and commit.\n\n## Good habits\n\n- Small commits with messages that say **why**: *\"Fix VAT rounding on receipts\"*, not *\"update\"*\n- Never commit secrets (API keys, passwords, `.env` files). Use a `.gitignore` and the platform's secret store. If a key is ever pushed, **rotate it** (make a new one): deleting the commit is not enough, history keeps it.\n- Protect `main`: require reviews and passing tests before merging\n\n## Where you have seen this\n\nCDM's own products are built this way: each change is a branch and a pull request, tests run on GitHub, and merging deploys the site.",
+        "quiz": [
+          {
+            "q": "A commit is…",
+            "options": [
+              "A saved snapshot of changes with a message",
+              "A web server",
+              "A password"
+            ],
+            "answer": 0,
+            "why": "Commits are Git's history."
+          },
+          {
+            "q": "You accidentally pushed an API key to GitHub. The right fix is…",
+            "options": [
+              "Delete the file and push again",
+              "Rotate (replace) the key, then remove it from the code",
+              "Make the repo private and forget it"
+            ],
+            "answer": 1,
+            "why": "History keeps the old key; it must be replaced."
+          },
+          {
+            "q": "Why work on a branch and open a pull request?",
+            "options": [
+              "To keep main working while changes are reviewed and tested",
+              "Branches are faster",
+              "GitHub charges less"
+            ],
+            "answer": 0,
+            "why": "Review and tests protect main."
+          }
+        ]
+      },
+      {
+        "id": "cloud-cicd",
+        "title": "CI/CD: automatic tests and deployment",
+        "minutes": 25,
+        "kind": "code",
+        "outline": "How pipelines work, and write a pipeline runner that stops at the first failing step.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "cloud-containers",
+        "title": "Containers, Docker and Kubernetes",
+        "minutes": 20,
+        "kind": "read",
+        "outline": "Why containers exist, images vs containers, a Dockerfile explained, and what Kubernetes adds.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "cloud-config",
+        "title": "Configuration, environments and secrets",
+        "minutes": 25,
+        "kind": "code",
+        "outline": "Twelve-factor config, dev/staging/production, and validate an app's environment variables safely.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "cloud-monitoring",
+        "title": "Monitoring, logs and uptime",
+        "minutes": 25,
+        "kind": "code",
+        "outline": "SLAs, error budgets and alerting; compute uptime and find error spikes in logs.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "cloud-cost",
+        "title": "Cloud costs, backups and your cloud career",
+        "minutes": 20,
+        "kind": "read",
+        "outline": "Keep cloud bills under control, plan backups and recovery, and the certifications that open cloud jobs.",
         "body": "",
         "paid": true
       }
