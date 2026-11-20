@@ -192,7 +192,7 @@ create or replace function public.remove_member(p_project uuid, p_user uuid defa
 returns void language plpgsql security definer set search_path = public as $$
 begin
   if p_invite is not null then
-    if public.project_role(p_project) <> 'owner' then raise exception 'Only the owner can cancel invitations.'; end if;
+    if public.project_role(p_project) is distinct from 'owner' then raise exception 'Only the owner can cancel invitations.'; end if;
     delete from public.project_invites where id = p_invite and project_id = p_project; return;
   end if;
   if p_user = auth.uid() or public.project_role(p_project) = 'owner' then

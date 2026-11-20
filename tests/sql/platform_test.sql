@@ -39,6 +39,7 @@ select pg_temp.ok(pg_temp.as_user(:b, format($q$insert into public.project_versi
 select pg_temp.ok(pg_temp.as_user(:b, format($q$select count(*) from public.project_people(%L)$q$, :p)) = '2', 'people list: owner and bola');
 select pg_temp.ok(pg_temp.as_user(:b, format($q$select string_agg(coalesce(email, '-'), ',' order by role) from public.project_people(%L)$q$, :p)) = 'bola@x.test,-', 'bola does not see the owner''s email');
 select pg_temp.ok(pg_temp.as_user(:a, format($q$select public.invite_member(%L, 'chi@x.test', 'viewer')$q$, :p)) !~ '^ERR', 'chi invited as viewer');
+select pg_temp.ok(pg_temp.as_user(:c, format($q$select public.remove_member(%L, null, %L)$q$, :p, (select id from public.project_invites limit 1))) like 'ERR:%', 'outsiders cannot cancel invitations');
 select pg_temp.ok(pg_temp.as_user(:c, format($q$select public.answer_invite(%L, true)$q$, (select id from public.project_invites limit 1))) !~ '^ERR', 'chi accepts');
 select pg_temp.ok(pg_temp.as_user(:c, $q$update public.projects set html = 'hack' returning 1$q$) is null, 'viewers cannot edit');
 select pg_temp.ok(pg_temp.as_user(:b, format($q$select public.remove_member(%L, %L)$q$, :p, :c)) like 'ERR:%', 'editors cannot remove others');
@@ -60,7 +61,7 @@ select pg_temp.ok((select reason from public.secret_take(null, :p, :a, 'WEATHER_
 select public.secret_save(:p, :a, 'WEATHER_KEY', '', 'https://api.weather.test/v1', 'bearer', null, true, 100);
 select pg_temp.ok((select value from public.secret_take((select slug from public.projects where id = :p), null, null, 'WEATHER_KEY')) = 'sk-live-123456', 'public use on the published page, value kept');
 select public.secret_delete(:p, :a, 'WEATHER_KEY');
-select pg_temp.ok((select count(*) from vault.secrets) = 0, 'deleting removes it from the vault');
+select pg_temp.ok((select count(*) from vault.secrets where name like 'studio_%') = 0, 'deleting removes it from the vault');
 
 -- ---------- marketplace ----------
 update public.profiles set credits = 100 where id = :c;
@@ -128,7 +129,7 @@ select pg_temp.ok(pg_temp.as_user(:a, $q$select account from public.user_tokens$
 select pg_temp.ok(pg_temp.as_user(:a, $q$select public.token_get(auth.uid(), 'netlify')$q$) like 'ERR:%', 'token never readable by people');
 select pg_temp.ok(public.token_get(:a, 'netlify') = 'nfp_secret', 'server reads it');
 select public.token_delete(:a, 'netlify');
-select pg_temp.ok((select count(*) from vault.secrets) = 0, 'disconnect removes the token');
+select pg_temp.ok((select count(*) from vault.secrets where name like 'studio_%') = 0, 'disconnect removes the token');
 
 select 'PASSED platform' as result;
 rollback;

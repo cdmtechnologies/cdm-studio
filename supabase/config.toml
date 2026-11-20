@@ -17,3 +17,11 @@ verify_jwt = true
 verify_jwt = true
 [functions.studio-tools]
 verify_jwt = true
+
+# CDM Social
+[functions.social-ai]
+verify_jwt = true
+[functions.social-connect]
+verify_jwt = false
+[functions.social-publish]
+verify_jwt = false
