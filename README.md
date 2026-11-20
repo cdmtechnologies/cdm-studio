@@ -14,7 +14,7 @@ Learn AI, websites, apps, games and data with short hands-on lessons, and build 
 | Safe previews | `src/lib/sandbox.ts` – every page runs in an `<iframe sandbox>` without `allow-same-origin` |
 | Database | `supabase/migrations/` (tests: `tests/sql/run.sh`) |
 | AI builder | `supabase/functions/studio-build` (Verify JWT on) |
-| AI tutor | `supabase/functions/studio-tutor` (Verify JWT on) – run `node scripts/lesson-meta.mjs` after changing lessons |
+| AI tutor | `supabase/functions/studio-tutor` (Verify JWT on) – after changing lessons run `node scripts/lesson-meta.mjs > lesson-meta.sql` and run it in the SQL editor |
 | Premium (Paystack) | `supabase/functions/studio-pay` (Verify JWT off; references start `cdmstudio_`) |
 | Owner dashboard / Partners Control Centre | `supabase/functions/studio-control` (Verify JWT off) |
 

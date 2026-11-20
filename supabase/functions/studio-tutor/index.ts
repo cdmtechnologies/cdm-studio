@@ -4,9 +4,9 @@
 //   { mode: 'explain', project_id, message? }                  explains one of the person's projects for a beginner
 // Answers { reply }. Each call counts as one tutor question (daily limit from settings).
 //
-// Secrets: ANTHROPIC_API_KEY. Optional: STUDIO_TUTOR_MODEL (default claude-haiku-5-5). Deploy with "Verify JWT" ON.
+// Secrets: ANTHROPIC_API_KEY. Optional: STUDIO_TUTOR_MODEL (default claude-haiku-5-5).
+// Lesson details come from the lesson_meta table (refresh it with node scripts/lesson-meta.mjs). Deploy with "Verify JWT" ON.
 import { createClient } from 'npm:@supabase/supabase-js@2'
-import LESSONS from './lessons.json' with { type: 'json' }
 import { cleanHistory, tutorSystem } from './lib.ts'
 
 const cors = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type' }
@@ -28,7 +28,11 @@ Deno.serve(async (req) => {
     const b = await req.json().catch(() => ({}))
     const mode = b.mode === 'practice' || b.mode === 'explain' ? b.mode : 'help'
     const message = typeof b.message === 'string' ? b.message.replace(/\u0000/g, '').trim().slice(0, 2000) : ''
-    const lesson = typeof b.lesson_id === 'string' ? (LESSONS as Record<string, Meta>)[b.lesson_id] ?? null : null
+    let lesson: Meta | null = null
+    if (typeof b.lesson_id === 'string' && /^[a-z0-9-]{1,60}$/.test(b.lesson_id)) {
+      const { data: lm } = await admin.from('lesson_meta').select('meta').eq('id', b.lesson_id).maybeSingle()
+      lesson = (lm?.meta as Meta) ?? null
+    }
     if (mode !== 'explain' && !message) return json({ error: 'Type a question first.' }, 400)
     if (!KEY) return json({ error: 'The tutor is not set up yet. Please try again later.' })
 
