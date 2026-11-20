@@ -3,12 +3,17 @@ import { apps } from './apps'
 import { data } from './data'
 import { games } from './games'
 import { web } from './web'
+import { COURSES } from './courses.generated'
 import type { Lesson, Track } from './types'
 
+/** the free beginner tracks */
 export const TRACKS: Track[] = [ai, web, apps, games, data]
+/** certified courses: the first lessons free, the rest unlocked with credits, a final exam and a certificate */
+export { COURSES }
+const ALL: Track[] = [...TRACKS, ...COURSES]
 
 export function findLesson(id: string): { track: Track; lesson: Lesson; index: number } | null {
-  for (const track of TRACKS) {
+  for (const track of ALL) {
     const index = track.lessons.findIndex((l) => l.id === id)
     if (index >= 0) return { track, lesson: track.lessons[index], index }
   }

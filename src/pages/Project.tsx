@@ -2,7 +2,9 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { useAuth } from '../lib/auth'
 import { build, download, explain, kindOf, QUICK_CHANGES, shareUrl, type Project, type Version } from '../lib/builder'
 import { go, href } from '../lib/router'
-import { buildDoc, cleanError, listen, newNonce, SANDBOX } from '../lib/sandbox'
+import { answerApi, buildDoc, cleanError, listen, newNonce, SANDBOX, type ApiRequest } from '../lib/sandbox'
+import { proxyCall } from '../lib/api'
+import ProjectTools from '../components/ProjectTools'
 import { supabase, type FnError } from '../lib/supabase'
 import { Alert, ago, CodeEditor, Icon, Md, Modal, Spinner } from '../components/ui'
 import { BestToggle, BuyCreditsLink, chargeNote, useBestAI } from '../components/Credits'
@@ -26,6 +28,8 @@ export default function ProjectPage({ id }: { id: string }) {
   const [pageErrors, setPageErrors] = useState<string[]>([])
   const [share, setShare] = useState(false)
   const [history, setHistory] = useState(false)
+  const [tools, setTools] = useState(false)
+  const [role, setRole] = useState<string>('owner')
   const [usage, setUsage] = useState('')
   const frame = useRef<HTMLIFrameElement>(null)
   const nonce = useRef('')
@@ -43,6 +47,7 @@ export default function ProjectPage({ id }: { id: string }) {
       supabase.from('project_versions').select('id, html, prompt, summary, source, created_at').eq('project_id', id).order('id', { ascending: true }).limit(50),
     ])
     if (!proj) { setMissing(true); return }
+    supabase.rpc('project_role', { p_project: id }).then(({ data }) => setRole(String(data ?? 'owner')))
     setP(proj as Project); setCode((proj as Project).html); show((proj as Project).html)
     const v = (vs as Version[]) ?? []
     setVersions(v)
@@ -55,7 +60,9 @@ export default function ProjectPage({ id }: { id: string }) {
   useEffect(() => { if (session) load() }, [session, load])
   useEffect(() => listen(() => frame.current, () => nonce.current, (m) => {
     if (m.type === 'error') setPageErrors((e) => (e.length >= 5 ? e : [...e, cleanError(m.message) + (m.line ? ` (line ${m.line})` : '')]))
-  }), [])
+    // the preview calls an API with one of the project's keys: made as the signed-in owner or editor
+    if (m.type === 'api') { const n = nonce.current; proxyCall(m as unknown as ApiRequest, { project_id: id }).then((r) => answerApi(frame.current, n, Number(m.id), r)) }
+  }), [id])
   useEffect(() => { chatEnd.current?.scrollIntoView({ block: 'nearest' }) }, [turns, busy])
 
   if (!ready) return <Spinner />
@@ -199,7 +206,8 @@ export default function ProjectPage({ id }: { id: string }) {
           </div>
           <button className="btn btn-ghost px-2.5 py-2" onClick={() => setHistory(true)} title="Versions"><Icon.undo /><span className="hidden sm:inline">Versions</span></button>
           <button className="btn btn-ghost px-2.5 py-2" onClick={() => download(p.title, p.html)} title="Download"><Icon.download /></button>
-          <button className="btn btn-primary px-3 py-2" onClick={() => setShare(true)}><Icon.share /> {p.published ? 'Shared' : 'Publish'}</button>
+          <button className="btn btn-ghost px-2.5 py-2" onClick={() => setTools(true)} title="Team, API keys, hosting, app and selling" aria-label="More: team, API keys, hosting, app and selling"><Icon.menu /><span className="hidden sm:inline">More</span></button>
+          {role === 'owner' && <button className="btn btn-primary px-3 py-2" onClick={() => setShare(true)}><Icon.share /> {p.published ? 'Shared' : 'Publish'}</button>}
         </div>
       </div>
 
@@ -227,6 +235,7 @@ export default function ProjectPage({ id }: { id: string }) {
         </div>
       </div>
 
+      {tools && <ProjectTools project={p} role={role} onClose={() => setTools(false)} />}
       <ShareModal open={share} onClose={() => setShare(false)} project={p} onChange={setP} onDelete={remove} />
       <Modal open={history} title="Versions" onClose={() => setHistory(false)}>
         <ol className="space-y-2">

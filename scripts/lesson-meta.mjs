@@ -16,4 +16,4 @@ for (const t of TRACKS) for (const l of t.lessons) {
 }
 const json = JSON.stringify(meta)
 if (json.includes('$lessons$')) throw new Error('lesson text contains the quote marker')
-console.log(`insert into public.lesson_meta (id, meta)\nselect key, value from jsonb_each($lessons$${json}$lessons$::jsonb)\non conflict (id) do update set meta = excluded.meta, updated_at = now();\ndelete from public.lesson_meta where id not in (select jsonb_object_keys($lessons$${json}$lessons$::jsonb));`)
+console.log(`insert into public.lesson_meta (id, meta)\nselect key, value from jsonb_each($lessons$${json}$lessons$::jsonb)\non conflict (id) do update set meta = excluded.meta, updated_at = now();\ndelete from public.lesson_meta where id not in (select jsonb_object_keys($lessons$${json}$lessons$::jsonb)) and not (meta ? 'paid');`)

@@ -39,3 +39,9 @@ body { @apply bg-slate-50 text-slate-900 antialiased; }
 
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
+
+@media print {
+  header, footer, .no-print { display: none !important; }
+  body { background: #fff; }
+  .cert { box-shadow: none; break-inside: avoid; }
+}

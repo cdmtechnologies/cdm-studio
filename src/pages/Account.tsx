@@ -5,6 +5,7 @@ import { callFunction, supabase } from '../lib/supabase'
 import { startEnrol, turnOff, verifiedFactor, verifyCode } from '../lib/twoStep'
 import { Alert, fmtDate, Icon, Spinner } from '../components/ui'
 import CreditsPanel from '../components/Credits'
+import { Certificates, Earnings, Requests } from '../components/AccountExtras'
 
 type Pay = { reference: string; amount: number; currency: string; period: string; status: string; created_at: string; credits: number | null }
 const GOALS = [['all', 'A bit of everything'], ['ai', 'Use AI well'], ['web', 'Build websites'], ['apps', 'Build apps'], ['games', 'Make games'], ['data', 'Analyse data']]
@@ -68,7 +69,10 @@ export default function Account() {
         </section>
       )}
 
+      <Requests />
       <CreditsPanel />
+      <Earnings />
+      <Certificates />
 
       <section className="card p-5">
         <h2 className="mb-3 font-semibold">About you</h2>

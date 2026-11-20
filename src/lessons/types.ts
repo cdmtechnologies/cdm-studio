@@ -20,14 +20,20 @@ export type Lesson = {
   quiz?: Quiz[]
   /** for 'prompt' lessons: what the learner is asked to try with the AI */
   practice?: string
+  /** an advanced lesson: its content is loaded from the server after it is unlocked with credits */
+  paid?: boolean
+  /** what a locked lesson teaches */
+  outline?: string
 }
 
 export type Track = {
-  id: 'ai' | 'web' | 'apps' | 'games' | 'data'
+  id: string
   title: string
   blurb: string
   colour: string
   emoji: string
   lessons: Lesson[]
   soon?: string
+  /** certified course details (courses/*.ts) */
+  course?: { level: string; hours: number; free: number; skills: string[]; careers: string[]; examQuestions: number }
 }

@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { useAuth } from '../lib/auth'
 import { go, href } from '../lib/router'
-import { buildDoc, newNonce, SANDBOX } from '../lib/sandbox'
+import { answerApi, buildDoc, listen, newNonce, SANDBOX, type ApiRequest } from '../lib/sandbox'
+import { proxyCall } from '../lib/api'
 import { supabase } from '../lib/supabase'
 import { Alert, Icon, Modal, Spinner } from '../components/ui'
 
@@ -16,6 +17,11 @@ export default function View({ slug }: { slug: string }) {
   const [reason, setReason] = useState('')
   const [reported, setReported] = useState(false)
   const nonce = useRef(newNonce())
+  const frame = useRef<HTMLIFrameElement>(null)
+  // studio.api calls from the published page use the keys its owner allowed on published pages
+  useEffect(() => listen(() => frame.current, () => nonce.current, (m) => {
+    if (m.type === 'api') proxyCall(m as unknown as ApiRequest, { slug }).then((r) => answerApi(frame.current, nonce.current, Number(m.id), r))
+  }), [slug])
 
   useEffect(() => {
     if (!/^[a-z0-9]{10}$/.test(slug)) { setP(null); return }
@@ -55,7 +61,7 @@ export default function View({ slug }: { slug: string }) {
         <a className="btn bg-white/10 px-3 py-1.5 text-white hover:bg-white/20" href={href('build')}><Icon.sparkle /> Make your own</a>
         <button className="rounded-lg p-1.5 text-slate-400 hover:bg-white/10" onClick={() => setReport(true)} aria-label="Report this project" title="Report"><Icon.flag /></button>
       </div>
-      <iframe title={p.title} sandbox={SANDBOX} srcDoc={buildDoc(p.html, nonce.current)} className="min-h-0 w-full flex-1 bg-white" />
+      <iframe ref={frame} title={p.title} sandbox={SANDBOX} srcDoc={buildDoc(p.html, nonce.current)} className="min-h-0 w-full flex-1 bg-white" />
       <Modal open={report} title="Report this project" onClose={() => setReport(false)}>
         {reported ? <Alert tone="ok">Thank you. We will look at it.</Alert> : (
           <div className="space-y-3">

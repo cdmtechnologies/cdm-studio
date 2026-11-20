@@ -12,9 +12,14 @@ const HELPER = (nonce: string) => `<script>(function(){
   function post(m){ try{ m.cdm=N; parent.postMessage(m,'*') }catch(e){} }
   window.addEventListener('error',function(e){ post({type:'error',message:String(e.message||'Error'),line:e.lineno||0}) });
   window.addEventListener('unhandledrejection',function(e){ post({type:'error',message:String((e.reason&&e.reason.message)||e.reason||'Promise error'),line:0}) });
+  // studio.api(name, {url, method, headers, body}): CDM Studio makes the call with the project's secret key (never in the page)
+  var calls={},seq=0;
+  window.studio={api:function(name,o){o=o||{};var id=++seq;return new Promise(function(res){calls[id]=res;post({type:'api',id:id,name:String(name),url:String(o.url||''),method:o.method||'GET',headers:o.headers||null,body:o.body===undefined?null:o.body});setTimeout(function(){if(calls[id]){delete calls[id];res({ok:false,error:'The API took too long to answer.'})}},20000)})}};
   var AF=Object.getPrototypeOf(async function(){}).constructor;
   window.addEventListener('message',async function(e){
-    var d=e.data; if(!d||d.cdm!==N||d.type!=='run-checks') return;
+    var d=e.data; if(!d||d.cdm!==N) return;
+    if(d.type==='api-result'){ var r=calls[d.id]; if(r){ delete calls[d.id]; r(d.result) } return }
+    if(d.type!=='run-checks') return;
     var out=[];
     for (var i=0;i<d.checks.length;i++){
       var c=d.checks[i];
@@ -61,3 +66,9 @@ export function runChecks(f: HTMLIFrameElement | null, nonce: string, checks: { 
 
 /** A short, safe version of an error for showing and sending to the AI. */
 export const cleanError = (m: unknown) => String(m ?? '').replace(/\s+/g, ' ').slice(0, 300)
+
+export type ApiRequest = { id: number; name: string; url: string; method: string; headers: Record<string, string> | null; body: unknown }
+/** Answers a page's studio.api call (the app makes it through the studio-proxy function). */
+export function answerApi(f: HTMLIFrameElement | null, nonce: string, id: number, result: unknown) {
+  f?.contentWindow?.postMessage({ cdm: nonce, type: 'api-result', id, result }, '*')
+}

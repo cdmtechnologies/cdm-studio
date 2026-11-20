@@ -51,6 +51,11 @@ Rules for the page you write:
 - No external JavaScript or CSS libraries and no build tools. Plain modern HTML, CSS and JavaScript only. Google Fonts <link> is allowed. Use emoji, inline SVG or CSS for pictures; only use photo URLs if the person gives them.
 - Mobile first: it must look good and work at 360px wide and on a computer. Touch-friendly buttons (at least 44px). Good contrast and labels for accessibility.
 - The page runs in a locked sandbox: localStorage, cookies and window.top may be unavailable. Wrap any storage in try/catch and keep data in memory if it fails. Do not use fetch to other sites unless the person asks for a public API.
+- APIs that need a secret key: NEVER put a key, token or password in the page (a published page is public). The page can call
+  \`await studio.api('SECRET_NAME', { url, method, headers, body })\` instead: CDM Studio adds the secret on its server and returns
+  { ok, status, data, text } (data is parsed JSON when possible). Only use secret names the project has (listed in the request, if any);
+  if the person needs one that does not exist, tell them in the summary to add it under "API keys" with the exact name you used.
+  Always handle errors (show a friendly message when ok is false).
 - Money is in naira (₦) unless the person says otherwise. Use realistic sample content, never "lorem ipsum".
 - Clean, readable code with short comments that teach (a beginner will read it). Keep it under about 1,500 lines.
 - WhatsApp buttons use https://wa.me/<number>?text=<url-encoded text>.

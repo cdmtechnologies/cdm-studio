@@ -10,13 +10,16 @@ import { chromium } from 'playwright'
 import { SOLUTIONS } from './lesson-solutions.mjs'
 
 const dir = mkdtempSync(join(tmpdir(), 'lc-'))
-await build({ entryPoints: ['src/lessons/index.ts', 'src/lib/sandbox.ts'], bundle: true, format: 'esm', platform: 'node', outdir: dir, logLevel: 'error' })
-const { TRACKS } = await import(pathToFileURL(join(dir, 'lessons/index.js')).href)
-const { buildDoc, SANDBOX } = await import(pathToFileURL(join(dir, 'lib/sandbox.js')).href)
+await build({ entryPoints: ['src/lessons/index.ts', 'src/lib/sandbox.ts', 'courses/index.ts'], bundle: true, format: 'esm', platform: 'node', outdir: dir, outbase: '.', logLevel: 'error' })
+const { TRACKS } = await import(pathToFileURL(join(dir, 'src/lessons/index.js')).href)
+const { COURSES } = await import(pathToFileURL(join(dir, 'courses/index.js')).href)
+const { buildDoc, SANDBOX } = await import(pathToFileURL(join(dir, 'src/lib/sandbox.js')).href)
 
 const browser = await chromium.launch()
 const page = await browser.newPage()
-await page.setContent('<!doctype html><body></body>')
+// an https page, like the real site (Web Crypto and other secure-context features need it)
+await page.route('https://lessons.test/**', (r) => r.fulfill({ contentType: 'text/html', body: '<!doctype html><body></body>' }))
+await page.goto('https://lessons.test/')
 async function run(html, checks) {
   const nonce = 'n' + Math.random().toString(36).slice(2)
   return page.evaluate(async ({ doc, checks, nonce, sandbox }) => {
@@ -37,9 +40,11 @@ async function run(html, checks) {
 }
 
 let bad = 0
-for (const t of TRACKS) for (const l of t.lessons) {
+// the free tracks' answers live in lesson-solutions.mjs; certified courses carry their own (never shipped)
+const all = [...TRACKS.flatMap((t) => t.lessons).filter((l) => !l.paid && !l.id.match(/^(cyber|aieng)-/)), ...COURSES.flatMap((c) => c.lessons.map((l) => ({ ...l, sol: l.solution })))]
+for (const l of all) {
   if (l.kind !== 'code') continue
-  const sol = SOLUTIONS[l.id]
+  const sol = l.sol !== undefined ? () => l.sol : SOLUTIONS[l.id]
   if (!sol) { console.log('MISSING answer', l.id); bad++; continue }
   const good = await run(sol(l), l.checks)
   const start = await run(l.starter, l.checks)

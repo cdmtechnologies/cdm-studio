@@ -1,6 +1,7 @@
 // Lesson progress. Works without an account (kept in this browser); after sign-in it is saved to the account
 // and what was done before signing in is added to it.
 import { supabase } from './supabase'
+import { findLesson } from '../lessons'
 
 const KEY = 'cdm-studio-progress-v1'
 export type Done = Record<string, string> // lesson id -> ISO date
@@ -24,7 +25,8 @@ export async function loadDone(userId: string | null): Promise<Done> {
   if (!userId) return local
   const { data } = await supabase.from('progress').select('lesson_id, done_at').eq('user_id', userId)
   const remote: Done = Object.fromEntries((data ?? []).map((r: { lesson_id: string; done_at: string }) => [r.lesson_id, r.done_at]))
-  const missing = Object.keys(local).filter((k) => !remote[k])
+  // advanced lessons are saved when finished (after unlocking); only free ones are copied from this browser
+  const missing = Object.keys(local).filter((k) => !remote[k] && findLesson(k) && !findLesson(k)!.lesson.paid)
   if (missing.length) await supabase.from('progress').upsert(missing.map((id) => ({ user_id: userId, lesson_id: id, done_at: local[id] })), { onConflict: 'user_id,lesson_id', ignoreDuplicates: true })
   const all = mergeDone(remote, local)
   saveLocal(all)

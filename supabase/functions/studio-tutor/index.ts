@@ -33,6 +33,11 @@ Deno.serve(async (req) => {
     if (typeof b.lesson_id === 'string' && /^[a-z0-9-]{1,60}$/.test(b.lesson_id)) {
       const { data: lm } = await admin.from('lesson_meta').select('meta').eq('id', b.lesson_id).maybeSingle()
       lesson = (lm?.meta as Meta) ?? null
+      // an advanced lesson: the tutor helps only people who unlocked it
+      if ((lm?.meta as { paid?: boolean } | null)?.paid) {
+        const { data: un } = await admin.from('lesson_unlocks').select('lesson_id').eq('user_id', user.id).eq('lesson_id', b.lesson_id).maybeSingle()
+        if (!un) return json({ error: 'Unlock this lesson to ask the tutor about it.' }, 403)
+      }
     }
     if (mode !== 'explain' && !message) return json({ error: 'Type a question first.' }, 400)
     if (!KEY) return json({ error: 'The tutor is not set up yet. Please try again later.' })

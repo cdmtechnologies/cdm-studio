@@ -3,7 +3,7 @@ import { href } from '../lib/router'
 import { callFunction } from '../lib/supabase'
 import { Alert, fmtDate, Spinner } from '../components/ui'
 
-type Settings = { ai_enabled: boolean; owner_two_step: boolean; free_builds_daily: number; free_tutor_daily: number; free_data_daily: number; signup_credits: number; credit_price_ngn: number; usd_ngn: number; markup: number; min_topup_ngn: number; min_topup_usd: number; fast_in_per_m: number; fast_out_per_m: number; best_in_per_m: number; best_out_per_m: number }
+type Settings = { ai_enabled: boolean; owner_two_step: boolean; free_builds_daily: number; free_tutor_daily: number; free_data_daily: number; signup_credits: number; credit_price_ngn: number; usd_ngn: number; markup: number; min_topup_ngn: number; min_topup_usd: number; fast_in_per_m: number; fast_out_per_m: number; best_in_per_m: number; best_out_per_m: number; lesson_price_credits: number; market_commission_pct: number; min_payout_credits: number; exam_pass_pct: number }
 type CreditsOverview = { credits_held: number; credits_sold_month: number; credits_used_month: number; avg_build_cost_usd: number | null; avg_build_credits: number | null; avg_tutor_credits: number | null; free_cost_7d_usd: number; paid_cost_7d_usd: number }
 type Overview = {
   generated_at: string
@@ -76,6 +76,8 @@ export default function Owner() {
         <div className="flex items-center gap-3"><button className="btn btn-primary" onClick={save}>Save</button>{msg && <span className="text-sm text-slate-600">{msg}</span>}</div>
       </section>
 
+      <Payouts />
+
       <section className="card p-5">
         <h2 className="mb-3 font-semibold">Reported projects</h2>
         {o.reports.length === 0 ? <p className="text-sm text-slate-500">No reports.</p> : (
@@ -108,5 +110,34 @@ export default function Owner() {
 const LABELS: Partial<Record<keyof Settings, string>> = {
   free_builds_daily: 'Free: AI builds a day', free_tutor_daily: 'Free: tutor questions a day', free_data_daily: 'Free: data questions a day', signup_credits: 'Welcome credits for new accounts',
   credit_price_ngn: 'Price of 1 credit (₦)', markup: 'Markup on AI cost (× times)', usd_ngn: 'Dollar rate (₦ per $1)', min_topup_ngn: 'Smallest top-up (₦)', min_topup_usd: 'Smallest top-up ($)',
+  lesson_price_credits: 'Advanced lesson price (credits)', exam_pass_pct: 'Exam pass mark (%)', market_commission_pct: 'Marketplace commission (%)', min_payout_credits: 'Smallest payout (credits)',
   fast_in_per_m: 'Quick AI: $ per million tokens in', fast_out_per_m: 'Quick AI: $ per million tokens out', best_in_per_m: 'Best AI: $ per million tokens in', best_out_per_m: 'Best AI: $ per million tokens out',
+}
+
+type Pay = { id: number; email: string | null; credits: number; amount_ngn: number; bank_name: string; account_name: string; account_no: string; status: string; note: string | null; created_at: string }
+/** Sellers' payout requests: pay them from the business account, then mark them paid (or refuse, which returns the earnings). */
+function Payouts() {
+  const [list, setList] = useState<Pay[] | null>(null)
+  const load = () => owner<Pay[]>('payouts').then(setList).catch(() => setList([]))
+  useEffect(() => { load() }, [])
+  async function settle(p: Pay, paid: boolean) {
+    const note = paid ? null : prompt('Why is this refused? (the seller sees this)')
+    if (!paid && !note) return
+    if (paid && !confirm(`Mark ₦${Number(p.amount_ngn).toLocaleString()} to ${p.account_name} as paid?`)) return
+    try { await owner('payout', { id: p.id, paid, note }); load() } catch (e) { alert((e as Error).message) }
+  }
+  if (!list?.length) return null
+  return (
+    <section className="card p-5">
+      <h2 className="mb-3 font-semibold">Marketplace payouts</h2>
+      <ul className="divide-y divide-slate-100 text-sm">
+        {list.map((p) => (
+          <li key={p.id} className="flex flex-wrap items-center gap-2 py-2">
+            <span className="min-w-0 flex-1">₦{Number(p.amount_ngn).toLocaleString()} · {p.account_name} · {p.bank_name} <span className="font-mono">{p.account_no}</span> · {p.email} · {fmtDate(p.created_at)}</span>
+            {p.status === 'waiting' ? <><button className="btn btn-primary px-3 py-1.5" onClick={() => settle(p, true)}>Mark paid</button><button className="btn btn-ghost px-3 py-1.5" onClick={() => settle(p, false)}>Refuse</button></> : <span className="text-slate-500">{p.status}</span>}
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
 }

@@ -40,6 +40,27 @@ const ACTIONS: Record<string, { partners?: boolean; run: (a: Admin, b: Record<st
       return { saved: true }
     },
   },
+  payouts: {
+    run: async (a) => {
+      const { data, error } = await a.from('payout_requests').select('id, user_id, credits, amount_ngn, bank_name, account_name, account_no, status, note, created_at, done_at').order('created_at', { ascending: false }).limit(50)
+      if (error) throw new Error(error.message)
+      const ids = [...new Set((data ?? []).map((r) => r.user_id))]
+      const emails: Record<string, string> = {}
+      for (const id of ids) { const { data: u } = await a.auth.admin.getUserById(id); if (u?.user?.email) emails[id] = u.user.email }
+      return (data ?? []).map((r) => ({ ...r, email: emails[r.user_id] ?? null }))
+    },
+  },
+  payout: {
+    run: async (a, b, w) => {
+      const id = Number(b.id)
+      if (!Number.isInteger(id) || id < 1) throw new Error('Pick a payout first')
+      const paid = b.paid === true
+      const { error } = await a.rpc('settle_payout', { p_id: id, p_paid: paid, p_note: typeof b.note === 'string' ? b.note.slice(0, 300) : null })
+      if (error) throw new Error(error.message)
+      await log(a, w, paid ? 'payout paid' : 'payout refused', String(id), {})
+      return { done: true }
+    },
+  },
   hide: {
     run: async (a, b, w) => {
       const id = String(b.project_id ?? '')

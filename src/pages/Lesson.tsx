@@ -5,15 +5,63 @@ import { dropCode, keepCode, markDone, savedCode } from '../lib/progress'
 import { href } from '../lib/router'
 import { buildDoc, cleanError, listen, newNonce, runChecks, SANDBOX, type CheckResult } from '../lib/sandbox'
 import Tutor from '../components/Tutor'
+import { supabase } from '../lib/supabase'
 import { Alert, CodeEditor, Icon, Md } from '../components/ui'
 
 export default function LessonPage({ id }: { id: string }) {
   const found = findLesson(id)
   if (!found) return <div className="mx-auto max-w-lg p-6"><Alert>That lesson was not found. <a className="underline" href={href('learn')}>All lessons</a></Alert></div>
-  return <LessonView key={id} lesson={found.lesson} trackTitle={found.track.title} index={found.index} total={found.track.lessons.length} />
+  const exam = found.track.course ? found.track.id : undefined
+  if (found.lesson.paid) return <PaidLesson key={id} lesson={found.lesson} trackTitle={found.track.title} index={found.index} total={found.track.lessons.length} exam={exam} />
+  return <LessonView key={id} lesson={found.lesson} trackTitle={found.track.title} index={found.index} total={found.track.lessons.length} exam={exam} />
 }
 
-function LessonView({ lesson, trackTitle, index, total }: { lesson: Lesson; trackTitle: string; index: number; total: number }) {
+/** An advanced lesson: its content is on the server, readable once the person has unlocked it with credits. */
+function PaidLesson({ lesson, trackTitle, index, total, exam }: { lesson: Lesson; trackTitle: string; index: number; total: number; exam?: string }) {
+  const { session, ready, credits, askSignIn, refresh } = useAuth()
+  const [full, setFull] = useState<Lesson | null | undefined>(undefined)
+  const [price, setPrice] = useState<number | null>(null)
+  const [busy, setBusy] = useState(false)
+  const [err, setErr] = useState('')
+  const load = useCallback(async () => {
+    if (!session) { setFull(null); return }
+    const { data } = await supabase.from('lesson_content').select('body').eq('id', lesson.id).maybeSingle()
+    setFull(data ? ({ ...lesson, ...(data as { body: Lesson }).body, paid: true }) : null)
+  }, [session, lesson])
+  useEffect(() => { if (ready) load() }, [ready, load])
+  useEffect(() => { supabase.from('settings').select('lesson_price_credits').maybeSingle().then(({ data }) => setPrice(data ? Number((data as { lesson_price_credits: number }).lesson_price_credits) : null)) }, [])
+  async function unlock() {
+    if (!session) return askSignIn('Create a free account to continue the course.')
+    setBusy(true); setErr('')
+    const { error } = await supabase.rpc('unlock_lesson', { p_lesson: lesson.id })
+    setBusy(false)
+    if (error) return setErr(error.message)
+    refresh(); load()
+  }
+  if (full) return <LessonView lesson={full} trackTitle={trackTitle} index={index} total={total} exam={exam} />
+  if (full === undefined && session) return <div className="p-6 text-center text-slate-500">Loading…</div>
+  const short = price !== null && credits < price
+  return (
+    <div className="mx-auto max-w-lg px-4 py-10">
+      <div className="card space-y-4 p-6 text-center">
+        <p className="text-4xl" aria-hidden="true">🔒</p>
+        <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">{trackTitle} · lesson {index + 1} of {total}</p>
+        <h1 className="font-display text-2xl font-bold">{lesson.title}</h1>
+        {lesson.outline && <p className="text-slate-600">{lesson.outline}</p>}
+        <p className="text-sm text-slate-600">{lesson.minutes} minutes · {lesson.kind === 'code' ? 'hands-on code with automatic checks and a live preview' : lesson.kind === 'prompt' ? 'practise with the AI tutor' : 'reading with a quiz'} · AI tutor help</p>
+        {price !== null && <p className="text-lg font-bold text-violet-800">{price === 0 ? 'Free' : `${price} credits (₦${(price * 10).toLocaleString()})`} to unlock this lesson</p>}
+        {err && <Alert>{err}</Alert>}
+        {!session ? <button className="btn btn-primary" onClick={() => askSignIn('Create a free account to continue the course.')}>Sign in to continue</button>
+          : short ? <a className="btn btn-primary" href={href('account')}>Buy credits (you have {credits})</a>
+          : <button className="btn btn-primary" disabled={busy} onClick={unlock}>{busy ? 'Unlocking…' : 'Unlock and start'}</button>}
+        <p className="text-xs text-slate-500">Once unlocked, a lesson is yours to repeat any time. Finish every lesson and pass the final exam for your certificate.</p>
+        <a className="text-sm font-semibold text-violet-700 hover:underline" href={href('learn')}>Back to the course</a>
+      </div>
+    </div>
+  )
+}
+
+function LessonView({ lesson, trackTitle, index, total, exam }: { lesson: Lesson; trackTitle: string; index: number; total: number; exam?: string }) {
   const { session } = useAuth()
   const uid = session?.user.id ?? null
   const [finished, setFinished] = useState(false)
@@ -38,7 +86,7 @@ function LessonView({ lesson, trackTitle, index, total }: { lesson: Lesson; trac
     <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4">
       <p className="font-semibold text-emerald-900">🎉 Lesson done!</p>
       <div className="mt-3 flex flex-wrap gap-2">
-        {next ? <a href={href(`learn/${next.id}`)} className="btn btn-primary">Next: {next.title} →</a> : <a href={href('learn')} className="btn btn-primary">Back to all lessons</a>}
+        {next ? <a href={href(`learn/${next.id}`)} className="btn btn-primary">Next: {next.title} →</a> : exam ? <a href={href(`exam/${exam}`)} className="btn btn-primary">🎓 Take the final exam</a> : <a href={href('learn')} className="btn btn-primary">Back to all lessons</a>}
         <a href={href('build')} className="btn btn-ghost"><Icon.sparkle /> Build something with AI</a>
       </div>
     </div>

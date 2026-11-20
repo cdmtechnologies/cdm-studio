@@ -17,6 +17,9 @@ const Account = lazy(() => import('./pages/Account'))
 const Owner = lazy(() => import('./pages/Owner'))
 const Data = lazy(() => import('./pages/Data'))
 const Prompts = lazy(() => import('./pages/Prompts'))
+const Market = lazy(() => import('./pages/Market'))
+const Exam = lazy(() => import('./pages/Exam'))
+const Certificate = lazy(() => import('./pages/Certificate'))
 
 export default function App() {
   return (
@@ -52,6 +55,9 @@ function Shell() {
             : top === 'explore' ? <Explore />
             : top === 'data' ? <Data />
             : top === 'prompts' ? <Prompts />
+            : top === 'market' ? <Market />
+            : top === 'exam' && route[1] ? <Exam track={route[1]} />
+            : top === 'cert' && route[1] ? <Certificate code={route[1]} />
             : top === 'account' ? <Account />
             : top === 'owner' ? <Owner />
             : <Landing />}
@@ -81,6 +87,7 @@ function Header({ active }: { active: string }) {
           {link('build', 'Build', Icon.hammer)}
           {link('data', 'Data', Icon.chart)}
           {link('prompts', 'Prompts', Icon.sparkle)}
+          {link('market', 'Market', Icon.star)}
           {link('explore', 'Explore', Icon.compass)}
         </nav>
         <div className="ml-auto flex shrink-0 items-center gap-2">
