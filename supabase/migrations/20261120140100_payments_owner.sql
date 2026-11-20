@@ -62,3 +62,10 @@ $$;
 
 revoke all on function public.apply_payment(text, numeric, text), public.studio_owner_overview() from public, anon, authenticated;
 grant execute on function public.apply_payment(text, numeric, text), public.studio_owner_overview() to service_role;
+
+-- Supabase adds this helper to new projects; nobody signed out or in should be able to call it
+do $$ begin
+  if to_regprocedure('public.rls_auto_enable()') is not null then
+    execute 'revoke all on function public.rls_auto_enable() from public, anon, authenticated';
+  end if;
+end $$;

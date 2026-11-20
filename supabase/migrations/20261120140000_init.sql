@@ -64,6 +64,7 @@ create table public.projects (
 );
 create index projects_owner_idx on public.projects (owner_id, updated_at desc);
 create index projects_gallery_idx on public.projects (updated_at desc) where published and not hidden;
+create index projects_remix_idx on public.projects (remix_of);
 
 create table public.project_versions (
   id         bigint generated always as identity primary key,
@@ -111,6 +112,7 @@ create table public.reports (
   created_at timestamptz not null default now(),
   unique (project_id, reporter)
 );
+create index reports_reporter_idx on public.reports (reporter);
 
 -- ---------- settings, usage, money, owner ----------
 create table public.settings (
@@ -154,6 +156,7 @@ create table public.payments (
   created_at timestamptz not null default now(),
   paid_at    timestamptz
 );
+create index payments_user_idx on public.payments (user_id);
 
 create table public.admin_log (
   id     bigint generated always as identity primary key,
