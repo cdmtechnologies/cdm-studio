@@ -1,0 +1,19 @@
+# Used by the Supabase CLI when GitHub deploys the functions (see .github/workflows/pages.yml).
+project_id = "vkrnrupiidbnqxrehrty"
+
+# These check the caller themselves (published pages, Paystack and the CDM Partners Control Centre have no Supabase sign-in).
+[functions.studio-pay]
+verify_jwt = false
+[functions.studio-control]
+verify_jwt = false
+[functions.studio-proxy]
+verify_jwt = false
+
+[functions.studio-build]
+verify_jwt = true
+[functions.studio-tutor]
+verify_jwt = true
+[functions.studio-data]
+verify_jwt = true
+[functions.studio-tools]
+verify_jwt = true
