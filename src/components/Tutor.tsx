@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import { callFunction, type FnError } from '../lib/supabase'
 import { useAuth } from '../lib/auth'
-import { href } from '../lib/router'
 import { Alert, Icon, Md } from './ui'
+import { BuyCreditsLink } from './Credits'
 
 export type Msg = { role: 'user' | 'assistant'; content: string }
 
@@ -13,7 +13,7 @@ export type Msg = { role: 'user' | 'assistant'; content: string }
 export default function Tutor({ lessonId, mode, code, starters, onReply, title = 'AI tutor' }: {
   lessonId?: string; mode: 'help' | 'practice'; code?: string; starters?: string[]; onReply?: (n: number) => void; title?: string
 }) {
-  const { session, askSignIn } = useAuth()
+  const { session, askSignIn, refresh } = useAuth()
   const [msgs, setMsgs] = useState<Msg[]>([])
   const [text, setText] = useState('')
   const [busy, setBusy] = useState(false)
@@ -31,6 +31,7 @@ export default function Tutor({ lessonId, mode, code, starters, onReply, title =
     try {
       const r = await callFunction<{ reply: string }>('studio-tutor', { mode, lesson_id: lessonId, message: question, code: code?.slice(0, 20000), history: next.slice(-8, -1) })
       setMsgs([...next, { role: 'assistant', content: r.reply }])
+      refresh()
       onReply?.(next.length)
     } catch (e) {
       setErr(e as FnError)
@@ -57,7 +58,7 @@ export default function Tutor({ lessonId, mode, code, starters, onReply, title =
         {err && (
           <Alert>
             {err.message}{' '}
-            {(err.limited || err.premiumNeeded) && <a className="font-semibold underline" href={href('account')}>See Premium</a>}
+            <BuyCreditsLink err={err} />
           </Alert>
         )}
         <div ref={end} />

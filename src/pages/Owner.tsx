@@ -3,7 +3,8 @@ import { href } from '../lib/router'
 import { callFunction } from '../lib/supabase'
 import { Alert, fmtDate, Spinner } from '../components/ui'
 
-type Settings = { ai_enabled: boolean; owner_two_step: boolean; free_builds_daily: number; premium_builds_daily: number; free_tutor_daily: number; premium_tutor_daily: number; price_monthly_ngn: number; price_yearly_ngn: number; price_monthly_usd: number; price_yearly_usd: number; ai_cost_in_per_m: number; ai_cost_out_per_m: number }
+type Settings = { ai_enabled: boolean; owner_two_step: boolean; free_builds_daily: number; free_tutor_daily: number; free_data_daily: number; signup_credits: number; credit_price_ngn: number; usd_ngn: number; markup: number; min_topup_ngn: number; min_topup_usd: number; fast_in_per_m: number; fast_out_per_m: number; best_in_per_m: number; best_out_per_m: number }
+type CreditsOverview = { credits_held: number; credits_sold_month: number; credits_used_month: number; avg_build_cost_usd: number | null; avg_build_credits: number | null; avg_tutor_credits: number | null; free_cost_7d_usd: number; paid_cost_7d_usd: number }
 type Overview = {
   generated_at: string
   users: { total: number; today: number; week: number; premium: number; active_7d: number }
@@ -14,6 +15,7 @@ type Overview = {
   reports: { id: string; title: string; slug: string | null; hidden: boolean; reports: number; last: string; reasons: string }[]
   recent_signups: { email: string; name: string | null; created_at: string }[]
   settings: Settings
+  credits: CreditsOverview | null
 }
 
 const owner = <T,>(action: string, body: Record<string, unknown> = {}) => callFunction<{ data: T }>('studio-control', { action, ...body }).then((r) => r.data)
@@ -38,15 +40,22 @@ export default function Owner() {
   }
   const num = (k: keyof Settings) => (
     <label key={k} className="text-sm"><span className="label">{LABELS[k]}</span>
-      <input className="input" type="number" min={0} step={k.startsWith('ai_cost') || k.endsWith('usd') ? '0.01' : '1'} value={String(s[k])} onChange={(e) => setS({ ...s, [k]: Number(e.target.value) })} />
+      <input className="input" type="number" min={0} step={/_per_m|usd|markup|price/.test(k) ? '0.01' : '1'} value={String(s[k])} onChange={(e) => setS({ ...s, [k]: Number(e.target.value) })} />
     </label>
   )
   const tiles: [string, string | number][] = [
-    ['People', o.users.total], ['New today', o.users.today], ['Premium', o.users.premium], ['Active (7 days)', o.users.active_7d],
+    ['People', o.users.total], ['New today', o.users.today], ['Active (7 days)', o.users.active_7d],
     ['Lessons done (7 days)', o.learning.lessons_done_7d], ['Projects', o.projects.total], ['Published', o.projects.published],
     ['AI builds today', o.ai.builds_today], ['Tutor today', o.ai.tutor_today], ['AI cost 7 days', `$${o.ai.cost_7d_usd}`], ['AI cost this month', `$${o.ai.cost_month_usd}`],
     ['Paid this month', `₦${Number(o.money.month_ngn).toLocaleString()}${o.money.month_usd ? ` + $${o.money.month_usd}` : ''}`],
+    ...(o.credits ? [
+      ['Credits sold this month', Number(o.credits.credits_sold_month).toLocaleString()], ['Credits used this month', Number(o.credits.credits_used_month).toLocaleString()],
+      ['Credits people hold', Number(o.credits.credits_held).toLocaleString()], ['Average build', o.credits.avg_build_credits ? `${o.credits.avg_build_credits} credits ($${o.credits.avg_build_cost_usd})` : '—'],
+      ['Free AI cost (7 days)', `$${o.credits.free_cost_7d_usd}`], ['Paid AI cost (7 days)', `$${o.credits.paid_cost_7d_usd}`],
+    ] as [string, string][] : []),
   ]
+  // what one credit really earns after the AI bill, at the current settings
+  const perCreditCost = s.credit_price_ngn / s.markup
   return (
     <div className="space-y-6">
       <div className="flex items-end justify-between"><h1 className="font-display text-3xl font-bold">Owner dashboard</h1><p className="text-xs text-slate-500">Updated {fmtDate(o.generated_at)}</p></div>
@@ -59,6 +68,11 @@ export default function Owner() {
         <label className="flex items-center gap-2 text-sm"><input type="checkbox" className="accent-violet-700" checked={s.ai_enabled} onChange={(e) => setS({ ...s, ai_enabled: e.target.checked })} /> AI on (turn off to pause all AI at once)</label>
         <label className="flex items-center gap-2 text-sm"><input type="checkbox" className="accent-violet-700" checked={s.owner_two_step} onChange={(e) => setS({ ...s, owner_two_step: e.target.checked })} /> Owner dashboard needs two-step sign-in</label>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{(Object.keys(LABELS) as (keyof Settings)[]).map(num)}</div>
+        <p className="rounded-xl bg-violet-50 p-3 text-sm text-violet-900">
+          At these settings, every ₦{s.credit_price_ngn} credit covers about ₦{perCreditCost.toFixed(2)} of AI cost (${(perCreditCost / s.usd_ngn).toFixed(4)}),
+          leaving ₦{(s.credit_price_ngn - perCreditCost).toFixed(2)} ({Math.round((1 - 1 / s.markup) * 100)}%) for Paystack fees, partner commission, hosting and profit.
+          Check the AI prices against your Anthropic console now and then, and raise "Dollar rate" when the naira moves.
+        </p>
         <div className="flex items-center gap-3"><button className="btn btn-primary" onClick={save}>Save</button>{msg && <span className="text-sm text-slate-600">{msg}</span>}</div>
       </section>
 
@@ -92,7 +106,7 @@ export default function Owner() {
 }
 
 const LABELS: Partial<Record<keyof Settings, string>> = {
-  free_builds_daily: 'Free: AI builds a day', premium_builds_daily: 'Premium: AI builds a day', free_tutor_daily: 'Free: tutor a day', premium_tutor_daily: 'Premium: tutor a day',
-  price_monthly_ngn: 'Price a month (₦)', price_yearly_ngn: 'Price a year (₦)', price_monthly_usd: 'Price a month ($)', price_yearly_usd: 'Price a year ($)',
-  ai_cost_in_per_m: 'AI cost in ($ per million tokens)', ai_cost_out_per_m: 'AI cost out ($ per million tokens)',
+  free_builds_daily: 'Free: AI builds a day', free_tutor_daily: 'Free: tutor questions a day', free_data_daily: 'Free: data questions a day', signup_credits: 'Welcome credits for new accounts',
+  credit_price_ngn: 'Price of 1 credit (₦)', markup: 'Markup on AI cost (× times)', usd_ngn: 'Dollar rate (₦ per $1)', min_topup_ngn: 'Smallest top-up (₦)', min_topup_usd: 'Smallest top-up ($)',
+  fast_in_per_m: 'Quick AI: $ per million tokens in', fast_out_per_m: 'Quick AI: $ per million tokens out', best_in_per_m: 'Best AI: $ per million tokens in', best_out_per_m: 'Best AI: $ per million tokens out',
 }

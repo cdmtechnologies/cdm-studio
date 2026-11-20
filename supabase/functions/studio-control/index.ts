@@ -23,7 +23,12 @@ const log = (a: Admin, w: Who, action: string, target: string | null, detail: un
 const ACTIONS: Record<string, { partners?: boolean; run: (a: Admin, b: Record<string, unknown>, w: Who) => Promise<unknown> }> = {
   overview: {
     partners: true,
-    run: async (a) => { const { data, error } = await a.rpc('studio_owner_overview'); if (error) throw new Error(error.message); return data },
+    run: async (a) => {
+      const { data, error } = await a.rpc('studio_owner_overview')
+      if (error) throw new Error(error.message)
+      const { data: c } = await a.rpc('studio_credit_overview')
+      return { ...(data as Record<string, unknown>), credits: c ?? null }
+    },
   },
   settings: {
     run: async (a, b, w) => {

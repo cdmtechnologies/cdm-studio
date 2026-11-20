@@ -4,7 +4,7 @@ import { href } from '../lib/router'
 import { supabase } from '../lib/supabase'
 import { Icon } from '../components/ui'
 
-type Prices = { free_builds_daily: number; premium_builds_daily: number; free_tutor_daily: number; premium_tutor_daily: number; price_monthly_ngn: number; price_yearly_ngn: number; price_monthly_usd: number; price_yearly_usd: number }
+type Prices = { free_builds_daily: number; free_tutor_daily: number; free_data_daily: number; credit_price_ngn: number; min_topup_ngn: number; min_topup_usd: number }
 
 export const COLOURS: Record<string, string> = {
   violet: 'from-violet-500 to-fuchsia-500', sky: 'from-sky-500 to-cyan-500', emerald: 'from-emerald-500 to-teal-500', amber: 'from-amber-500 to-orange-500', rose: 'from-rose-500 to-pink-500',
@@ -13,7 +13,7 @@ export const COLOURS: Record<string, string> = {
 export default function Landing() {
   const [p, setP] = useState<Prices | null>(null)
   useEffect(() => {
-    supabase.from('settings').select('free_builds_daily, premium_builds_daily, free_tutor_daily, premium_tutor_daily, price_monthly_ngn, price_yearly_ngn, price_monthly_usd, price_yearly_usd').maybeSingle().then(({ data }) => setP(data as Prices | null))
+    supabase.from('settings').select('free_builds_daily, free_tutor_daily, free_data_daily, credit_price_ngn, min_topup_ngn, min_topup_usd').maybeSingle().then(({ data }) => setP(data as Prices | null))
   }, [])
 
   return (
@@ -32,6 +32,7 @@ export default function Landing() {
             <div className="mt-6 flex flex-wrap gap-3">
               <a href={href('learn')} className="btn btn-primary px-5 py-3 text-base"><Icon.book /> Start learning</a>
               <a href={href('build')} className="btn bg-white px-5 py-3 text-base text-slate-900 hover:bg-violet-50"><Icon.sparkle /> Build with AI</a>
+              <a href={href('data')} className="btn border border-white/30 px-5 py-3 text-base text-white hover:bg-white/10"><Icon.chart /> Analyse data</a>
             </div>
             <p className="mt-4 text-sm text-slate-400">{LESSON_COUNT} lessons ready · no installs · your work saved online</p>
           </div>
@@ -50,6 +51,9 @@ export default function Landing() {
             ['Lessons that check your work', 'Each lesson runs your code and ticks off each step, with hints and an AI tutor that guides instead of giving answers.'],
             ['Publish and remix', 'One tap gives you a link to share on WhatsApp. Others can remix your project to make their own.'],
             ['Your language', 'The tutor answers in the language you write in: English, Pidgin, Hausa, Yoruba, Igbo, French and more.'],
+            ['Analyse your spreadsheets', 'Upload a CSV or Excel file and ask questions in plain words. Get charts, tables and what the numbers mean. Your file stays in your browser.'],
+            ['A bank of ready prompts', 'Fill-in-the-blank prompts for websites, apps, games, data, business and study, or type your idea and AI writes the prompt for you.'],
+            ['Download and host anywhere', 'Every project is one file you own. Publish on CDM Studio, or download it and put it on your own domain.'],
           ].map(([t, d]) => (
             <div key={t} className="card p-5">
               <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-xl bg-violet-100 text-violet-700"><Icon.check /></div>
@@ -88,24 +92,25 @@ export default function Landing() {
             <p className="mt-1 text-3xl font-bold">₦0</p>
             <ul className="mt-4 space-y-2 text-sm text-slate-700">
               <li>✓ Every lesson, with checks and hints</li>
-              <li>✓ {p?.free_tutor_daily ?? 20} AI tutor questions a day</li>
-              <li>✓ {p?.free_builds_daily ?? 8} AI builds a day</li>
-              <li>✓ Publish and share your projects</li>
+              <li>✓ {p?.free_builds_daily ?? 3} AI builds a day</li>
+              <li>✓ {p?.free_tutor_daily ?? 10} AI tutor questions a day</li>
+              <li>✓ {p?.free_data_daily ?? 3} AI data questions a day, unlimited charts you make yourself</li>
+              <li>✓ Prompt bank, publish and share, download your projects</li>
             </ul>
             <a href={href('learn')} className="btn btn-ghost mt-6 w-full">Start free</a>
           </div>
           <div className="card relative border-violet-300 p-6 ring-2 ring-violet-200">
-            <span className="absolute right-4 top-4 rounded-full bg-violet-700 px-2.5 py-0.5 text-xs font-bold text-white">Best for builders</span>
-            <h3 className="text-lg font-bold">Premium</h3>
-            <p className="mt-1 text-3xl font-bold">₦{(p?.price_monthly_ngn ?? 3000).toLocaleString()}<span className="text-base font-medium text-slate-500"> / month</span></p>
-            <p className="text-sm text-slate-500">or ₦{(p?.price_yearly_ngn ?? 30000).toLocaleString()} a year · ${p?.price_monthly_usd ?? 5} / month outside Nigeria</p>
+            <span className="absolute right-4 top-4 rounded-full bg-violet-700 px-2.5 py-0.5 text-xs font-bold text-white">No subscription</span>
+            <h3 className="text-lg font-bold">Pay as you go</h3>
+            <p className="mt-1 text-3xl font-bold">From ₦{(p?.min_topup_ngn ?? 500).toLocaleString()}</p>
+            <p className="text-sm text-slate-500">Buy credits of any amount · ${p?.min_topup_usd ?? 1} and up outside Nigeria · 1 credit = ₦{p?.credit_price_ngn ?? 10}</p>
             <ul className="mt-4 space-y-2 text-sm text-slate-700">
-              <li>✓ {p?.premium_builds_daily ?? 80} AI builds a day, with our strongest AI model</li>
-              <li>✓ {p?.premium_tutor_daily ?? 200} tutor questions a day</li>
-              <li>✓ Download your projects as files</li>
-              <li>✓ No automatic renewals: pay only when you want</li>
+              <li>✓ Keep building after your free allowance runs out</li>
+              <li>✓ Switch on our strongest AI model for bigger, better projects</li>
+              <li>✓ Credits never expire. Top up again only when you need to</li>
+              <li>✓ See exactly what each AI action used</li>
             </ul>
-            <a href={href('account')} className="btn btn-primary mt-6 w-full">Get Premium</a>
+            <a href={href('account')} className="btn btn-primary mt-6 w-full">Buy credits</a>
           </div>
         </div>
       </section>
@@ -119,7 +124,8 @@ export default function Landing() {
             ['Can I use it on my phone?', 'Yes. Lessons and the builder work in any modern phone browser. A laptop is more comfortable for longer code.'],
             ['Who owns what I build?', 'You do. Download it or publish it. Published projects can be remixed by others, so only publish what you are happy to share.'],
             ['Is it safe?', 'Projects run in a locked sandbox that cannot reach your account. Never put passwords or private data into a project or the chat.'],
-            ['How do I pay?', 'Card or bank transfer through Paystack, in naira or US dollars. Premium does not renew by itself.'],
+            ['How do I pay?', 'Buy credits by card or bank transfer through Paystack, in naira or US dollars. Nothing renews by itself: you top up only when you want.'],
+            ['What does a credit buy?', 'A quick AI build is usually 25–40 credits, a build with the strongest AI about 70–120, a tutor answer 3–6. Your account shows what each action used.'],
           ].map(([q, a]) => (
             <details key={q} className="group p-4">
               <summary className="cursor-pointer list-none font-semibold marker:hidden">{q}<span className="float-right text-slate-400 group-open:rotate-90">›</span></summary>

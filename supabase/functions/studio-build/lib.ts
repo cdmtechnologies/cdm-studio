@@ -5,7 +5,7 @@ export type Kind = (typeof KINDS)[number]
 export const MAX_HTML = 300_000
 export const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
 
-export type BuildInput = { mode: 'create' | 'change' | 'fix'; kind: Kind; prompt: string; projectId: string | null; error: string }
+export type BuildInput = { mode: 'create' | 'change' | 'fix'; kind: Kind; prompt: string; projectId: string | null; error: string; best: boolean }
 
 /** Checks and tidies what the browser sent. Returns the input or the reason it cannot be used. */
 export function cleanInput(raw: unknown): { input?: BuildInput; error?: string } {
@@ -17,7 +17,7 @@ export function cleanInput(raw: unknown): { input?: BuildInput; error?: string }
   const error = typeof b.error === 'string' ? b.error.replace(/\u0000/g, '').slice(0, 1500) : ''
   if (prompt.length < 3) return { error: 'Describe what you want first.' }
   if (mode !== 'create' && !projectId) return { error: 'Open a project first.' }
-  return { input: { mode, kind, prompt, projectId, error } }
+  return { input: { mode, kind, prompt, projectId, error, best: b.best === true } }
 }
 
 /** The page the AI returned: a whole HTML document, within the size limit. */
@@ -86,9 +86,9 @@ export function userMessage(i: BuildInput, currentHtml: string, recent: string[]
   return `${history}${err}Current page:\n<current_page>\n${currentHtml}\n</current_page>\n\nRequest: ${i.prompt}`
 }
 
-export function limitMessage(reason: string | null | undefined, premium: boolean, limit: number): string {
+/** Why an AI action could not start, in plain words. */
+export function limitMessage(reason: string | null | undefined, what: string, dayLimit: number, need: number): string {
   if (reason === 'paused') return 'AI is paused for a short while. Please try again later.'
-  return premium
-    ? `You have used today's ${limit} AI builds. They come back tomorrow.`
-    : `You have used today's ${limit} free AI builds. They come back tomorrow, or get Premium for many more.`
+  if (reason === 'credits_best') return `The best AI uses credits: you need at least ${Math.ceil(need)} credits for this. Buy credits in your account, or switch "Best AI" off to use your free ${what}.`
+  return `You have used today's ${dayLimit} free ${what}. They come back tomorrow, or buy credits to keep going now (you need at least ${Math.ceil(need)} credits).`
 }

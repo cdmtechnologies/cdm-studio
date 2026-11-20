@@ -4,11 +4,13 @@ import { build, IDEAS, KINDS, kindOf, type Kind, type Project } from '../lib/bui
 import { go, href } from '../lib/router'
 import { supabase, type FnError } from '../lib/supabase'
 import { Alert, ago, Icon, Spinner } from '../components/ui'
+import { BestToggle, BuyCreditsLink, useBestAI } from '../components/Credits'
 
 const PENDING = 'cdm-studio-pending-build'
 
 export default function Build() {
-  const { session, askSignIn } = useAuth()
+  const { session, askSignIn, refresh } = useAuth()
+  const [best, setBest] = useBestAI()
   const [projects, setProjects] = useState<Project[] | null>(null)
   const [kind, setKind] = useState<Kind>('website')
   const [prompt, setPrompt] = useState('')
@@ -39,7 +41,8 @@ export default function Build() {
     }
     setBusy(true); setErr(null)
     try {
-      const r = await build({ kind, prompt: text, mode: 'create' })
+      const r = await build({ kind, prompt: text, mode: 'create', best })
+      refresh()
       go(`build/${r.project.id}`)
     } catch (e) { setErr(e as FnError) } finally { setBusy(false) }
   }
@@ -76,13 +79,15 @@ export default function Build() {
               {IDEAS[kind].map((i) => <button key={i} className="rounded-xl border border-slate-200 px-3 py-2 text-left text-sm text-slate-700 hover:border-violet-300 hover:bg-violet-50" onClick={() => setPrompt(i)}>{i}</button>)}
             </div>
           </div>
-          {err && <Alert>{err.message} {(err.limited || err.premiumNeeded) && <a className="font-semibold underline" href={href('account')}>See Premium</a>}</Alert>}
+          {err && <Alert>{err.message} <BuyCreditsLink err={err} /></Alert>}
           <div className="flex flex-wrap items-center gap-3">
             <button className="btn btn-primary px-5 py-3 text-base" onClick={create} disabled={busy}>
               {busy ? <><span className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white" /> Building… (up to a minute)</> : <><Icon.sparkle /> Build it</>}
             </button>
             <button className="btn btn-ghost" onClick={blank} disabled={busy}><Icon.code /> Start from an empty page</button>
+            {session && <BestToggle best={best} onChange={setBest} />}
           </div>
+          <p className="text-sm text-slate-500">Need a better prompt? <a className="font-semibold text-violet-700 hover:underline" href={href('prompts')}>Open the prompt bank</a></p>
         </div>
       </section>
 

@@ -2,12 +2,13 @@ import { createContext, useCallback, useContext, useEffect, useState, type React
 import type { Session } from '@supabase/supabase-js'
 import { supabase } from './supabase'
 
-export type Profile = { id: string; name: string | null; country: string | null; goal: string | null; level: string | null; premium_until: string | null; created_at: string }
+export type Profile = { id: string; name: string | null; country: string | null; goal: string | null; level: string | null; premium_until: string | null; credits: number; created_at: string }
 
 type Auth = {
   session: Session | null
   profile: Profile | null
   premium: boolean
+  credits: number
   ready: boolean
   refresh: () => Promise<void>
   askSignIn: (why?: string) => void
@@ -24,7 +25,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const loadProfile = useCallback(async (s: Session | null) => {
     if (!s) { setProfile(null); return }
-    const { data } = await supabase.from('profiles').select('id, name, country, goal, level, premium_until, created_at').eq('id', s.user.id).maybeSingle()
+    const { data } = await supabase.from('profiles').select('id, name, country, goal, level, premium_until, credits, created_at').eq('id', s.user.id).maybeSingle()
     setProfile((data as Profile) ?? null)
   }, [])
 
@@ -35,8 +36,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [loadProfile])
 
   const premium = !!profile?.premium_until && new Date(profile.premium_until) > new Date()
+  const credits = Math.floor(Number(profile?.credits ?? 0))
   return (
-    <Ctx.Provider value={{ session, profile, premium, ready, refresh: () => loadProfile(session), askSignIn: (why) => setAsk(why || 'Sign in to save your work.'), signInAsk, closeSignIn: () => setAsk(null) }}>
+    <Ctx.Provider value={{ session, profile, premium, credits, ready, refresh: () => loadProfile(session), askSignIn: (why) => setAsk(why || 'Sign in to save your work.'), signInAsk, closeSignIn: () => setAsk(null) }}>
       {children}
     </Ctx.Provider>
   )

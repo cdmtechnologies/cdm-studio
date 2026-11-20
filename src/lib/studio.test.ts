@@ -54,7 +54,7 @@ describe('builder', () => {
     expect(cleanPage({ html: 'x'.repeat(300_001) })).toBe(null)
   })
   it('sends the current page and the error when fixing', () => {
-    const m = userMessage({ mode: 'fix', kind: 'game', prompt: 'Fix it', projectId: 'p', error: 'x is not defined' }, '<p>page</p>', ['first'])
+    const m = userMessage({ mode: 'fix', kind: 'game', prompt: 'Fix it', projectId: 'p', error: 'x is not defined', best: false }, '<p>page</p>', ['first'])
     expect(m).toContain('x is not defined')
     expect(m).toContain('<p>page</p>')
     expect(m).toContain('- first')

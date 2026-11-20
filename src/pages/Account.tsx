@@ -1,24 +1,20 @@
 import { useEffect, useState, type FormEvent } from 'react'
 import { useAuth } from '../lib/auth'
-import { href, referralCode } from '../lib/router'
+import { href } from '../lib/router'
 import { callFunction, supabase } from '../lib/supabase'
 import { startEnrol, turnOff, verifiedFactor, verifyCode } from '../lib/twoStep'
 import { Alert, fmtDate, Icon, Spinner } from '../components/ui'
+import CreditsPanel from '../components/Credits'
 
-type Prices = { price_monthly_ngn: number; price_yearly_ngn: number; price_monthly_usd: number; price_yearly_usd: number; free_builds_daily: number; premium_builds_daily: number; free_tutor_daily: number; premium_tutor_daily: number }
-type Pay = { reference: string; amount: number; currency: string; period: string; status: string; created_at: string }
+type Pay = { reference: string; amount: number; currency: string; period: string; status: string; created_at: string; credits: number | null }
 const GOALS = [['all', 'A bit of everything'], ['ai', 'Use AI well'], ['web', 'Build websites'], ['apps', 'Build apps'], ['games', 'Make games'], ['data', 'Analyse data']]
 
 export default function Account() {
-  const { session, profile, premium, ready, refresh, askSignIn } = useAuth()
+  const { session, profile, ready, refresh, askSignIn } = useAuth()
   const [name, setName] = useState('')
   const [goal, setGoal] = useState('all')
   const [saved, setSaved] = useState('')
-  const [prices, setPrices] = useState<Prices | null>(null)
-  const [usage, setUsage] = useState<{ builds: number; tutor: number } | null>(null)
   const [pays, setPays] = useState<Pay[]>([])
-  const [busy, setBusy] = useState('')
-  const [err, setErr] = useState('')
   const [notice, setNotice] = useState('')
   const [isOwner, setIsOwner] = useState(false)
   const [newPw, setNewPw] = useState('')
@@ -27,10 +23,7 @@ export default function Account() {
   useEffect(() => { setName(profile?.name ?? ''); setGoal(profile?.goal ?? 'all') }, [profile])
   useEffect(() => {
     if (!session) return
-    supabase.from('settings').select('price_monthly_ngn, price_yearly_ngn, price_monthly_usd, price_yearly_usd, free_builds_daily, premium_builds_daily, free_tutor_daily, premium_tutor_daily').maybeSingle().then(({ data }) => setPrices(data as Prices))
-    const today = new Date(Date.now() + 3600e3).toISOString().slice(0, 10) // Lagos day
-    supabase.from('ai_usage').select('builds, tutor').eq('user_id', session.user.id).eq('day', today).maybeSingle().then(({ data }) => setUsage((data as { builds: number; tutor: number }) ?? { builds: 0, tutor: 0 }))
-    supabase.from('payments').select('reference, amount, currency, period, status, created_at').order('created_at', { ascending: false }).limit(10).then(({ data }) => setPays((data as Pay[]) ?? []))
+    supabase.from('payments').select('reference, amount, currency, period, status, created_at, credits').order('created_at', { ascending: false }).limit(10).then(({ data }) => setPays((data as Pay[]) ?? []))
     callFunction<{ data: { email: string } }>('studio-control', { action: 'whoami' }).then(() => setIsOwner(true)).catch(() => setIsOwner(false))
   }, [session])
 
@@ -41,8 +34,8 @@ export default function Account() {
     const ref = q.get('reference') || q.get('trxref')
     if (!session || !ref || !/^cdmstudio_/.test(ref)) return
     setNotice('Checking your payment…')
-    callFunction<{ paid: boolean; premium_until?: string; status?: string }>('studio-pay', { action: 'verify', reference: ref })
-      .then((r) => { setNotice(r.paid ? `Payment received. Premium is on until ${fmtDate(r.premium_until!)}.` : 'The payment was not completed. You can try again.'); refresh(); history.replaceState(null, '', location.pathname + '#/account') })
+    callFunction<{ paid: boolean; premium_until?: string; credits_added?: number | null; balance?: number | null; status?: string }>('studio-pay', { action: 'verify', reference: ref })
+      .then((r) => { setNotice(!r.paid ? 'The payment was not completed. You can try again.' : r.credits_added ? `Payment received. ${Number(r.credits_added).toLocaleString()} credits added${r.balance != null ? ` (balance ${Math.floor(Number(r.balance)).toLocaleString()})` : ''}.` : `Payment received. Premium is on until ${fmtDate(r.premium_until!)}.`); refresh(); history.replaceState(null, '', location.pathname + '#/account') })
       .catch((e) => setNotice((e as Error).message))
   }, [session]) // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -54,20 +47,12 @@ export default function Account() {
     const { error } = await supabase.from('profiles').update({ name: name.trim().slice(0, 80) || null, goal }).eq('id', session!.user.id)
     setSaved(error ? error.message : 'Saved.'); refresh()
   }
-  async function pay(period: 'monthly' | 'yearly', currency: 'NGN' | 'USD') {
-    setBusy(period + currency); setErr('')
-    try {
-      const r = await callFunction<{ url: string }>('studio-pay', { action: 'start', period, currency, return_url: `${location.origin}${location.pathname}#/account`, referral_code: referralCode() })
-      location.assign(r.url)
-    } catch (e) { setErr((e as Error).message); setBusy('') }
-  }
   async function changePassword() {
     if (newPw.length < 8) return setSaved('Use at least 8 characters.')
     const { error } = await supabase.auth.updateUser({ password: newPw })
     setSaved(error ? error.message : 'Password changed.'); setNewPw('')
   }
 
-  const lim = (free?: number, prem?: number) => (premium ? prem : free) ?? 0
   return (
     <div className="mx-auto max-w-3xl space-y-6">
       <div className="flex items-center justify-between gap-3">
@@ -83,39 +68,7 @@ export default function Account() {
         </section>
       )}
 
-      <section className="card p-5">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div>
-            <h2 className="font-semibold">{premium ? 'Premium' : 'Free plan'}</h2>
-            <p className="text-sm text-slate-600">{premium ? `Until ${fmtDate(profile!.premium_until!)}` : 'Every lesson is free. Premium adds more AI and our strongest model.'}</p>
-          </div>
-          {premium && <span className="rounded-full bg-amber-100 px-3 py-1 text-sm font-bold text-amber-800">★ Premium</span>}
-        </div>
-        {usage && prices && (
-          <div className="mt-4 grid gap-3 sm:grid-cols-2">
-            {[['AI builds today', usage.builds, lim(prices.free_builds_daily, prices.premium_builds_daily)], ['Tutor questions today', usage.tutor, lim(prices.free_tutor_daily, prices.premium_tutor_daily)]].map(([l, u, m]) => (
-              <div key={l as string} className="rounded-xl bg-slate-50 p-3">
-                <p className="text-sm text-slate-600">{l}</p>
-                <p className="font-bold">{u} of {m}</p>
-                <div className="mt-1 h-1.5 overflow-hidden rounded-full bg-slate-200"><div className="h-full bg-violet-600" style={{ width: `${Math.min(100, (Number(u) / Math.max(1, Number(m))) * 100)}%` }} /></div>
-              </div>
-            ))}
-          </div>
-        )}
-        {prices && (
-          <div className="mt-5 border-t border-slate-100 pt-4">
-            <p className="mb-3 text-sm font-semibold">{premium ? 'Add more Premium time' : 'Get Premium'} (no automatic renewal)</p>
-            <div className="grid gap-2 sm:grid-cols-2">
-              <button className="btn btn-primary" disabled={!!busy} onClick={() => pay('monthly', 'NGN')}>1 month · ₦{prices.price_monthly_ngn.toLocaleString()}</button>
-              <button className="btn btn-primary" disabled={!!busy} onClick={() => pay('yearly', 'NGN')}>1 year · ₦{prices.price_yearly_ngn.toLocaleString()}</button>
-              <button className="btn btn-ghost" disabled={!!busy} onClick={() => pay('monthly', 'USD')}>1 month · ${prices.price_monthly_usd}</button>
-              <button className="btn btn-ghost" disabled={!!busy} onClick={() => pay('yearly', 'USD')}>1 year · ${prices.price_yearly_usd}</button>
-            </div>
-            {err && <div className="mt-3"><Alert>{err}</Alert></div>}
-            <p className="mt-2 text-xs text-slate-500">Secure payment by card or bank transfer through Paystack.</p>
-          </div>
-        )}
-      </section>
+      <CreditsPanel />
 
       <section className="card p-5">
         <h2 className="mb-3 font-semibold">About you</h2>
@@ -135,7 +88,7 @@ export default function Account() {
         <section className="card p-5">
           <h2 className="mb-3 font-semibold">Payments</h2>
           <ul className="divide-y divide-slate-100 text-sm">
-            {pays.map((p) => <li key={p.reference} className="flex justify-between py-2"><span>{fmtDate(p.created_at)} · {p.period === 'yearly' ? '1 year' : '1 month'}</span><span>{p.currency === 'NGN' ? '₦' : '$'}{Number(p.amount).toLocaleString()} · {p.status}</span></li>)}
+            {pays.map((p) => <li key={p.reference} className="flex justify-between py-2"><span>{fmtDate(p.created_at)} · {p.period === 'credits' ? `${Number(p.credits ?? 0).toLocaleString()} credits` : p.period === 'yearly' ? '1 year Premium' : '1 month Premium'}</span><span>{p.currency === 'NGN' ? '₦' : '$'}{Number(p.amount).toLocaleString()} · {p.status}</span></li>)}
           </ul>
         </section>
       )}

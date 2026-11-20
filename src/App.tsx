@@ -15,6 +15,8 @@ const Explore = lazy(() => import('./pages/Explore'))
 const View = lazy(() => import('./pages/View'))
 const Account = lazy(() => import('./pages/Account'))
 const Owner = lazy(() => import('./pages/Owner'))
+const Data = lazy(() => import('./pages/Data'))
+const Prompts = lazy(() => import('./pages/Prompts'))
 
 export default function App() {
   return (
@@ -48,6 +50,8 @@ function Shell() {
             : top === 'build' && route[1] ? <ProjectPage id={route[1]} />
             : top === 'build' ? <Build />
             : top === 'explore' ? <Explore />
+            : top === 'data' ? <Data />
+            : top === 'prompts' ? <Prompts />
             : top === 'account' ? <Account />
             : top === 'owner' ? <Owner />
             : <Landing />}
@@ -59,26 +63,28 @@ function Shell() {
 }
 
 function Header({ active }: { active: string }) {
-  const { session, premium, askSignIn } = useAuth()
+  const { session, credits, askSignIn } = useAuth()
   const link = (to: string, label: string, Ico: (p: { className?: string }) => ReactElement) => (
-    <a href={href(to)} className={`flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-semibold ${active === to ? 'bg-violet-100 text-violet-800' : 'text-slate-600 hover:bg-slate-100'}`} aria-current={active === to ? 'page' : undefined}>
+    <a href={href(to)} className={`flex shrink-0 items-center gap-1.5 rounded-lg px-2 py-2 text-sm font-semibold sm:px-3 ${active === to ? 'bg-violet-100 text-violet-800' : 'text-slate-600 hover:bg-slate-100'}`} aria-current={active === to ? 'page' : undefined}>
       <Ico className="hidden sm:block" />{label}
     </a>
   )
   return (
     <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/90 backdrop-blur">
       <div className="mx-auto flex h-14 max-w-6xl items-center gap-2 px-3 sm:px-6">
-        <a href="#/" className="mr-2 flex items-center gap-2 font-display text-lg font-bold text-slate-900">
+        <a href="#/" className="mr-1 flex shrink-0 items-center gap-2 font-display sm:mr-2 text-lg font-bold text-slate-900">
           <img src="./icon.svg" alt="" width={28} height={28} />
           <span className="hidden sm:inline">CDM <span className="text-violet-700">Studio</span></span>
         </a>
-        <nav className="flex items-center gap-0.5" aria-label="Main">
+        <nav className="no-scrollbar flex min-w-0 items-center gap-0.5 overflow-x-auto" aria-label="Main">
           {link('learn', 'Learn', Icon.book)}
           {link('build', 'Build', Icon.hammer)}
+          {link('data', 'Data', Icon.chart)}
+          {link('prompts', 'Prompts', Icon.sparkle)}
           {link('explore', 'Explore', Icon.compass)}
         </nav>
-        <div className="ml-auto flex items-center gap-2">
-          {premium && <span className="hidden rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-bold text-amber-800 sm:inline">Premium</span>}
+        <div className="ml-auto flex shrink-0 items-center gap-2">
+          {session && <a href={href('account')} className="rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-bold text-amber-800" title="Your credits">{credits.toLocaleString()}<span className="hidden sm:inline"> credits</span></a>}
           {session
             ? <a href={href('account')} className="flex h-9 w-9 items-center justify-center rounded-full bg-violet-100 text-violet-800" aria-label="Your account"><Icon.user /></a>
             : <button className="btn btn-primary px-3 py-2" onClick={() => askSignIn('Create a free account to save your progress and your projects.')}>Sign in</button>}

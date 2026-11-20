@@ -10,7 +10,7 @@ export const supabase = createClient(url || 'https://example.supabase.co', key |
   auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: 'pkce' },
 })
 
-export type FnError = Error & { limited?: boolean; premiumNeeded?: boolean; signIn?: boolean }
+export type FnError = Error & { limited?: boolean; premiumNeeded?: boolean; needCredits?: boolean; signIn?: boolean }
 
 /** Calls an edge function and returns its JSON, turning errors into readable messages. */
 export async function callFunction<T = Record<string, unknown>>(name: string, body: Record<string, unknown>): Promise<T> {
@@ -31,6 +31,7 @@ export async function callFunction<T = Record<string, unknown>>(name: string, bo
     const e = new Error((data as { error: string }).error) as FnError
     e.limited = !!(data as { limited?: boolean }).limited
     e.premiumNeeded = !!(data as { premium_needed?: boolean }).premium_needed
+    e.needCredits = !!(data as { need_credits?: boolean }).need_credits
     throw e
   }
   return data as T

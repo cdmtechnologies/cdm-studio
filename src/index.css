@@ -36,3 +36,6 @@ body { @apply bg-slate-50 text-slate-900 antialiased; }
 .prose-cdm table { @apply my-3 w-full text-sm; }
 .prose-cdm th, .prose-cdm td { @apply border border-slate-200 px-2 py-1 text-left; }
 .prose-cdm > :first-child { margin-top: 0; }
+
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }

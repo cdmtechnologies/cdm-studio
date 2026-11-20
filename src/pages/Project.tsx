@@ -5,11 +5,13 @@ import { go, href } from '../lib/router'
 import { buildDoc, cleanError, listen, newNonce, SANDBOX } from '../lib/sandbox'
 import { supabase, type FnError } from '../lib/supabase'
 import { Alert, ago, CodeEditor, Icon, Md, Modal, Spinner } from '../components/ui'
+import { BestToggle, BuyCreditsLink, chargeNote, useBestAI } from '../components/Credits'
 
 type Turn = { role: 'user' | 'ai'; text: string; at?: string }
 
 export default function ProjectPage({ id }: { id: string }) {
-  const { session, ready, premium, askSignIn } = useAuth()
+  const { session, ready, askSignIn, refresh } = useAuth()
+  const [best, setBest] = useBestAI()
   const [p, setP] = useState<Project | null>(null)
   const [missing, setMissing] = useState(false)
   const [versions, setVersions] = useState<Version[]>([])
@@ -24,7 +26,7 @@ export default function ProjectPage({ id }: { id: string }) {
   const [pageErrors, setPageErrors] = useState<string[]>([])
   const [share, setShare] = useState(false)
   const [history, setHistory] = useState(false)
-  const [usage, setUsage] = useState<{ used: number; day_limit: number } | null>(null)
+  const [usage, setUsage] = useState('')
   const frame = useRef<HTMLIFrameElement>(null)
   const nonce = useRef('')
   const chatEnd = useRef<HTMLDivElement>(null)
@@ -71,8 +73,8 @@ export default function ProjectPage({ id }: { id: string }) {
     setTurns((t) => [...t, { role: 'user', text: q }])
     setText('')
     try {
-      const r = await build({ project_id: p!.id, prompt: q, mode, error: mode === 'fix' ? pageErrors.join('\n') : undefined })
-      setUsage({ used: r.used, day_limit: r.day_limit })
+      const r = await build({ project_id: p!.id, prompt: q, mode, best, error: mode === 'fix' ? pageErrors.join('\n') : undefined })
+      setUsage(chargeNote(r, 'AI builds')); refresh()
       setP(r.project); setCode(r.project.html); show(r.project.html)
       setTurns((t) => [...t, { role: 'ai', text: r.summary }])
       setTab((x) => (x === 'chat' ? 'preview' : x))
@@ -135,7 +137,7 @@ export default function ProjectPage({ id }: { id: string }) {
           </div>
         ))}
         {busy && <p className="flex items-center gap-2 text-sm text-violet-700"><span className="h-4 w-4 animate-spin rounded-full border-2 border-violet-200 border-t-violet-700" />{busy} this can take up to a minute</p>}
-        {err && <Alert>{err.message} {(err.limited || err.premiumNeeded) && <a className="font-semibold underline" href={href('account')}>See Premium</a>}</Alert>}
+        {err && <Alert>{err.message} <BuyCreditsLink err={err} /></Alert>}
         <div ref={chatEnd} />
       </div>
       <div className="border-t border-slate-200 p-3">
@@ -149,7 +151,9 @@ export default function ProjectPage({ id }: { id: string }) {
         </form>
         <div className="mt-2 flex items-center justify-between text-xs text-slate-500">
           <button className="font-semibold text-violet-700 hover:underline" onClick={explainIt} disabled={!!busy}>Explain how it works</button>
-          {usage && <span>{Math.max(usage.day_limit - usage.used, 0)} AI builds left today</span>}
+          {usage ? <span>{usage}</span> : null}
+        </div>
+        <div className="mt-1.5"><BestToggle best={best} onChange={setBest} />
         </div>
       </div>
     </div>
@@ -194,7 +198,7 @@ export default function ProjectPage({ id }: { id: string }) {
             <button className={`rounded-md p-1.5 ${device === 'phone' ? 'bg-white shadow' : ''}`} onClick={() => setDevice('phone')} aria-label="Phone size"><Icon.phone /></button>
           </div>
           <button className="btn btn-ghost px-2.5 py-2" onClick={() => setHistory(true)} title="Versions"><Icon.undo /><span className="hidden sm:inline">Versions</span></button>
-          <button className="btn btn-ghost px-2.5 py-2" onClick={() => (premium ? download(p.title, p.html) : alert('Downloading projects is part of Premium. You can still publish and share for free.'))} title="Download"><Icon.download /></button>
+          <button className="btn btn-ghost px-2.5 py-2" onClick={() => download(p.title, p.html)} title="Download"><Icon.download /></button>
           <button className="btn btn-primary px-3 py-2" onClick={() => setShare(true)}><Icon.share /> {p.published ? 'Shared' : 'Publish'}</button>
         </div>
       </div>

@@ -27,7 +27,17 @@ const BASE = `You are the tutor in CDM Studio, a friendly platform where people 
 - Never ask for or accept passwords, card numbers, PINs or other private data; if shared, tell them not to.
 - Stay on learning and building. Politely decline harmful requests.`
 
-export function tutorSystem(mode: 'help' | 'practice' | 'explain', lesson: Meta): string {
+export function tutorSystem(mode: 'help' | 'practice' | 'explain' | 'prompt', lesson: Meta): string {
+  if (mode === 'prompt') {
+    return `${BASE}
+
+You turn a person's rough idea into one excellent prompt they can paste into CDM Studio's AI builder (or any AI).
+Reply in Markdown with exactly these parts:
+1. "**Your prompt**" then the prompt in a fenced block: it states who it is for, what to build or analyse, the main sections or features (as a short list), content and data to include, look and feel (colours, mood), behaviour on phones, and what NOT to do. Keep it under 220 words. Use naira (₦) and local examples unless the idea says otherwise.
+2. "**Make it yours**": 3 short bullet points of details they could add to improve it.
+3. "**Next prompts**": 3 short follow-up requests they can send after the first result (each one line).
+Write the prompt in the language the person used.`
+  }
   const ctx = lesson ? `\n\nThe learner is on the lesson "${lesson.title}" (${lesson.track}).${lesson.task ? `\nTask: ${lesson.task}` : ''}${lesson.practice ? `\nPractice: ${lesson.practice}` : ''}\nLesson text: ${lesson.body}${lesson.hint ? `\nOfficial hint: ${lesson.hint}` : ''}` : ''
   if (mode === 'practice') {
     return `${BASE}${ctx}

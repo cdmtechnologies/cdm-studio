@@ -37,9 +37,11 @@ export const IDEAS: Record<Kind, string[]> = {
 
 export const QUICK_CHANGES = ['Make it look more modern', 'Make it work well on phones', 'Add a dark mode switch', 'Use bigger, friendlier text', 'Add simple animations']
 
-export type BuildReply = { project: Project; summary: string; version_id: number; premium: boolean; used: number; day_limit: number }
+/** mode: paid from the free allowance or from credits; charged: credits taken; credits: balance after. */
+export type Charge = { mode: 'free' | 'credits'; charged: number; credits: number; free_left: number }
+export type BuildReply = Charge & { project: Project; summary: string; version_id: number }
 
-export function build(body: { project_id?: string; kind?: Kind; prompt: string; mode?: 'create' | 'change' | 'fix'; error?: string }) {
+export function build(body: { project_id?: string; kind?: Kind; prompt: string; mode?: 'create' | 'change' | 'fix'; error?: string; best?: boolean }) {
   return callFunction<BuildReply>('studio-build', body)
 }
 export function explain(project_id: string, question?: string) {

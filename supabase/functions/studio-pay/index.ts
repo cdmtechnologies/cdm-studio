@@ -1,11 +1,11 @@
-// Supabase Edge Function: studio-pay (CDM Studio Premium through Paystack)
-//   { action: 'start', period: 'monthly' | 'yearly', currency: 'NGN' | 'USD', return_url }  -> { url } to Paystack checkout
-//   { action: 'verify', reference }  -> checks the payment with Paystack and adds a month or a year of Premium
+// Supabase Edge Function: studio-pay (CDM Studio credits through Paystack)
+//   { action: 'start', amount, currency: 'NGN' | 'USD', return_url }  -> { url } to Paystack checkout for a credit top-up of any amount
+//   { action: 'verify', reference }  -> checks the payment with Paystack and adds the credits (older month/year payments add Premium time)
 //   POST /studio-pay/webhook (Paystack, signed with the secret key) -> the same as verify, in case the person never returns
 // Prices come from the settings table. Secret: PAYSTACK_SECRET_KEY (the shared CDM Paystack key).
 // Deploy with "Verify JWT" OFF: the start and verify actions check the person's login themselves; the webhook checks Paystack's signature.
 import { createClient } from 'npm:@supabase/supabase-js@2'
-import { returnUrl } from './lib.ts'
+import { returnUrl, topUp } from './lib.ts'
 
 const cors = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type' }
 const json = (b: unknown, status = 200) => new Response(JSON.stringify(b), { status, headers: { ...cors, 'Content-Type': 'application/json' } })
@@ -34,7 +34,9 @@ async function settle(admin: any, reference: string) {
   }
   const { data: until, error } = await admin.rpc('apply_payment', { p_reference: reference, p_amount: Number(t.amount) / 100, p_currency: String(t.currency) })
   if (error) { console.error('apply_payment', error.message); return { paid: false, error: 'The payment does not match. Contact CDM support with your reference.' } }
-  return { paid: true, premium_until: until }
+  const { data: pay } = await admin.from('payments').select('credits, user_id').eq('reference', reference).maybeSingle()
+  const { data: prof } = pay ? await admin.from('profiles').select('credits').eq('id', pay.user_id).maybeSingle() : { data: null }
+  return { paid: true, premium_until: until, credits_added: pay?.credits ?? null, balance: prof?.credits ?? null }
 }
 
 Deno.serve(async (req) => {
@@ -62,17 +64,19 @@ Deno.serve(async (req) => {
     const body = await req.json().catch(() => ({}))
 
     if (body.action === 'start') {
-      const period = body.period === 'yearly' ? 'yearly' : 'monthly'
+      const period = 'credits'
       const currency = body.currency === 'USD' ? 'USD' : 'NGN'
       const { data: s } = await admin.from('settings').select('*').maybeSingle()
       if (!s) return json({ error: 'Prices are not set up yet.' }, 503)
-      const amount = Number(currency === 'USD' ? (period === 'yearly' ? s.price_yearly_usd : s.price_monthly_usd) : (period === 'yearly' ? s.price_yearly_ngn : s.price_monthly_ngn))
+      const t = topUp(body.amount, currency, s)
+      if ('error' in t) return json({ error: t.error })
+      const { amount, credits } = t
       const ret = returnUrl(body.return_url, req.headers.get('origin'))
       const reference = `cdmstudio_${crypto.randomUUID().replace(/-/g, '')}`
       const referral = typeof body.referral_code === 'string' && /^[A-Z0-9-]{3,24}$/.test(body.referral_code.toUpperCase()) ? body.referral_code.toUpperCase() : null
       const { data: prof } = await admin.from('profiles').select('name').eq('id', user.id).maybeSingle()
       const clientName = (prof?.name || String(user.email ?? '').split('@')[0]).slice(0, 80)
-      const { error: e1 } = await admin.from('payments').insert({ reference, user_id: user.id, period, amount, currency })
+      const { error: e1 } = await admin.from('payments').insert({ reference, user_id: user.id, period, amount, currency, credits })
       if (e1) throw new Error(e1.message)
       const r = await fetch('https://api.paystack.co/transaction/initialize', {
         method: 'POST',
@@ -80,7 +84,7 @@ Deno.serve(async (req) => {
         body: JSON.stringify({
           email: user.email, amount: Math.round(amount * 100), currency, reference, callback_url: ret,
           // referral_code and client_name are for CDM Partners (sales commission and the Control Centre)
-          metadata: { product: 'cdmstudio', user_id: user.id, period, cancel_action: ret, client_name: clientName, ...(referral ? { referral_code: referral } : {}) },
+          metadata: { product: 'cdmstudio', user_id: user.id, period, credits, cancel_action: ret, client_name: clientName, ...(referral ? { referral_code: referral } : {}) },
         }),
       })
       const j = await r.json().catch(() => ({}))

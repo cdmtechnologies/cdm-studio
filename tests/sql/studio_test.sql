@@ -36,17 +36,31 @@ select pg_temp.ok(pg_temp.as_user(:b, format($q$insert into public.project_versi
 update public.projects set hidden = true where owner_id = :a;
 select pg_temp.ok(pg_temp.as_user(null, $q$select count(*) from public.gallery()$q$) = '0', 'hidden projects leave the gallery');
 
--- AI limits
-update public.settings set free_builds_daily = 2;
-select pg_temp.ok((select allowed from public.usage_take(:a, 'build')), 'first build allowed');
-select pg_temp.ok((select allowed from public.usage_take(:a, 'build')), 'second build allowed');
-select pg_temp.ok((select reason from public.usage_take(:a, 'build')) = 'limit', 'third build stopped');
-update public.profiles set premium_until = now() + interval '1 day' where id = :a;
-select pg_temp.ok((select premium from public.usage_take(:a, 'build')), 'Premium gets the bigger limit');
+-- AI: free allowance, then credits
+update public.settings set free_builds_daily = 2, credit_price_ngn = 10, usd_ngn = 1600, markup = 3, fast_in_per_m = 1, fast_out_per_m = 5, best_in_per_m = 3, best_out_per_m = 15;
+select pg_temp.ok((select mode from public.usage_take(:a, 'build')) = 'free', 'first build is free');
+select pg_temp.ok((select free_left from public.usage_take(:a, 'build')) = 0, 'second build is free, none left');
+select pg_temp.ok((select reason from public.usage_take(:a, 'build')) = 'credits', 'third build needs credits');
+select pg_temp.ok((select reason from public.usage_take(:a, 'build', true)) = 'credits_best', 'the best model always needs credits');
+-- a ₦1,000 top-up = 100 credits
+insert into public.payments (reference, user_id, amount, currency, period, credits) values ('cdmstudio_test000001', :a, 1000, 'NGN', 'credits', 100);
+select public.apply_payment('cdmstudio_test000001', 1000, 'NGN');
+select pg_temp.ok((select credits from public.profiles where id = :a) = 100, 'top-up adds 100 credits');
+select public.apply_payment('cdmstudio_test000001', 1000, 'NGN');
+select pg_temp.ok((select credits from public.profiles where id = :a) = 100, 'a payment is only counted once');
+select pg_temp.ok((select mode from public.usage_take(:a, 'build')) = 'credits', 'with credits the build goes ahead');
+-- 4,000 tokens in + 10,000 out on the fast model = $0.054 -> 0.054 * 1600 * 3 / 10 = 25.92 -> 26 credits
+select pg_temp.ok((select charged from public.charge_ai(:a, 'build', 'credits', false, 'fast', 4000, 10000, 'p1')) = 26, 'charged 26 credits for that build');
+select pg_temp.ok((select credits from public.profiles where id = :a) = 74, '74 credits left');
+select pg_temp.ok((select count(*) from public.credit_ledger where user_id = :a) = 2, 'ledger has the top-up and the build');
+select pg_temp.ok((select charged from public.charge_ai(:a, 'tutor', 'free', false, 'fast', 1000, 500)) = 0, 'free actions cost no credits');
+select pg_temp.ok(pg_temp.as_user(:a, $q$select count(*) from public.credit_ledger$q$) = '2', 'people see their own ledger');
+select pg_temp.ok(pg_temp.as_user(:b, $q$select count(*) from public.credit_ledger$q$) = '0', 'and nobody else''s');
+select pg_temp.ok(pg_temp.as_user(:a, $q$update public.profiles set credits = 99999 where id = auth.uid() returning 1$q$) like 'ERR:%', 'people cannot give themselves credits');
 select pg_temp.ok(pg_temp.as_user(:a, $q$select (public.usage_take(auth.uid(), 'build')).allowed$q$) like 'ERR:%', 'people cannot call the limit function');
 update public.settings set ai_enabled = false;
 select pg_temp.ok((select reason from public.usage_take(:b, 'tutor')) = 'paused', 'AI switch pauses everything');
-select pg_temp.ok(pg_temp.as_user(null, $q$select price_monthly_ngn from public.settings$q$) = '3000', 'prices are public');
+select pg_temp.ok(pg_temp.as_user(null, $q$select credit_price_ngn from public.settings$q$) = '10.00', 'credit price is public');
 select pg_temp.ok(pg_temp.as_user(null, $q$select ai_cost_in_per_m from public.settings$q$) like 'ERR:%', 'AI costs are not public');
 select pg_temp.ok(pg_temp.as_user(:a, $q$select count(*) from public.staff$q$) like 'ERR:%', 'staff list is private');
 select 'PASSED studio' as result;
