@@ -13,7 +13,7 @@ export const supabase = createClient(url || 'https://example.supabase.co', key |
 export type FnError = Error & { limited?: boolean; premiumNeeded?: boolean; signIn?: boolean }
 
 /** Calls an edge function and returns its JSON, turning errors into readable messages. */
-export async function callFunction<T = Record<string, unknown>>(name: string, body: unknown): Promise<T> {
+export async function callFunction<T = Record<string, unknown>>(name: string, body: Record<string, unknown>): Promise<T> {
   const { data, error } = await supabase.functions.invoke(name, { body })
   if (error) {
     let msg = error.message
