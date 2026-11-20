@@ -16,6 +16,7 @@ type Overview = {
   recent_signups: { email: string; name: string | null; created_at: string }[]
   settings: Settings
   credits: CreditsOverview | null
+  storage?: { db_mb: number; limit_mb: number; projects_mb: number; versions_mb: number } | null
 }
 
 const owner = <T,>(action: string, body: Record<string, unknown> = {}) => callFunction<{ data: T }>('studio-control', { action, ...body }).then((r) => r.data)
@@ -53,6 +54,7 @@ export default function Owner() {
       ['Credits people hold', Number(o.credits.credits_held).toLocaleString()], ['Average build', o.credits.avg_build_credits ? `${o.credits.avg_build_credits} credits ($${o.credits.avg_build_cost_usd})` : '—'],
       ['Free AI cost (7 days)', `$${o.credits.free_cost_7d_usd}`], ['Paid AI cost (7 days)', `$${o.credits.paid_cost_7d_usd}`],
     ] as [string, string][] : []),
+    ...(o.storage ? [['Database used', `${o.storage.db_mb} MB of ${o.storage.limit_mb} MB${o.storage.db_mb > 400 ? ' · upgrade to Pro soon' : ''}`]] as [string, string][] : []),
   ]
   // what one credit really earns after the AI bill, at the current settings
   const perCreditCost = s.credit_price_ngn / s.markup

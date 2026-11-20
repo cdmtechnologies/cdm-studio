@@ -27,7 +27,8 @@ const ACTIONS: Record<string, { partners?: boolean; run: (a: Admin, b: Record<st
       const { data, error } = await a.rpc('studio_owner_overview')
       if (error) throw new Error(error.message)
       const { data: c } = await a.rpc('studio_credit_overview')
-      return { ...(data as Record<string, unknown>), credits: c ?? null }
+      const { data: st } = await a.rpc('studio_storage')
+      return { ...(data as Record<string, unknown>), credits: c ?? null, storage: st ?? null }
     },
   },
   settings: {
