@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:11,950
+In a good interface, every colour has a job, like players in a football team: neutral for backgrounds, a brand colour for actions, and colours with meaning.
+
+2
+00:00:12,650 --> 00:00:21,800
+About one man in twelve has trouble telling some colours apart. So never use colour alone: add a word or an icon.
+
+3
+00:00:23,500 --> 00:00:31,775
+Turn each colour into its brightness, called luminance. Green counts most, because our eyes are most sensitive to it.
+
+4
+00:00:32,480 --> 00:00:38,030
+Then divide the lighter by the darker, after adding a small amount to each.
+
+5
+00:00:38,720 --> 00:00:46,845
+Grey seven six seven six seven six on white just passes at four point five four. Lighter greys fail.
+
+6
+00:00:48,550 --> 00:00:58,325
+Contrast compares how light two colours are. Black on white is twenty-one to one. Normal text needs at least four and a half to one.
+
+7
+00:00:59,030 --> 00:01:08,530
+Light grey text looks elegant in a design file, and becomes unreadable on a phone in sunlight. Now build a contrast checker.
+
