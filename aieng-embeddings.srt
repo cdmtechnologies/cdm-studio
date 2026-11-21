@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:10,825
+Imagine a map where every sentence has a position, and sentences that mean similar things sit close together. That position is an embedding.
+
+2
+00:00:11,520 --> 00:00:18,870
+Keyword search finds shared words. Semantic search finds shared meaning, even across languages.
+
+3
+00:00:20,570 --> 00:00:29,470
+Use the same embedding model for documents and questions. Vectors from different models are like coordinates on different maps.
+
+4
+00:00:30,170 --> 00:00:39,745
+Combine keywords and meaning, especially for names and codes. And set a minimum similarity: if nothing is close, say I don't know.
+
+5
+00:00:41,450 --> 00:00:50,075
+To measure closeness, compare the directions of two arrows. One means the same direction. Zero means unrelated.
+
+6
+00:00:50,770 --> 00:01:00,395
+Embed your documents once, embed each question, and pick the nearest chunks. Vector databases like pgvector do it fast.
+
