@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:08,975
+After you sign in, a session token is like a wristband at an event. Anyone wearing your wristband gets in as you.
+
+2
+00:00:09,670 --> 00:00:17,695
+Testers check that tokens are long and random, sent only over HTTPS, and hidden from scripts.
+
+3
+00:00:19,400 --> 00:00:28,075
+Testers often find tokens in web addresses, sessions that never expire, and sign-out that does nothing on the server.
+
+4
+00:00:28,780 --> 00:00:36,730
+Each finding gets a simple fix: cookies with the right flags, short expiry, and real server-side sign-out.
+
+5
+00:00:38,430 --> 00:00:44,155
+Tokens should expire, and signing out should really end the session on the server.
+
+6
+00:00:44,860 --> 00:00:50,110
+A new token after sign-in stops attackers planting one in advance.
+
