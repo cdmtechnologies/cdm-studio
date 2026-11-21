@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:10,775
+An agent is an AI that works in a loop: decide the next step, use a tool, look at the result, and repeat until the task is done.
+
+2
+00:00:11,480 --> 00:00:17,855
+Like a new employee, it needs clear goals, the right tools, and limits on what it may do.
+
+3
+00:00:19,550 --> 00:00:27,800
+Example: an agent reads new support emails, drafts replies, and files each one under the right label.
+
+4
+00:00:28,500 --> 00:00:36,175
+But a person approves each reply before it is sent, and the agent can never issue refunds by itself.
+
+5
+00:00:36,880 --> 00:00:41,080
+Log every step, so you can see what it did and why.
+
+6
+00:00:42,780 --> 00:00:51,505
+Start with simple, reliable workflows before free-roaming agents. Most business automation is a fixed set of steps.
+
+7
+00:00:52,200 --> 00:00:59,325
+For anything that spends money or sends messages, ask a human to approve. Log every step.
+
