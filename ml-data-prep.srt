@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:11,225
+Cooks prepare ingredients before cooking: wash, cut, measure. Data needs the same: clean it, fill or drop missing values, and fix typos.
+
+2
+00:00:11,920 --> 00:00:17,845
+Scale numbers so a salary in millions does not drown out an age in tens.
+
+3
+00:00:19,550 --> 00:00:26,425
+Some rows have blanks. You can drop them, or fill them with a sensible value like the median.
+
+4
+00:00:27,130 --> 00:00:34,180
+But note how many you filled. If half the column is blank, the column may not be useful at all.
+
+5
+00:00:34,880 --> 00:00:41,305
+Categories like city need turning into numbers before most models can use them.
+
+6
+00:00:43,000 --> 00:00:49,550
+Keep some data hidden for the final test, like exam questions the students never saw.
+
+7
+00:00:50,250 --> 00:00:56,925
+If the model sees the test data while learning, its score is a lie. Split first, always.
+
