@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:09,600
+An analyst is like a detective for a business. The job is not to make charts. It is to help people make better decisions.
+
+2
+00:00:10,300 --> 00:00:16,775
+Describe what happened, diagnose why, predict what will happen, and recommend what to do.
+
+3
+00:00:18,480 --> 00:00:26,605
+Descriptive: what happened? Sales fell ten percent. Diagnostic: why? A competitor opened next door.
+
+4
+00:00:27,300 --> 00:00:36,425
+Predictive: what will happen? December will be thirty percent higher. Prescriptive: what should we do? Order more stock in November.
+
+5
+00:00:38,130 --> 00:00:49,605
+How are sales is too vague. Which five products lost the most revenue in the third quarter, by branch, so we can plan orders, is a question you can answer.
+
+6
+00:00:50,300 --> 00:00:56,150
+Most of the work is getting and cleaning data. Then the answer is often simple.
+
