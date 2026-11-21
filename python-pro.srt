@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:08,250
+Many loops build a new list from an old one. A comprehension does it in one line, and reads like a sentence.
+
+2
+00:00:08,950 --> 00:00:17,100
+Give me the price times one point oh seven five, for each price in prices. Add an if, to keep only some.
+
+3
+00:00:18,800 --> 00:00:28,575
+To sort records, tell sorted what to compare with key. It is like telling a librarian: arrange by title, by author, or by year.
+
+4
+00:00:29,280 --> 00:00:36,480
+A lambda is a tiny function with no name. Reverse equals True puts the best sellers first.
+
+5
+00:00:38,180 --> 00:00:50,255
+Python ships with hundreds of modules: math, statistics, dates, files and more. Math dot ceil rounds up: how many buses for 130 pupils?
+
+6
+00:00:50,950 --> 00:01:00,400
+Use clear names, small functions, and no magic numbers. Then write with vat, top products, buses needed and median sale.
+
