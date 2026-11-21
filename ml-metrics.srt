@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:11,050
+If only one transaction in a hundred is fraud, a model that always says not fraud is ninety-nine percent accurate, and completely useless.
+
+2
+00:00:11,750 --> 00:00:20,250
+So we look closer, with the confusion matrix: true positives, false positives, false negatives and true negatives.
+
+3
+00:00:21,950 --> 00:00:29,825
+A fraud model flags fifty transactions. Forty are really fraud. There were eighty frauds in total.
+
+4
+00:00:30,520 --> 00:00:40,920
+Precision: forty out of fifty, eighty percent. Recall: forty out of eighty, fifty percent. It is accurate when it rings, but misses half.
+
+5
+00:00:41,620 --> 00:00:46,570
+F one combines both into one number, when you need a balance.
+
+6
+00:00:48,280 --> 00:00:57,630
+Precision asks: when the alarm rings, how often is it right? Recall asks: of all the real cases, how many did we catch?
+
+7
+00:00:58,330 --> 00:01:06,780
+A cancer screen wants high recall. A spam filter wants high precision. Choose by the cost of each mistake.
+
