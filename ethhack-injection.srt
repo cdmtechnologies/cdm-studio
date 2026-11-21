@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:11,800
+Injection happens when an app mixes user input into a command. It is like a form where someone writes an instruction in the name box, and the clerk obeys.
+
+2
+00:00:12,500 --> 00:00:17,150
+In SQL, a quote mark in a name can change the query's meaning.
+
+3
+00:00:18,850 --> 00:00:27,325
+The same mistake appears with system commands, templates and search queries: user input mixed into instructions.
+
+4
+00:00:28,020 --> 00:00:33,670
+The fix is always the same idea: keep data separate from instructions.
+
+5
+00:00:35,380 --> 00:00:43,030
+Parameterised queries send the command and the values separately, so a value is never run as code.
+
+6
+00:00:43,730 --> 00:00:49,680
+Validate input, and give the database account only the permissions it needs.
+
