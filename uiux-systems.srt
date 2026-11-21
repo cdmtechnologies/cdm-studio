@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:11,225
+LEGO bricks come in a fixed set of shapes and colours. That is exactly why everything fits together. A design system is a LEGO set for a product.
+
+2
+00:00:11,920 --> 00:00:22,145
+Tokens are the named values at its heart: colours, spacing and corners. Name them by role, like colour danger, not by look, like red.
+
+3
+00:00:23,850 --> 00:00:33,075
+A design system also has ready-made components: buttons, inputs, cards and alerts, each with its states and rules.
+
+4
+00:00:33,770 --> 00:00:39,595
+Big examples include Google's Material Design and Apple's guidelines.
+
+5
+00:00:40,300 --> 00:00:46,800
+Solve accessibility once, inside the component, and every screen gets it for free.
+
+6
+00:00:48,500 --> 00:00:54,075
+Because components use roles, dark mode just swaps the token values.
+
+7
+00:00:54,780 --> 00:01:02,555
+Change the brand colour in one place, and the whole product follows. Now refactor the page with tokens.
+
