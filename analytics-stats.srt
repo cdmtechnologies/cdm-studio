@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:11,775
+If a billionaire walks into a bar, the average wealth in the room jumps, but nobody else got richer. That is why we also use the median: the middle value.
+
+2
+00:00:12,480 --> 00:00:19,080
+Percentiles tell you more: a quarter of sales are below this, three quarters below that.
+
+3
+00:00:20,780 --> 00:00:31,205
+Sales of two, nine, four and seven. Sort them: two, four, seven, nine. The middle two are four and seven, so the median is five and a half.
+
+4
+00:00:31,910 --> 00:00:37,935
+Add one huge sale of a hundred, and the mean jumps. The median barely moves.
+
+5
+00:00:39,630 --> 00:00:47,630
+The middle half of the data sits between Q1 and Q3. Anything far beyond it may be an outlier.
+
+6
+00:00:48,330 --> 00:00:55,505
+Do not delete outliers blindly. They may be typing errors, or your most important customers.
+
