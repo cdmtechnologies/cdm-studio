@@ -107,6 +107,8 @@ function Footer() {
       <div className="mx-auto flex max-w-6xl flex-col gap-2 px-4 py-6 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between sm:px-6">
         <p>© {new Date().getFullYear()} CDM Technologies, Abuja. Learn and build with AI.</p>
         <p className="flex flex-wrap gap-4">
+          <a className="hover:text-violet-700" href="./privacy.html">Privacy</a>
+          <a className="hover:text-violet-700" href="./terms.html">Terms</a>
           <a className="hover:text-violet-700" href="https://cdmtechnologies.github.io">CDM Technologies</a>
           <a className="hover:text-violet-700" href="https://wa.me/2348064068800">WhatsApp 0806 406 8800</a>
           <a className="hover:text-violet-700" href="mailto:cdmtech26@gmail.com">cdmtech26@gmail.com</a>
