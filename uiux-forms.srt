@@ -1,0 +1,32 @@
+1
+00:00:00,500 --> 00:00:09,725
+Sign-up and checkout are where money is made or lost. A confusing form is like a cashier who ignores you: people walk out.
+
+2
+00:00:10,420 --> 00:00:19,845
+Every field needs a visible label. Placeholder text disappears as soon as you type, and people forget what the field was for.
+
+3
+00:00:20,550 --> 00:00:29,025
+And a button is like a light switch: people need to know it worked. Design hover, focus, disabled and loading states.
+
+4
+00:00:30,730 --> 00:00:36,580
+Every extra field loses some people. Ask only what you truly need now.
+
+5
+00:00:37,280 --> 00:00:47,230
+Use the right input type, so phones show the right keyboard: email, tel, or number. Autocomplete fills in names and addresses.
+
+6
+00:00:47,930 --> 00:00:54,580
+After submitting, say what happened. Silence makes people press the button again, and again.
+
+7
+00:00:56,280 --> 00:01:03,330
+Invalid input helps nobody. Say what went wrong, and how to fix it, right next to the field.
+
+8
+00:01:04,030 --> 00:01:10,030
+Never clear the whole form because of one mistake. Now fix the sign-up form.
+
