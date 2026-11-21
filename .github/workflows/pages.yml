@@ -3,6 +3,7 @@ name: Deploy CDM Studio to GitHub Pages
 on:
   push:
     branches: [main]
+    paths-ignore: ['video/**', '.github/workflows/video.yml']
   workflow_dispatch:
 
 permissions:

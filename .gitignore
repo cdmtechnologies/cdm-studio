@@ -6,3 +6,6 @@ dist
 !.env.example
 *.log
 .DS_Store
+video/out
+video/scenes
+video/__pycache__

@@ -1,0 +1,49 @@
+name: Make a lesson video (AI voice)
+
+on:
+  workflow_dispatch:
+    inputs:
+      script:
+        description: 'Script module in video/ (for example python_values)'
+        required: true
+        default: python_values
+      voices:
+        description: 'Kokoro voices, comma separated (af_heart, am_michael, bf_emma, bm_george …)'
+        required: true
+        default: af_heart,am_michael
+
+permissions:
+  contents: read
+
+jobs:
+  video:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Tools
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq espeak-ng ffmpeg
+          pip install -q "kokoro>=0.9.4" soundfile numpy
+          npm install --no-audit --no-fund
+          npx playwright install --with-deps chromium
+      - name: Make the videos
+        run: |
+          mkdir -p dist
+          for v in $(echo "${{ inputs.voices }}" | tr ',' ' '); do
+            ./video/make.sh "${{ inputs.script }}" "$v"
+            cp video/out/*-"$v".mp4 dist/
+            cp video/out/*.srt dist/
+          done
+          ls -la dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: video-${{ inputs.script }}
+          path: dist/
+          retention-days: 14
