@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:10,725
+Your hotel key opens room two fourteen. You try two fifteen, and it opens too. The lock checked you had a key, not that it was your room.
+
+2
+00:00:11,420 --> 00:00:20,870
+Change an invoice number in a link, and see someone else's invoice. That is IDOR, and it tops the OWASP list.
+
+3
+00:00:22,570 --> 00:00:33,095
+In databases like PostgreSQL and Supabase, row level security makes the database itself refuse rows a user may not see.
+
+4
+00:00:33,790 --> 00:00:38,390
+Even if the app has a bug, the data stays protected.
+
+5
+00:00:40,100 --> 00:00:45,250
+Testers use two test accounts, and try to reach each other's data.
+
+6
+00:00:45,950 --> 00:00:53,550
+The fix: the server checks ownership on every request, and answers the same for missing and forbidden.
+
