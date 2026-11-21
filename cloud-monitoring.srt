@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:07,850
+A doctor watches a patient's heartbeat, not just waits for collapse. Watch your app's health all the time.
+
+2
+00:00:08,550 --> 00:00:15,150
+Logs say what happened. Metrics count how much. Uptime checks ask: is it up right now?
+
+3
+00:00:16,850 --> 00:00:24,575
+A runbook says exactly what to do when an alert fires: check this, restart that, call this person.
+
+4
+00:00:25,270 --> 00:00:29,445
+Health checks, logs, metrics, and a calm, written plan.
+
+5
+00:00:31,150 --> 00:00:38,750
+Alert on what users feel: errors, slowness, downtime. Too many alerts, and people ignore them all.
+
+6
+00:00:39,450 --> 00:00:44,300
+Every alert needs an owner, and a runbook that says what to do.
+
