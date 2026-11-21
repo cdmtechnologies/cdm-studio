@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:08,425
+A good prompt is like a brief to a new colleague: who they are, the task, the rules, and an example of good work.
+
+2
+00:00:09,130 --> 00:00:16,280
+A template keeps the brief the same every time, and only fills in the blanks, like a printed form.
+
+3
+00:00:17,980 --> 00:00:21,080
+Here is the shape of a strong template.
+
+4
+00:00:21,780 --> 00:00:29,680
+Then the example, then the customer's message between clear markers, so the model knows which part is data.
+
+5
+00:00:31,380 --> 00:00:38,155
+Saying be professional is vague. Showing one example of a great reply teaches far more.
+
+6
+00:00:38,860 --> 00:00:46,335
+Put the instructions first, mark user text clearly, and say what to do when information is missing.
+
