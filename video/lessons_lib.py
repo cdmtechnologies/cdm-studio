@@ -15,11 +15,49 @@ def turn(b, msg='Your turn!'):
     return b.note(msg, 90, GREEN)
 
 
+EXTRA = {}
+
+
+def more(name, title, cues):
+    """An extra worked-example scene, placed before the lesson's last scene."""
+    EXTRA[name] = (title, cues)
+
+
+def scenes(name):
+    s = LESSONS[name]()
+    if name not in EXTRA:
+        return s
+    title, cues = EXTRA[name]
+    return s[:-1] + [scene_from(name, title, cues, 'x')] + s[-1:]
+
+
+def scene_from(name, title, cues, idx):
+    from build import BLUE, RED, GREEN
+    import re
+    b = Board(top=170)
+    cs = []
+    for j, (say, lines) in enumerate(cues):
+        items = [b.title(title)] if j == 0 else []
+        for ln in lines:
+            k, t = (ln[:2], ln[2:]) if len(ln) >= 2 and ln[1] == ':' and ln[0] in 'cngrbT' else ('', ln)
+            if k == 'c:': items.append(b.code(t, 76))
+            elif k == 'n:': items.append(b.note(t, 76))
+            elif k == 'g:': items.append(b.line(t, 74, color=GREEN))
+            elif k == 'r:': items.append(b.line(t, 74, color=RED))
+            elif k == 'b:': items.append(b.line(t, 74, color=BLUE))
+            elif k == 'T:': items.append(turn(b, t or 'Your turn!'))
+            else: items.append(b.line(t, 74))
+        cs.append((say, items))
+    if b.y > 1060:
+        raise ValueError(f'{name} {title} is too tall ({b.y:.0f})')
+    return (f'{idx}-' + re.sub(r'[^a-z0-9]+', '-', title.lower()).strip('-')[:20], cs)
+
+
 def make_modules(names, src):
     import os
     here = os.path.dirname(os.path.abspath(__file__))
     for n in names:
-        open(os.path.join(here, n.replace('-', '_') + '.py'), 'w').write(f"import {src}\nfrom lessons_lib import LESSONS\n\nLESSON = '{n}'\nSCENES = LESSONS[LESSON]()\n")
+        open(os.path.join(here, n.replace('-', '_') + '.py'), 'w').write(f"import {src}\nfrom lessons_lib import scenes\n\nLESSON = '{n}'\nSCENES = scenes(LESSON)\n")
 
 
 def simple(name, spec):

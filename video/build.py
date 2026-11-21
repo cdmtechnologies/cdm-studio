@@ -92,7 +92,7 @@ def build(lesson, scenes, timings=None):
     """scenes: list of (scene_name, [(say, [items...]), ...]). Returns scene dicts with absolute cue times."""
     out = []
     k = 0
-    for name, cues in scenes:
+    for si, (name, cues) in enumerate(scenes):
         t = 0.4
         cs = []
         for say, items in cues:
@@ -101,7 +101,7 @@ def build(lesson, scenes, timings=None):
             dur = (timings[k] + PAD) if timings else words(say) / WPS + PAD
             t += dur
             k += 1
-        out.append({'name': f'{lesson}-{name}', 'captions': not timings, 'speed': 1000, 'duration': round(t + 0.6, 2), 'cues': cs})
+        out.append({'name': f'{lesson}-{si + 1:02d}-{name}', 'captions': not timings, 'speed': 1000, 'duration': round(t + 0.6, 2), 'cues': cs})
     return out
 
 

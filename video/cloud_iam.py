@@ -1,5 +1,5 @@
-import sec_all
-from lessons_lib import LESSONS
+import mkt_all, ux_all, ai_all, sec_all, more_all  # noqa: F401
+from lessons_lib import scenes
 
 LESSON = 'cloud-iam'
-SCENES = LESSONS[LESSON]()
+SCENES = scenes(LESSON)
