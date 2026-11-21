@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:08,675
+A pivot table sorts receipts into piles and counts each pile: sales by branch, by month, by product.
+
+2
+00:00:09,380 --> 00:00:13,730
+Choose the rows, the columns, and the number to summarise.
+
+3
+00:00:15,420 --> 00:00:23,870
+Rows: branches. Columns: months. Values: total sales. Now you can read across a branch, and down a month.
+
+4
+00:00:24,570 --> 00:00:29,745
+Add a total row and a share column, and the story starts to appear.
+
+5
+00:00:31,440 --> 00:00:38,040
+Wuse sold two million of eight million. Its share is one quarter, twenty-five percent.
+
+6
+00:00:38,740 --> 00:00:46,140
+Growth compares with before: from five hundred thousand to six hundred thousand is up twenty percent.
+
