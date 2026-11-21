@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:07,725
+Git is a time machine for your code. Every save point, called a commit, can be visited again.
+
+2
+00:00:08,420 --> 00:00:14,795
+Branches let you try ideas without breaking the working version, like drafts of a letter.
+
+3
+00:00:16,500 --> 00:00:24,300
+Pull the latest, create a branch, make small commits with clear messages, push, and open a pull request.
+
+4
+00:00:25,000 --> 00:00:28,575
+Write messages that say why, not just what.
+
+5
+00:00:30,280 --> 00:00:36,305
+A pull request asks the team to review a change before it joins the main branch.
+
+6
+00:00:37,010 --> 00:00:42,710
+Never commit passwords or keys. Once pushed, assume they are public.
+
