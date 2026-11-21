@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:09,625
+Now we write data. Constraints are the database's security guard at the gate: it refuses data that breaks the rules.
+
+2
+00:00:10,320 --> 00:00:14,345
+Insert adds rows. Always list the columns.
+
+3
+00:00:16,050 --> 00:00:31,225
+Primary key: a unique id. Not null: a value is required. Unique: no two rows share it. Check: any rule you like. Code in an app can have bugs, but the guard at the gate still stops bad data.
+
+4
+00:00:31,920 --> 00:00:40,520
+Many real systems never delete business records. They mark them as archived, so history and audits stay intact.
+
+5
+00:00:42,220 --> 00:00:50,570
+Update and delete are like a cheque book: check twice, sign once. An update without where changes every row.
+
+6
+00:00:51,270 --> 00:01:00,645
+A transaction is all or nothing, like a money transfer: both updates happen, or neither does. Now create and change some data.
+
