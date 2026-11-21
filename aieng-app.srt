@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:10,450
+A demo works once on your laptop. A product works thousands of times a day, on slow networks, while the AI provider is busy.
+
+2
+00:00:11,150 --> 00:00:21,350
+Models do not remember. Send the conversation each time, but keep within a budget: keep the rules and the newest messages, drop the oldest.
+
+3
+00:00:23,050 --> 00:00:31,000
+If the best model is busy, fall back to a smaller one, a cached answer, or a plain path without AI.
+
+4
+00:00:31,700 --> 00:00:39,550
+Do not retry errors that will never succeed, like a wrong key or a bad request. Those need fixing.
+
+5
+00:00:40,250 --> 00:00:46,950
+Set a timeout on every call. A clear error after thirty seconds beats waiting forever.
+
+6
+00:00:48,650 --> 00:00:59,525
+When a service is busy, do not redial at once, like everyone calling a busy line. Wait one second, then two, then four, then give up kindly.
+
+7
+00:01:00,220 --> 00:01:09,770
+Limit messages per user, input size and output length, and have a fallback, so the feature degrades instead of disappearing.
+
