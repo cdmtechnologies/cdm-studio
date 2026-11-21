@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:10,175
+Programs cannot read a friendly paragraph. They need data with a fixed shape, like a form with labelled boxes. That is JSON.
+
+2
+00:00:10,880 --> 00:00:17,880
+Ask the model for JSON with exact field names, and give an example of the shape you want.
+
+3
+00:00:19,580 --> 00:00:27,130
+The model returns a name, a phone and a total. Your code checks each field before saving anything.
+
+4
+00:00:27,830 --> 00:00:34,430
+Is the name present? Does the phone have eleven digits? Is the total a positive number?
+
+5
+00:00:35,130 --> 00:00:41,080
+If anything fails, ask again with the error, once, or send it to a person.
+
+6
+00:00:42,780 --> 00:00:51,405
+Then check it in code, like a cashier checking a banknote. Does it parse? Are the fields there? Are the numbers sensible?
+
+7
+00:00:52,100 --> 00:01:00,750
+If it fails, retry once with the error message, or fall back safely. Never let bad data into your system.
+
