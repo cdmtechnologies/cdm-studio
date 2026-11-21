@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:08,300
+Sometimes there are no labels. Clustering finds natural groups, like customers who shop the same way.
+
+2
+00:00:09,000 --> 00:00:18,500
+Place k centres, give each point to its nearest centre, move each centre to the middle of its points, and repeat until nothing moves.
+
+3
+00:00:20,200 --> 00:00:26,050
+How many groups? Try several values of k, and watch how tight the groups are.
+
+4
+00:00:26,750 --> 00:00:31,900
+When adding another group stops helping much, you have found the elbow.
+
+5
+00:00:32,600 --> 00:00:37,575
+Scale the features first, or the biggest numbers decide the groups.
+
+6
+00:00:39,280 --> 00:00:47,730
+A shop might find bargain hunters, weekend families and big monthly buyers, and market to each one differently.
+
+7
+00:00:48,430 --> 00:00:54,955
+Clusters are suggestions. Give each one a name only after looking at who is inside.
+
