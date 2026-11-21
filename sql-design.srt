@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:10,175
+A badly planned building can be painted beautifully, but the doors are still in the wrong places. Design decides everything later.
+
+2
+00:00:10,880 --> 00:00:19,105
+Store each fact once. Use a meaningless id as the primary key, because names and phone numbers change.
+
+3
+00:00:20,800 --> 00:00:30,750
+Start from the nouns: customers, products, orders, payments. Each thing usually becomes a table, and the facts about it become columns.
+
+4
+00:00:31,450 --> 00:00:44,575
+One customer has many orders, so the orders table holds the customer's id. An order has many products, and a product is in many orders, so a join table sits in the middle.
+
+5
+00:00:45,280 --> 00:00:52,130
+Store money as whole numbers or a numeric type, never as text, and store dates as dates.
+
+6
+00:00:53,820 --> 00:01:00,445
+An index is like a book's index: jump straight to the page instead of reading every page.
+
+7
+00:01:01,150 --> 00:01:10,275
+And never glue a user's input into SQL text. Use parameterised queries, so a value is never run as code.
+
