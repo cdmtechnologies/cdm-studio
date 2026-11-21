@@ -1,0 +1,20 @@
+1
+00:00:00,500 --> 00:00:13,825
+Before shipping containers, cargo was loaded piece by piece, and every port worked differently. A software container packs an app with everything it needs, and runs the same everywhere.
+
+2
+00:00:14,520 --> 00:00:17,645
+Docker builds and runs containers.
+
+3
+00:00:19,350 --> 00:00:28,600
+A Dockerfile is the recipe for a container: start from a base, copy your code, install what it needs, and say how to run it.
+
+4
+00:00:30,300 --> 00:00:39,400
+With many containers, Kubernetes is the harbour master: it places them, restarts failed ones, and adds more when busy.
+
+5
+00:00:40,100 --> 00:00:44,175
+Start simple. Many apps never need Kubernetes.
+
