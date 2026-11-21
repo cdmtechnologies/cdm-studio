@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:10,725
+Group by squeezes rows into one per group. Window functions keep every row, like seeing each student's score, and their position in the class.
+
+2
+00:00:11,420 --> 00:00:17,745
+A running total is how a bank statement shows the balance after every transaction.
+
+3
+00:00:19,450 --> 00:00:28,625
+Lag looks at the previous row. Total minus the previous total shows the change since last time, like growth month on month.
+
+4
+00:00:29,330 --> 00:00:38,380
+A classic interview question: the best seller in each category. Number the rows in each category, then keep number one.
+
+5
+00:00:40,070 --> 00:00:51,995
+SQL takes you to data analysis, business intelligence and back-end development. Practise with real datasets, and explain your thinking out loud in interviews.
+
+6
+00:00:52,700 --> 00:00:57,800
+Now add a running total, then build your final project. Good luck!
+
