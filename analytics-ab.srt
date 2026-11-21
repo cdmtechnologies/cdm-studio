@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:11,000
+Toss a fair coin ten times, and you might get six heads. Small samples wobble. An A/B test checks if a change really worked, or was luck.
+
+2
+00:00:11,700 --> 00:00:19,125
+Split visitors at random. Half see the old page, half the new one. Then compare conversion rates.
+
+3
+00:00:20,830 --> 00:00:29,805
+Significant is not the same as important. A tiny lift can be significant with huge traffic, but not worth the cost.
+
+4
+00:00:30,500 --> 00:00:36,150
+And not significant does not mean no effect. Maybe the test was too small.
+
+5
+00:00:36,860 --> 00:00:41,360
+Check guardrail numbers too, like complaints and refunds.
+
+6
+00:00:43,060 --> 00:00:49,885
+A z score beyond about two means a difference that big would rarely happen by luck alone.
+
+7
+00:00:50,590 --> 00:00:57,990
+Decide the sample size first, run whole weeks, and do not stop early because you like the result.
+
