@@ -634,6 +634,171 @@ export const COURSES: Track[] = [
     ]
   },
   {
+    "id": "ethhack",
+    "title": "Ethical hacking and penetration testing",
+    "blurb": "Learn how professional, authorised security testers think and work: scope and law, methodology, finding and rating weaknesses, and reporting them so they get fixed.",
+    "colour": "emerald",
+    "emoji": "🕵️",
+    "course": {
+      "level": "Intermediate",
+      "hours": 10,
+      "free": 2,
+      "skills": [
+        "Ethics, law and rules of engagement",
+        "Penetration testing methodology",
+        "Reading scan results",
+        "Injection flaws and their fixes",
+        "Session and token checks",
+        "Rating risk (CVSS-style)",
+        "Spotting attacks in logs",
+        "Writing findings and responsible disclosure"
+      ],
+      "careers": [
+        "Junior penetration tester",
+        "Bug bounty hunter",
+        "Application security analyst",
+        "SOC analyst"
+      ],
+      "examQuestions": 20
+    },
+    "lessons": [
+      {
+        "id": "ethhack-ethics",
+        "title": "Hacking with permission: ethics, law and scope",
+        "minutes": 20,
+        "kind": "read",
+        "outline": "What makes hacking ethical, the law in Nigeria and abroad, written permission, scope and rules of engagement.",
+        "body": "## The one rule\n\nAn **ethical hacker** (penetration tester, \"pentester\", red teamer) attacks systems **with the owner's written permission**, inside an agreed **scope**, to find weaknesses **before criminals do**, and reports them so they get fixed. Without permission the same actions are a crime, however good your intentions.\n\n- In Nigeria, the **Cybercrimes (Prohibition, Prevention, etc.) Act 2015** (amended 2024) makes unauthorised access to a computer system an offence, with fines and prison terms.\n- The UK's Computer Misuse Act, the US Computer Fraud and Abuse Act and similar laws elsewhere say the same.\n- \"I was only looking\", \"it was not protected\" or \"I wanted to help\" are not defences.\n\n## What permission looks like\n\nBefore any test, professionals sign:\n\n1. **A contract or statement of work** with the system owner (not just an employee who says \"go ahead\")\n2. **Scope**: exactly which systems are in (these web addresses, these IP ranges, this app) and which are **out** (third-party services, other customers, payment processors)\n3. **Rules of engagement**: dates and times, what is allowed (no denial of service, no social engineering of staff unless agreed), how to handle real customer data you see, and who to call in an emergency\n4. **A safe harbour / authorisation letter** you can show if anyone asks\n\nIf you find something outside scope, **stop and ask**. If a system belongs to someone else (a hosting company, a cloud provider), their permission matters too; most cloud providers publish rules for testing what you host with them.\n\n## Bug bounties and disclosure\n\nMany companies run **bug bounty programmes** (HackerOne, Bugcrowd, Intigriti, their own pages) that give public permission to test **specific** things under **specific** rules, and pay for valid findings. Read the policy every time: it is your permission and its limits.\n\nIf you stumble on a weakness with no programme, use **responsible (coordinated) disclosure**: report privately to the owner, give them reasonable time to fix (often 90 days), and never use or publish the weakness or the data first.\n\n## The ethics beyond the law\n\n- Do the minimum needed to prove a finding. Do not download, keep or look through more personal data than you must.\n- Never damage, change or delete real data.\n- Keep findings confidential; the report is for the client.\n- Tell the truth in your report, including what you could not test.\n\nThis course teaches the defender's understanding of attacks: how testers work, how to read their results, how weaknesses are found and fixed. Practise only on systems you own or on legal training labs.",
+        "quiz": [
+          {
+            "q": "A friend's company website looks weak. Can you test it if your friend works there and says it is fine?",
+            "options": [
+              "Yes, a staff member agreed",
+              "Only with written permission from someone authorised to give it, inside an agreed scope",
+              "Yes, if you do not change anything"
+            ],
+            "answer": 1,
+            "why": "Permission must come from the system owner in writing, with a defined scope."
+          },
+          {
+            "q": "During a test you find a server that is not in your scope. You should…",
+            "options": [
+              "Test it quickly while you are there",
+              "Stop and ask the client before touching it",
+              "Report it on social media"
+            ],
+            "answer": 1,
+            "why": "Out-of-scope systems are off limits until the owner agrees."
+          },
+          {
+            "q": "Responsible disclosure means…",
+            "options": [
+              "Publishing the bug immediately",
+              "Reporting privately and giving the owner time to fix before anything is public",
+              "Selling the bug"
+            ],
+            "answer": 1,
+            "why": "Coordinated disclosure protects users while the fix is made."
+          }
+        ]
+      },
+      {
+        "id": "ethhack-method",
+        "title": "How a penetration test works",
+        "minutes": 20,
+        "kind": "read",
+        "outline": "The phases of a test, testing frameworks, the kinds of tests, and building a legal practice lab.",
+        "body": "## The phases\n\nEvery professional methodology (PTES, OWASP Web Security Testing Guide, NIST SP 800-115) follows the same shape:\n\n1. **Planning and scoping**: goals, scope, rules, contacts (lesson 1).\n2. **Reconnaissance (information gathering)**: what does the target expose? Web addresses, sub-domains, technologies, public documents, staff roles. *Passive* recon uses public information only; *active* recon touches the target (allowed only in scope).\n3. **Scanning and enumeration**: which services are running, which versions, which pages and inputs exist.\n4. **Vulnerability analysis**: which of those could be weak? Outdated software with known issues (CVEs), weak settings, missing checks on inputs or permissions.\n5. **Exploitation (proof)**: carefully demonstrating that a weakness is real and what it allows, with the least possible impact.\n6. **Post-exploitation**: within the rules, what could an attacker reach from there? Often stops at a screenshot as proof.\n7. **Reporting**: clear findings, evidence, risk rating, and how to fix each one. **The report is the product.**\n8. **Retest**: check the fixes work.\n\n## Kinds of tests\n\n- **Black box**: the tester starts with almost nothing, like an outside attacker.\n- **Grey box**: some knowledge or a normal user account (most common for web apps).\n- **White box**: full information, including source code; finds the most per hour.\n- **Red team**: a long, stealthy exercise testing people, processes and detection, not just technology.\n- **Vulnerability assessment**: wide scanning and listing of weaknesses without exploiting them.\n\n## The OWASP Top 10\n\nThe best-known list of web application risks (2021 edition): broken access control, cryptographic failures, injection, insecure design, security misconfiguration, vulnerable and outdated components, identification and authentication failures, software and data integrity failures, security logging and monitoring failures, and server-side request forgery. You met several in Cybersecurity essentials; this course goes deeper on finding, rating and reporting them.\n\n## Your practice lab (legal and free)\n\n- **TryHackMe** and **Hack The Box**: guided rooms and machines you are allowed to attack\n- **OWASP Juice Shop**, **DVWA** and **WebGoat**: deliberately vulnerable web apps to run on your own computer\n- **PortSwigger Web Security Academy**: free web security labs\n- **picoCTF** and other Capture the Flag (CTF) games\n- Common tools you will meet there: Nmap (scanning), Burp Suite or OWASP ZAP (web proxies), Wireshark (traffic), and the Kali Linux distribution, which bundles many tools.\n\nNever point tools at systems outside these labs or your written scope.",
+        "quiz": [
+          {
+            "q": "Which phase produces what the client actually pays for?",
+            "options": [
+              "Scanning",
+              "Exploitation",
+              "Reporting"
+            ],
+            "answer": 2,
+            "why": "Findings only help when they are clearly reported with fixes."
+          },
+          {
+            "q": "A grey-box web test usually means…",
+            "options": [
+              "The tester has some information, such as a normal user account",
+              "The tester has the full source code",
+              "The tester knows nothing"
+            ],
+            "answer": 0,
+            "why": "Grey box sits between black and white box."
+          },
+          {
+            "q": "Where may you practise attacking web apps legally?",
+            "options": [
+              "Any site without a login",
+              "Training labs such as Juice Shop, DVWA or PortSwigger Academy",
+              "Government sites, as they are public"
+            ],
+            "answer": 1,
+            "why": "Use labs built for practice, or systems you own."
+          }
+        ]
+      },
+      {
+        "id": "ethhack-recon",
+        "title": "Reading scan results like a tester",
+        "minutes": 25,
+        "kind": "code",
+        "outline": "Turn raw service-scan output into a list of exposed services and flag the risky ones.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "ethhack-injection",
+        "title": "Injection flaws: how they happen and how they are fixed",
+        "minutes": 30,
+        "kind": "code",
+        "outline": "Why mixing data into commands is dangerous, and build the fix: parameterised queries and allow-lists.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "ethhack-sessions",
+        "title": "Sessions and tokens: what testers check",
+        "minutes": 30,
+        "kind": "code",
+        "outline": "How sign-in tokens work, common token mistakes, and write the checks a server must make on a JWT.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "ethhack-risk",
+        "title": "Rating and prioritising findings",
+        "minutes": 25,
+        "kind": "code",
+        "outline": "Likelihood and impact, CVSS severity bands, and sort a list of findings so the worst get fixed first.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "ethhack-logs",
+        "title": "The blue-team view: spotting attacks in logs",
+        "minutes": 25,
+        "kind": "code",
+        "outline": "What scans, brute force and probing look like in web server logs, and build a simple detector.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "ethhack-report",
+        "title": "Reporting, disclosure and your security career",
+        "minutes": 20,
+        "kind": "prompt",
+        "outline": "Write findings clients act on, report bugs responsibly, and plan certifications and a portfolio.",
+        "body": "",
+        "paid": true
+      }
+    ]
+  },
+  {
     "id": "cloud",
     "title": "Cloud and DevOps essentials",
     "blurb": "How modern apps are hosted, deployed and kept running: cloud services, Git, CI/CD, containers, monitoring and cost control.",
