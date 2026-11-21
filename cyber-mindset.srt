@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:09,075
+A burglar walks round a house looking for the open window. Defenders must think the same way: where is my open window?
+
+2
+00:00:09,770 --> 00:00:17,070
+Security protects three things: keep data secret, keep it correct, and keep systems available.
+
+3
+00:00:18,770 --> 00:00:28,295
+When you hear about an attack, ask which goal it hit. Ransomware hits availability. A leaked customer list hits confidentiality.
+
+4
+00:00:28,990 --> 00:00:33,115
+A cashier quietly changing prices hits integrity.
+
+5
+00:00:34,820 --> 00:00:42,670
+A threat is what could cause harm. A weakness is the open window. Risk is how likely, times how bad.
+
+6
+00:00:43,370 --> 00:00:48,570
+You cannot fix everything at once, so fix the biggest risks first.
+
