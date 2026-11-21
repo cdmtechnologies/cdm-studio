@@ -77,6 +77,13 @@ def circle(cx, cy, r, color=ORANGE, width=6, **kw):
     return path('M ' + ' L '.join(pts), color, width, **kw)
 
 
+def flat(items):
+    out = []
+    for i in items:
+        out.extend(flat(i) if isinstance(i, (list, tuple)) else [i])
+    return out
+
+
 def words(s):
     return len(s.split())
 
@@ -89,7 +96,7 @@ def build(lesson, scenes, timings=None):
         t = 0.4
         cs = []
         for say, items in cues:
-            cs.append({'at': round(t, 2), 'say': say, 'items': items})
+            cs.append({'at': round(t, 2), 'say': say, 'items': flat(items)})
             # timings: seconds of speech for each cue (from the AI voice or a recording)
             dur = (timings[k] + PAD) if timings else words(say) / WPS + PAD
             t += dur
@@ -105,3 +112,86 @@ if __name__ == '__main__':
         os.makedirs('scenes', exist_ok=True)
         json.dump(sc, open(f"scenes/{sc['name']}.json", 'w'), indent=1)
         print(sc['name'], sc['duration'])
+
+
+# ---------- automatic layout: write a board from top to bottom without placing every item by hand ----------
+import xml.etree.ElementTree as _ET
+_ADV = {}
+
+
+def _font(name):
+    if name not in _ADV:
+        root = _ET.parse(os.path.join(os.path.dirname(os.path.abspath(__file__)), name + '.svg')).getroot()
+        ns = '{http://www.w3.org/2000/svg}'
+        f = root.find(f'.//{ns}font')
+        d = int(f.get('horiz-adv-x'))
+        _ADV[name] = (d, {g.get('unicode'): float(g.get('horiz-adv-x', d)) for g in root.iter(f'{ns}glyph') if g.get('unicode')})
+    return _ADV[name]
+
+
+def width(t, font, size):
+    d, g = _font(font)
+    return sum(g.get(ch, d) for ch in t) * size / 1000
+
+
+class Board:
+    """Writes lines down the board, shrinking any line that would not fit."""
+    MAXW = 1720
+
+    def __init__(self, top=150):
+        self.y = top
+
+    def _fit(self, t, font, size):
+        w = width(t, font, size)
+        return size * self.MAXW / w if w > self.MAXW else size
+
+    def title(self, t, size=104):
+        s = self._fit(t, 'EMSFelix', size)
+        w = width(t, 'EMSFelix', s)
+        out = [text(t, 960, self.y, s, 'EMSFelix', align='center', width=8), underline(960 - w / 2 - 20, self.y + 26, w + 40)]
+        self.y += s + 70
+        return out
+
+    def line(self, t, size=66, font='EMSReadability', color=INK, x=None, gap=None, **kw):
+        s = self._fit(t, font, size)
+        it = text(t, 960 if x is None else x, self.y, s, font, color=color, align='center' if x is None else 'left', width=7 if s > 80 else 6, **kw)
+        self.y += gap if gap is not None else s * 1.45
+        return it
+
+    def code(self, t, size=72, color=BLUE, **kw):
+        return self.line(t, size, 'EMSNixish', color, **kw)
+
+    def note(self, t, size=60, color=ORANGE, **kw):
+        return self.line(t, size, 'EMSFelix', color, **kw)
+
+    def down(self, x=960, h=90):
+        a = arrow(x, self.y - 55, x, self.y + h - 75, INK, 6, head=24)
+        self.y += h + 10
+        return a
+
+    def pair(self, left, right, size=66, lfont='EMSNixish', rfont='EMSFelix', lx=360, rx=1000, lcolor=BLUE, rcolor=INK):
+        out = [text(left, lx, self.y, size, lfont, color=lcolor), arrow(rx - 190, self.y - size * 0.3, rx - 40, self.y - size * 0.3, INK, 5, head=20), text(right, rx, self.y, size, rfont, color=rcolor)]
+        self.y += size * 1.5
+        return out
+
+    def space(self, h=40):
+        self.y += h
+        return []
+
+
+def around(it, color=ORANGE, width=5):
+    """A hand-drawn loop around a text item (from Board.line, Board.code or text)."""
+    w = width_of(it)
+    x0 = it['x'] - (w / 2 if it.get('align') == 'center' else 0)
+    cx, cy = x0 + w / 2, it['y'] - it['size'] * 0.33
+    rx, ry = w / 2 + 40, it['size'] * 0.75
+    pts = []
+    for i in range(0, 380, 15):
+        a = math.radians(i - 100)
+        k = 1 + rnd.uniform(-0.025, 0.025)
+        pts.append(f'{cx + rx * k * math.cos(a):.1f} {cy + ry * k * math.sin(a):.1f}')
+    return path('M ' + ' L '.join(pts), color, width)
+
+
+def width_of(it):
+    return width(it['text'], it.get('font', 'EMSReadability'), it['size'])

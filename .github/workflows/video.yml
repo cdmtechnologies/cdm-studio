@@ -1,24 +1,38 @@
-name: Make a lesson video (AI voice)
+name: Make lesson videos (AI voice)
 
 on:
   workflow_dispatch:
     inputs:
-      script:
-        description: 'Script module in video/ (for example python_values)'
+      scripts:
+        description: 'Script modules in video/, comma separated (for example python_hello,python_values)'
         required: true
         default: python_values
-      voices:
-        description: 'Kokoro voices, comma separated (af_heart, am_michael, bf_emma, bm_george …)'
+      voice:
+        description: 'Kokoro voice (am_michael is the chosen narrator)'
         required: true
-        default: af_heart,am_michael
+        default: am_michael
 
 permissions:
   contents: write
 
 jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      list: ${{ steps.l.outputs.list }}
+    steps:
+      - id: l
+        run: echo "list=$(echo '${{ inputs.scripts }}' | python3 -c 'import sys,json; print(json.dumps([s.strip() for s in sys.stdin.read().split(",") if s.strip()]))')" >> "$GITHUB_OUTPUT"
+
   video:
+    needs: plan
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        script: ${{ fromJSON(needs.plan.outputs.list) }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -33,23 +47,13 @@ jobs:
           pip install -q "kokoro>=0.9.4" soundfile numpy
           npm install --no-audit --no-fund
           npx playwright install --with-deps chromium
-      - name: Make the videos
+      - name: Make the video
         run: |
-          mkdir -p dist
-          for v in $(echo "${{ inputs.voices }}" | tr ',' ' '); do
-            ./video/make.sh "${{ inputs.script }}" "$v"
-            cp video/out/*-"$v".mp4 dist/
-            cp video/out/*.srt dist/
-          done
-          ls -la dist
-      - uses: actions/upload-artifact@v4
-        with:
-          name: video-${{ inputs.script }}
-          path: dist/
-          retention-days: 14
-      - name: Save the videos to the videos branch
+          ./video/make.sh "${{ matrix.script }}" "${{ inputs.voice }}"
+          mkdir -p dist && cp video/out/*-"${{ inputs.voice }}".mp4 video/out/*.srt dist/
+      - name: Save it to its own branch (videos/<script>)
         run: |
           cd dist
-          git init -q -b videos && git config user.name 'cdm-video-bot' && git config user.email 'bot@users.noreply.github.com'
-          git add . && git commit -qm "video ${{ inputs.script }} (${{ inputs.voices }})"
-          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" videos:videos-${{ inputs.script }}
+          git init -q -b v && git config user.name 'cdm-video-bot' && git config user.email 'bot@users.noreply.github.com'
+          git add . && git commit -qm "video ${{ matrix.script }} (${{ inputs.voice }})"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" v:videos/${{ matrix.script }}
