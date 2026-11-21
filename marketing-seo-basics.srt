@@ -1,0 +1,32 @@
+1
+00:00:00,500 --> 00:00:10,525
+Google is a librarian who has read every page in the world. When you ask a question, it hands you the ten pages most likely to help.
+
+2
+00:00:11,220 --> 00:00:22,120
+First it crawls, following links to discover pages. Then it indexes, filing each page in a huge catalogue. Then it ranks the best answers.
+
+3
+00:00:22,830 --> 00:00:33,055
+Ranking rewards relevance, quality and trust, links from other sites, which are like recommendation letters, and a fast, mobile-friendly page.
+
+4
+00:00:34,750 --> 00:00:43,400
+Find the words people really type. Start typing in Google and read the suggestions. Read the People also ask box.
+
+5
+00:00:44,100 --> 00:00:54,100
+Google Search Console shows the searches that already bring people to your site. Google Trends shows the seasons, like a December rush.
+
+6
+00:00:54,800 --> 00:01:01,225
+Look at what already ranks for a search. Google is showing you the kind of page it thinks fits.
+
+7
+00:01:02,930 --> 00:01:13,980
+The same words can mean different things, so match the intent. How to start poultry farming wants a guide. Buy power bank Abuja wants a product page.
+
+8
+00:01:14,680 --> 00:01:25,730
+Long, specific searches have fewer people each, but those people know exactly what they want. SEO is like planting trees, not lighting fireworks.
+
