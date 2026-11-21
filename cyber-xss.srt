@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:10,475
+If a website shows what users type without care, an attacker can type code instead of a name, and it runs in other people's browsers.
+
+2
+00:00:11,170 --> 00:00:16,795
+It is like a notice board where someone pins a trap instead of a notice.
+
+3
+00:00:18,500 --> 00:00:26,800
+A comment box shows names. An attacker types a script instead of a name. Every visitor's browser now runs it.
+
+4
+00:00:27,500 --> 00:00:33,750
+Display it as text, and the browser shows harmless characters instead of running code.
+
+5
+00:00:35,450 --> 00:00:44,450
+Treat user text as text, never as code. Use text content, not inner HTML, and escape special characters.
+
+6
+00:00:45,150 --> 00:00:51,575
+A content security policy adds a second wall, blocking scripts you did not allow.
+
