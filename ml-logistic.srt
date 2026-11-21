@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:09,600
+Many questions are yes or no: will this loan be repaid? Logistic regression gives a probability, not just a label.
+
+2
+00:00:10,300 --> 00:00:16,900
+The sigmoid squashes any score into a number between zero and one, like a dimmer switch.
+
+3
+00:00:18,600 --> 00:00:24,325
+A positive weight pushes towards yes. A negative weight pushes towards no.
+
+4
+00:00:25,030 --> 00:00:31,580
+Missed payments might have a big negative weight on repayment. Income a positive one.
+
+5
+00:00:32,270 --> 00:00:38,370
+That is why regulators like logistic regression: you can tell a customer why.
+
+6
+00:00:40,080 --> 00:00:46,830
+The business chooses the threshold. A careful bank might decline above thirty percent risk.
+
+7
+00:00:47,530 --> 00:00:57,655
+Log loss punishes being confidently wrong. And each weight shows how a feature pushes the answer, which makes the model easy to explain.
+
