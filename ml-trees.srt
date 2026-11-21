@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:09,225
+A decision tree plays twenty questions with your data: is income above three hundred thousand? Has a payment been missed?
+
+2
+00:00:09,920 --> 00:00:17,195
+It picks the question that splits the groups most cleanly. Gini impurity measures how mixed a group is.
+
+3
+00:00:18,900 --> 00:00:28,375
+Six customers: three good, three bad. Split at income fifty thousand. The left side is all bad, the right side all good.
+
+4
+00:00:29,070 --> 00:00:35,320
+Both sides are pure, so the impurity is zero. That is the best split possible.
+
+5
+00:00:36,020 --> 00:00:41,795
+Trees also show which features matter most. But importance is not cause.
+
+6
+00:00:43,500 --> 00:00:54,650
+A tree that grows forever memorises the data. A random forest asks many trees and lets them vote, like asking a crowd instead of one person.
+
+7
+00:00:55,350 --> 00:01:03,000
+Boosted trees fix each other's mistakes one after another, and often win on spreadsheet-style data.
+
