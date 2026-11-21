@@ -1,0 +1,36 @@
+1
+00:00:00,500 --> 00:00:06,525
+Text in Python is a string, and a string behaves like a list of characters.
+
+2
+00:00:07,230 --> 00:00:14,305
+You can slice it like a loaf of bread. From the start position, up to but not including the end.
+
+3
+00:00:15,000 --> 00:00:18,450
+Len tells you how many characters it has.
+
+4
+00:00:20,150 --> 00:00:25,475
+Every string carries a tool belt of methods. You call them with a dot.
+
+5
+00:00:26,180 --> 00:00:35,705
+Strip removes spaces at the ends. Title capitalises each word. Replace swaps text. Split cuts text into a list.
+
+6
+00:00:36,400 --> 00:00:43,825
+Strings never change themselves. Methods give you a new string, so keep the result in a variable.
+
+7
+00:00:45,530 --> 00:00:50,605
+Real data is typed by real people, and people are inconsistent.
+
+8
+00:00:51,310 --> 00:00:58,410
+Keep only the digits, then turn a local zero into two three four. Now both numbers match.
+
+9
+00:00:59,110 --> 00:01:06,760
+That is everyday work in offices around the world. Now write initials, clean phone and mask email.
+
