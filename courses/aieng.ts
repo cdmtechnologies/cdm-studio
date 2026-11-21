@@ -1,4 +1,5 @@
 import type { Course } from './types'
+import { aiengMore, aiengProject } from './extra/aieng'
 
 export const aieng: Course = {
   id: 'aieng',
@@ -447,6 +448,7 @@ Then write \`agentLoop(steps, approve, maxSteps)\` that runs the tool calls in \
   function agentLoop(steps, approve, maxSteps) { return steps.slice(0, maxSteps).map((s) => runTool(s, approve)) }
 </script>`,
     },
+    ...aiengMore,
     {
       id: 'aieng-responsible',
       title: 'Responsible AI, privacy and your AI career',
@@ -477,6 +479,7 @@ Use the tutor to design an AI workflow for a real job you know. A strong answer 
       practice: 'Describe a repetitive task in a job you know (for example, answering customer WhatsApp questions about prices, or preparing a weekly sales summary). Ask the AI to design an automated workflow for it, with the steps, which steps need human approval, what personal data must be protected, and how to test it with 5 example cases.',
     },
   ],
+  project: aiengProject,
   exam: [
     { q: 'At each step, a large language model…', options: ['Searches a database', 'Predicts the next token', 'Runs the code you wrote', 'Copies a stored answer'], answer: 1, why: 'Next-token prediction is the core mechanism.' },
     { q: 'What limits how much a model can consider at once?', options: ['Temperature', 'The context window', 'The API key', 'The font size'], answer: 1, why: 'Only what is in the context window is seen.' },

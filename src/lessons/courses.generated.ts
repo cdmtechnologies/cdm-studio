@@ -787,7 +787,24 @@ export const COURSES: Track[] = [
         "AI product assistant",
         "Operations analyst using AI"
       ],
-      "examQuestions": 20
+      "examQuestions": 20,
+      "project": {
+        "title": "An AI tool for a real job",
+        "lang": "html",
+        "brief": "Build an AI-powered tool in CDM Studio that saves someone real time at work: a customer-reply drafter for a shop, a lesson-plan helper for a teacher, a receipt-to-spreadsheet reader, a job-description writer for HR.\n\n**It must:** use a reusable prompt template with clear instructions, ask the AI for **structured output** (JSON) and validate it in code, handle errors and empty or oversized input gracefully, control cost (input limits, short outputs), and include at least one **guardrail** (for example refusing off-topic requests, or flagging low-confidence results for a human).\n\nUse the AI features available in Studio projects. Add a short \"How it works\" section on the page explaining the prompt design, the validation and the guardrail.",
+        "rubric": [
+          "Solves a specific, real work task for a named kind of user",
+          "Uses a clear prompt template with role, task, rules and examples or format",
+          "Requests structured output (JSON) and parses it safely",
+          "Validates the AI result in code before showing or using it",
+          "Handles errors, empty input and oversized input with friendly messages",
+          "Controls cost, for example by limiting input size or output length",
+          "Includes at least one guardrail such as off-topic refusal or human review of doubtful results",
+          "Has a clean, usable interface with clear feedback while the AI is working",
+          "Explains how it works: the prompt design, validation and guardrail"
+        ],
+        "pass_pct": 70
+      }
     },
     "lessons": [
       {
@@ -909,6 +926,42 @@ export const COURSES: Track[] = [
         "paid": true
       },
       {
+        "id": "aieng-tools",
+        "title": "Tool use: letting AI call your functions",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "How function calling works, describing tools with JSON Schema, validating the model's arguments and running the tool safely.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "aieng-embeddings",
+        "title": "Embeddings and semantic search",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "What embeddings are, cosine similarity, nearest-neighbour search and how vector databases power RAG.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "aieng-multimodal",
+        "title": "Images, speech and multimodal AI",
+        "minutes": 25,
+        "kind": "read",
+        "outline": "Vision models, document reading, speech-to-text and text-to-speech, image generation, and their limits.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "aieng-app",
+        "title": "Shipping an AI feature: memory, retries and limits",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "Conversation memory within a token budget, retries with exponential backoff, timeouts, rate limits and fallbacks.",
+        "body": "",
+        "paid": true
+      },
+      {
         "id": "aieng-responsible",
         "title": "Responsible AI, privacy and your AI career",
         "minutes": 20,
@@ -943,7 +996,24 @@ export const COURSES: Track[] = [
         "Data analyst using ML",
         "AI product analyst"
       ],
-      "examQuestions": 20
+      "examQuestions": 20,
+      "project": {
+        "title": "Build and evaluate a model end to end",
+        "lang": "html",
+        "brief": "Pick a real prediction problem (will a customer return next month, is a loan likely to be repaid, which crop variety suits a plot, will a student pass) and build a small **machine learning app in CDM Studio** that solves it in JavaScript, from scratch.\n\n**It must:** include a dataset you prepare (at least 40 rows, realistic, with at least 3 features, kept in the page), split it into training and test sets, prepare the features (scaling or encoding, fitted on training data only), train at least **two** models from this course (for example k-nearest neighbours and logistic regression or a decision stump) and compare them on the test set with accuracy plus precision and recall, and let a user enter new values to get a prediction.\n\nAdd a short \"Model card\" section: what the model is for, the data, the results, the limits, and any fairness risks.",
+        "rubric": [
+          "Defines a real prediction problem and who would use the predictions",
+          "Includes a prepared dataset of at least 40 rows with at least 3 features",
+          "Splits data into training and test sets and evaluates only on the test set",
+          "Prepares features correctly (scaling or encoding fitted on training data only, no leakage)",
+          "Implements and trains at least two different models from the course",
+          "Reports accuracy, precision and recall for each model and compares them",
+          "Lets a user enter new values and see a prediction (with a probability or confidence where possible)",
+          "Includes a model card covering purpose, data, results, limits and fairness risks",
+          "Code is organised into clear functions with sensible names"
+        ],
+        "pass_pct": 70
+      }
     },
     "lessons": [
       {
@@ -1061,6 +1131,42 @@ export const COURSES: Track[] = [
         "minutes": 30,
         "kind": "code",
         "outline": "Group customers without labels by building the k-means algorithm.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "ml-logistic",
+        "title": "Logistic regression: predicting yes or no",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "The sigmoid function, probabilities instead of labels, decision thresholds and log loss.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "ml-trees",
+        "title": "Decision trees and random forests",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "How a tree asks questions, Gini impurity, choosing the best split, and why forests and boosting win on tables.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "ml-features",
+        "title": "Feature engineering and data leakage",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "Turning raw data into useful features: one-hot encoding, dates, ratios, scaling with training statistics, and avoiding leakage.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "ml-neural",
+        "title": "Neural networks and deep learning",
+        "minutes": 40,
+        "kind": "code",
+        "outline": "Neurons, layers, activation functions (ReLU), softmax for many classes, and how deep learning powers vision and language models.",
         "body": "",
         "paid": true
       },

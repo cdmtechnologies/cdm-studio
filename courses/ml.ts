@@ -1,4 +1,5 @@
 import type { Course } from './types'
+import { mlMore, mlProject } from './extra/ml'
 
 export const ml: Course = {
   id: 'ml',
@@ -406,6 +407,7 @@ Using \`distance(a, b)\` (given), write:
   }
 </script>`,
     },
+    ...mlMore,
     {
       id: 'ml-deploy',
       title: 'From notebook to product: deploying ML and your career',
@@ -448,6 +450,7 @@ Use simple rules or statistics when they work. ML is worth it when there is enou
       ],
     },
   ],
+  project: mlProject,
   exam: [
     { q: 'Machine learning differs from normal programming because…', options: ['It needs no computer', 'The computer finds the rule from examples', 'It cannot make mistakes', 'It only works on images'], answer: 1, why: 'Rules are learned from data.' },
     { q: 'Predicting whether a customer will default (yes/no) is…', options: ['Regression', 'Classification', 'Clustering', 'Reinforcement learning'], answer: 1, why: 'A category is predicted.' },
