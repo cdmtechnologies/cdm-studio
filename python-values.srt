@@ -1,0 +1,48 @@
+1
+00:00:00,500 --> 00:00:04,825
+Imagine you sell phone accessories at a market stall.
+
+2
+00:00:05,530 --> 00:00:12,180
+You keep your things in boxes, and every box has a label, so you always find what you need.
+
+3
+00:00:12,880 --> 00:00:18,880
+In Python, a variable is exactly that: a labelled box that holds a value.
+
+4
+00:00:20,580 --> 00:00:25,855
+Here is how you fill a box in Python: price equals fifteen hundred.
+
+5
+00:00:26,560 --> 00:00:35,910
+But careful. This equals sign is not the equals of maths. It means: take the value on the right, and put it into the box on the left.
+
+6
+00:00:36,610 --> 00:00:44,010
+That is why count equals count plus one makes sense: take what is in the box, add one, and put it back.
+
+7
+00:00:45,700 --> 00:00:49,150
+Boxes can hold different kinds of things.
+
+8
+00:00:49,850 --> 00:00:57,975
+Whole numbers are called int. Decimals are float. Text in quotes is a string, and True or False is a bool.
+
+9
+00:00:58,680 --> 00:01:07,805
+Python will not mix them carelessly. Quote five, plus three, is an error. Convert on purpose: int of five, plus three, gives eight.
+
+10
+00:01:09,500 --> 00:01:14,700
+Finally, f-strings. Think of a printed form with blanks to fill in.
+
+11
+00:01:15,400 --> 00:01:23,450
+Put the letter f before the quotes, and your variables inside curly brackets. Python fills in the blanks for you.
+
+12
+00:01:24,150 --> 00:01:29,975
+Now it is your turn. Open the editor and build a receipt with VAT.
+
