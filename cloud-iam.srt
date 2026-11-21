@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:08,350
+The cloud provider secures the building. You secure what you put inside: accounts, permissions and data.
+
+2
+00:00:09,050 --> 00:00:14,950
+Most cloud breaches are wrong permissions and leaked keys, not clever attacks.
+
+3
+00:00:16,650 --> 00:00:25,025
+Prefer short-lived credentials from roles. If you must use keys, keep them in a secrets manager and rotate them.
+
+4
+00:00:25,720 --> 00:00:30,820
+Turn on audit logs, so you can always see who did what, and when.
+
+5
+00:00:32,520 --> 00:00:39,520
+Give each identity the minimum it needs, like a cleaner who gets corridor keys, not the safe.
+
+6
+00:00:40,220 --> 00:00:44,845
+Deny by default, and an explicit deny always wins.
+
