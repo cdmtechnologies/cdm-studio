@@ -31,6 +31,8 @@ jobs:
         run: npx tsc --noEmit
       - name: Courses are up to date
         run: node scripts/courses.mjs && git diff --exit-code src/lessons/courses.generated.ts supabase/seed/courses.sql
+      - name: Every code lesson's model answer passes its checks (HTML, Python, SQL)
+        run: npx playwright install --with-deps chromium && node scripts/check-lessons.mjs
 
   backend:
     needs: test

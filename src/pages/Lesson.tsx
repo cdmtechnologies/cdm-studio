@@ -6,6 +6,7 @@ import { href } from '../lib/router'
 import { buildDoc, cleanError, listen, newNonce, runChecks, SANDBOX, type CheckResult } from '../lib/sandbox'
 import Tutor from '../components/Tutor'
 import LessonVideo from '../components/LessonVideo'
+import { lessonPage } from '../lib/runtimes'
 import { supabase } from '../lib/supabase'
 import { Alert, CodeEditor, Icon, Md } from '../components/ui'
 
@@ -138,7 +139,7 @@ function CodeLesson({ lesson, header, done, finished, complete }: { lesson: Less
     const nonce = newNonce()
     nonceRef.current = nonce
     setErrors([]); setResults(null)
-    setDoc({ html: buildDoc(src, nonce), nonce })
+    setDoc({ html: buildDoc(lessonPage(src, lesson), nonce), nonce })
   }, [])
 
   useEffect(() => { run(code) }, []) // eslint-disable-line react-hooks/exhaustive-deps
@@ -178,7 +179,7 @@ function CodeLesson({ lesson, header, done, finished, complete }: { lesson: Less
         <button className="btn btn-ghost" onClick={() => { if (confirm('Start this lesson\'s code again?')) { dropCode(lesson.id); setCode(lesson.starter ?? ''); run(lesson.starter ?? '') } }}><Icon.undo /> Reset</button>
         {results && <span className={`ml-auto text-sm font-semibold ${passed === results.length ? 'text-emerald-700' : 'text-slate-600'}`}>{passed}/{results.length} steps</span>}
       </div>
-      <div className="min-h-[280px] flex-1"><CodeEditor value={code} onChange={setCode} label="Lesson code" /></div>
+      <div className="min-h-[280px] flex-1"><CodeEditor value={code} onChange={setCode} label={lesson.lang === 'python' ? 'Python code' : lesson.lang === 'sql' ? 'SQL code' : 'Lesson code'} indent={lesson.lang === 'python' ? 4 : 2} /></div>
     </div>
   )
   const preview = (

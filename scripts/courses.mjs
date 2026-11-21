@@ -29,6 +29,12 @@ for (const c of COURSES) {
     if (paid) sql.push(`insert into public.lesson_content (id, track, body) values (${q(l.id)}, ${q(c.id)}, ${q(JSON.stringify(strip(l)))}::jsonb) on conflict (id) do update set body = excluded.body, track = excluded.track, updated_at = now();`)
     else sql.push(`delete from public.lesson_content where id = ${q(l.id)};`)
   })
+  const pr = c.project
+  if (pr) {
+    if (!pr.title || !pr.brief || !['html', 'python', 'sql', 'text'].includes(pr.lang) || pr.rubric.length < 5 || pr.rubric.length > 12) throw new Error(`${c.id}: bad project`)
+    if (JSON.stringify(pr).includes('$cdm$')) throw new Error('reserved text')
+    sql.push(`insert into public.course_projects (track, title, brief, lang, rubric, pass_pct) values (${q(c.id)}, ${q(pr.title)}, ${q(pr.brief)}, ${q(pr.lang)}, ${q(JSON.stringify(pr.rubric))}::jsonb, ${pr.pass_pct ?? 70}) on conflict (track) do update set title = excluded.title, brief = excluded.brief, lang = excluded.lang, rubric = excluded.rubric, pass_pct = excluded.pass_pct;`)
+  } else sql.push(`delete from public.course_projects where track = ${q(c.id)};`)
   sql.push(`delete from public.exam_questions where track = ${q(c.id)};`)
   c.exam.forEach((e, i) => {
     if (!(e.answer >= 0 && e.answer < e.options.length)) throw new Error(`${c.id} exam ${i + 1}: bad answer`)
@@ -36,7 +42,7 @@ for (const c of COURSES) {
   })
   tracks.push({
     id: c.id, title: c.title, blurb: c.blurb, colour: c.colour, emoji: c.emoji,
-    course: { level: c.level, hours: c.hours, free: c.free, skills: c.skills, careers: c.careers, examQuestions: c.exam.length },
+    course: { level: c.level, hours: c.hours, free: c.free, skills: c.skills, careers: c.careers, examQuestions: c.exam.length, ...(c.project ? { project: { ...c.project, pass_pct: c.project.pass_pct ?? 70 } } : {}) },
     lessons: c.lessons.map((l, i) => (i < c.free ? { ...strip(l), outline: l.outline } : { id: l.id, title: l.title, minutes: l.minutes, kind: l.kind, outline: l.outline, body: '', paid: true })),
   })
 }

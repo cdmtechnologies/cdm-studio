@@ -95,7 +95,7 @@ export function Md({ text, className = '' }: { text: string; className?: string 
 }
 
 /** A plain code editor: line numbers, Tab inserts spaces. */
-export function CodeEditor({ value, onChange, label = 'Code', minRows = 14, readOnly = false }: { value: string; onChange?: (v: string) => void; label?: string; minRows?: number; readOnly?: boolean }) {
+export function CodeEditor({ value, onChange, label = 'Code', minRows = 14, readOnly = false, indent = 2 }: { value: string; onChange?: (v: string) => void; label?: string; minRows?: number; readOnly?: boolean; indent?: number }) {
   const lines = Math.max(minRows, value.split('\n').length)
   const ta = useRef<HTMLTextAreaElement>(null)
   const gutter = useRef<HTMLDivElement>(null)
@@ -112,9 +112,9 @@ export function CodeEditor({ value, onChange, label = 'Code', minRows = 14, read
           if (e.key !== 'Tab' || readOnly) return
           e.preventDefault()
           const t = e.currentTarget, s = t.selectionStart, en = t.selectionEnd
-          const v = t.value.slice(0, s) + '  ' + t.value.slice(en)
+          const v = t.value.slice(0, s) + ' '.repeat(indent) + t.value.slice(en)
           onChange?.(v)
-          requestAnimationFrame(() => { if (ta.current) ta.current.selectionStart = ta.current.selectionEnd = s + 2 })
+          requestAnimationFrame(() => { if (ta.current) ta.current.selectionStart = ta.current.selectionEnd = s + indent })
         }}
         className="min-h-0 flex-1 resize-none whitespace-pre bg-transparent px-3 py-3 outline-none"
         style={{ tabSize: 2 }}

@@ -20,6 +20,8 @@ const HELPER = (nonce: string) => `<script>(function(){
     var d=e.data; if(!d||d.cdm!==N) return;
     if(d.type==='api-result'){ var r=calls[d.id]; if(r){ delete calls[d.id]; r(d.result) } return }
     if(d.type!=='run-checks') return;
+    // Python and SQL lessons load their engine first (window.__ready); the engine's load time does not count against a check
+    if(window.__ready){ try{ await window.__ready }catch(err){} }
     var out=[];
     for (var i=0;i<d.checks.length;i++){
       var c=d.checks[i];

@@ -13,6 +13,10 @@ export type Lesson = {
   /** 'code': edit the starter and pass the checks; 'prompt': practise with the AI tutor; 'read': read and answer the quiz */
   kind: 'code' | 'prompt' | 'read'
   task?: string
+  /** code lessons: the language of the starter (default html). Python and SQL run in the browser with WebAssembly. */
+  lang?: 'html' | 'python' | 'sql'
+  /** SQL lessons: statements that create and fill the practice tables before the learner's query runs */
+  setup?: string
   starter?: string
   checks?: Check[]
   /** shown on request; never needed to pass */
@@ -35,5 +39,5 @@ export type Track = {
   lessons: Lesson[]
   soon?: string
   /** certified course details (courses/*.ts) */
-  course?: { level: string; hours: number; free: number; skills: string[]; careers: string[]; examQuestions: number }
+  course?: { level: string; hours: number; free: number; skills: string[]; careers: string[]; examQuestions: number; project?: { title: string; brief: string; lang: string; rubric: string[]; pass_pct: number } }
 }

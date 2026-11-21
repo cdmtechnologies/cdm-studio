@@ -10,17 +10,19 @@ import { chromium } from 'playwright'
 import { SOLUTIONS } from './lesson-solutions.mjs'
 
 const dir = mkdtempSync(join(tmpdir(), 'lc-'))
-await build({ entryPoints: ['src/lessons/index.ts', 'src/lib/sandbox.ts', 'courses/index.ts'], bundle: true, format: 'esm', platform: 'node', outdir: dir, outbase: '.', logLevel: 'error' })
+await build({ entryPoints: ['src/lessons/index.ts', 'src/lib/sandbox.ts', 'src/lib/runtimes.ts', 'courses/index.ts'], bundle: true, format: 'esm', platform: 'node', outdir: dir, outbase: '.', logLevel: 'error' })
 const { TRACKS } = await import(pathToFileURL(join(dir, 'src/lessons/index.js')).href)
 const { COURSES } = await import(pathToFileURL(join(dir, 'courses/index.js')).href)
 const { buildDoc, SANDBOX } = await import(pathToFileURL(join(dir, 'src/lib/sandbox.js')).href)
+const { lessonPage } = await import(pathToFileURL(join(dir, 'src/lib/runtimes.js')).href)
 
 const browser = await chromium.launch()
 const page = await browser.newPage()
 // an https page, like the real site (Web Crypto and other secure-context features need it)
 await page.route('https://lessons.test/**', (r) => r.fulfill({ contentType: 'text/html', body: '<!doctype html><body></body>' }))
 await page.goto('https://lessons.test/')
-async function run(html, checks) {
+async function run(html, checks, lesson) {
+  html = lessonPage(html, lesson)
   const nonce = 'n' + Math.random().toString(36).slice(2)
   return page.evaluate(async ({ doc, checks, nonce, sandbox }) => {
     document.body.innerHTML = ''
@@ -29,7 +31,7 @@ async function run(html, checks) {
     f.srcdoc = doc
     document.body.appendChild(f)
     return await new Promise((resolve) => {
-      const t = setTimeout(() => resolve({ timeout: true }), 15000)
+      const t = setTimeout(() => resolve({ timeout: true }), 90000)
       window.onmessage = (e) => {
         if (e.source !== f.contentWindow || e.data?.cdm !== nonce) return
         if (e.data.type === 'ready') f.contentWindow.postMessage({ cdm: nonce, type: 'run-checks', checks }, '*')
@@ -46,8 +48,8 @@ for (const l of all) {
   if (l.kind !== 'code') continue
   const sol = l.sol !== undefined ? () => l.sol : SOLUTIONS[l.id]
   if (!sol) { console.log('MISSING answer', l.id); bad++; continue }
-  const good = await run(sol(l), l.checks)
-  const start = await run(l.starter, l.checks)
+  const good = await run(sol(l), l.checks, l)
+  const start = await run(l.starter, l.checks, l)
   const okGood = Array.isArray(good) && good.every((r) => r.ok)
   const okStart = Array.isArray(start) && start.some((r) => !r.ok)
   console.log(`${okGood && okStart ? 'ok  ' : 'FAIL'} ${l.id}${okGood ? '' : ' answer: ' + JSON.stringify(good)}${okStart ? '' : ' starter passes everything'}`)

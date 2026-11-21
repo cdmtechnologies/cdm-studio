@@ -4,6 +4,205 @@ import type { Track } from './types'
 
 export const COURSES: Track[] = [
   {
+    "id": "python",
+    "title": "Python programming",
+    "blurb": "The most popular language for automation, data and AI. Go from your first line of code to real programs that read data, make decisions and produce reports.",
+    "colour": "sky",
+    "emoji": "🐍",
+    "course": {
+      "level": "Beginner",
+      "hours": 14,
+      "free": 2,
+      "skills": [
+        "Variables, numbers and text",
+        "Decisions and loops",
+        "Functions",
+        "Lists and dictionaries",
+        "Handling errors",
+        "Reading CSV data",
+        "Classes and objects",
+        "Using AI to write and debug code"
+      ],
+      "careers": [
+        "Junior Python developer",
+        "Automation / scripting",
+        "Data analyst",
+        "Back-end developer (with Django or FastAPI)",
+        "AI and machine learning (next step)"
+      ],
+      "examQuestions": 23,
+      "project": {
+        "title": "Sales report generator",
+        "lang": "python",
+        "brief": "Build a Python program that a small shop owner could really use at the end of the month.\n\n**What it does:** it reads the month's sales from CSV text (at least 12 rows that you write yourself, with columns such as date, product, quantity and price, including at least 2 deliberately bad rows), cleans the data, and prints a clear report.\n\n**The report must show:** the total revenue, revenue per product, the 3 best-selling products, the best day, the average sale, and how many rows were skipped and why.\n\n**How to work:** build it in the Studio code playground or on your own computer, test it until the output is right, then paste the **whole program** here. Use functions (and a class if it helps), and keep the data inside the program so the marker can read it.",
+        "rubric": [
+          "Keeps the sales data as CSV text inside the program with at least 12 rows and at least 2 bad rows",
+          "Reads the CSV with the csv module (DictReader or reader) rather than only splitting on commas",
+          "Converts text to numbers and handles bad rows with try / except, counting what was skipped",
+          "Is organised into small, well-named functions (at least 3), each with one job",
+          "Uses a dictionary (or class) to total revenue per product",
+          "Finds the top 3 products using sorting with a key",
+          "Works out the total revenue, average sale and best day correctly",
+          "Prints a clear, readable report using f-strings with formatted money",
+          "Uses constants or parameters instead of repeating magic numbers, and has helpful comments or docstrings"
+        ],
+        "pass_pct": 70
+      }
+    },
+    "lessons": [
+      {
+        "id": "python-hello",
+        "title": "Your first Python program",
+        "minutes": 20,
+        "kind": "code",
+        "lang": "python",
+        "outline": "What Python is, how a program runs line by line, print() and comments.",
+        "body": "## What is Python?\n\nA computer is a very fast, very obedient worker who understands nothing unless you spell it out. A **programming language** is how you write those instructions down. Python is the language most people learn first because it reads almost like English, and it is the same language used by Instagram, Netflix, NASA, banks and nearly every AI lab.\n\nThink of a Python program as a **recipe**. The cook (the computer) starts at the top and follows one line at a time, in order. If a step is written wrongly, the cook stops and tells you which line confused it.\n\n## Your first instruction: print()\n\n`print()` tells Python to show something on the screen:\n\n```python\nprint(\"Hello, world!\")\nprint(\"I am learning Python\")\n```\n\n- The words inside quotes are **text** (programmers call it a *string*: a string of letters).\n- The brackets `( )` hold what you give to print.\n- Every `print` starts a new line.\n\nYou can print numbers and sums too, without quotes:\n\n```python\nprint(5 + 3)      # shows 8\nprint(\"5 + 3\")    # shows 5 + 3 (it is text, so Python does not calculate it)\n```\n\n## Comments: notes for humans\n\nAnything after `#` is a **comment**. Python skips it. Comments are sticky notes you leave for yourself and your team: *why* you did something, not what every line does.\n\n## When it goes wrong\n\nMistakes are normal: every programmer sees errors every day. If you forget a quote, Python says something like `SyntaxError: unterminated string literal` and points to the line. Read the **last line** of the error first: it says what went wrong. Then look at the line number.\n\n## Your task\n\nThe editor on the right already runs Python in your browser. Press **Run** to see the output panel.\n\n1. Print exactly `Hello, world!`\n2. On the next line, print the sentence `My name is` followed by your name, for example `My name is Ada`.\n3. Print the answer to `365 * 24` (the hours in a year), as a number, not as text.\n4. Add at least one comment.",
+        "task": "Print the three lines described and add a comment.",
+        "starter": "# Write your code below\nprint(\"Hello\")\n",
+        "checks": [
+          {
+            "label": "prints Hello, world!",
+            "test": "return output().includes(\"Hello, world!\")"
+          },
+          {
+            "label": "introduces yourself",
+            "test": "return output().includes(\"My name is \")"
+          },
+          {
+            "label": "prints the hours in a year (8760)",
+            "test": "return output().includes(\"8760\")"
+          }
+        ],
+        "hint": "Three print lines: print(\"Hello, world!\"), print(\"My name is Ada\"), print(365 * 24). A comment starts with #."
+      },
+      {
+        "id": "python-values",
+        "title": "Variables, numbers and text",
+        "minutes": 25,
+        "kind": "code",
+        "lang": "python",
+        "outline": "Store values in variables, do arithmetic, round money and build messages with f-strings.",
+        "body": "## Variables are labelled boxes\n\nImagine a market stall with labelled boxes: one says *price*, one says *quantity*. You can look inside a box, or empty it and put something new in. A **variable** is exactly that: a name that holds a value.\n\n```python\nprice = 1500\nquantity = 3\ntotal = price * quantity\nprint(total)   # 4500\n```\n\nThe `=` sign means **\"put the value on the right into the box on the left\"**. It is not \"equals\" like in maths. `count = count + 1` is perfectly sensible: take what is in the box, add one, put it back.\n\nGood names describe the content: `total_price`, not `tp` or `x`. Python names use lowercase words joined by underscores.\n\n## Kinds of values (types)\n\n| Type | Example | Used for |\n|---|---|---|\n| `int` | `42`, `-7` | whole numbers: counts, quantities |\n| `float` | `3.5`, `0.075` | numbers with decimals: prices, rates |\n| `str` | `\"Abuja\"` | text |\n| `bool` | `True`, `False` | yes / no answers |\n\n`type(value)` tells you the type. Mixing types carelessly causes errors: `\"5\" + 3` fails because Python will not guess whether you meant text or maths. Convert on purpose: `int(\"5\") + 3` gives `8`, `str(8)` gives `\"8\"`.\n\n## Arithmetic\n\n`+  -  *  /` work as you expect. Also:\n\n- `//` whole-number division: `17 // 5` is `3` (3 full boxes of 5)\n- `%` remainder: `17 % 5` is `2` (2 left over)\n- `**` power: `2 ** 10` is `1024`\n- `round(x, 2)` rounds to 2 decimal places, which is what you want for money.\n\n## f-strings: filling in a form\n\nAn f-string is like a printed form with blanks. Put `f` before the quotes and write variable names inside `{ }`:\n\n```python\nname = \"Chika\"\nitems = 3\nprint(f\"{name} bought {items} items\")\nprint(f\"Total: {4500:,}\")       # Total: 4,500   (the comma adds thousands separators)\n```\n\n## Your task\n\nA shop sells a phone case for 2,500. A customer buys 4. VAT is 7.5%.\n\n1. Set `price = 2500` and `quantity = 4`.\n2. `subtotal`: price times quantity.\n3. `vat`: 7.5% of the subtotal, rounded to 2 decimals.\n4. `total`: subtotal plus vat.\n5. `receipt`: an f-string that reads exactly `4 items, total 10750.0` (use your variables, not typed numbers).\n6. Print the receipt.",
+        "task": "Work out subtotal, vat and total, then build the receipt with an f-string.",
+        "starter": "price = 2500\nquantity = 4\n# subtotal = ...\n# vat = ...\n# total = ...\n# receipt = f\"...\"\n",
+        "checks": [
+          {
+            "label": "subtotal is 10000",
+            "test": "return await py(\"subtotal == 10000\")"
+          },
+          {
+            "label": "vat is 750.0",
+            "test": "return await py(\"vat == 750.0\")"
+          },
+          {
+            "label": "total is 10750.0",
+            "test": "return await py(\"total == 10750.0\")"
+          },
+          {
+            "label": "receipt built with an f-string",
+            "test": "return await py(\"receipt == '4 items, total 10750.0'\")"
+          },
+          {
+            "label": "receipt printed",
+            "test": "return output().includes(\"4 items, total 10750.0\")"
+          }
+        ],
+        "hint": "vat = round(subtotal * 0.075, 2) and receipt = f\"{quantity} items, total {total}\""
+      },
+      {
+        "id": "python-decisions",
+        "title": "Decisions and your first functions",
+        "minutes": 30,
+        "kind": "code",
+        "outline": "Comparisons, if / elif / else, and and / or, and wrapping logic in a function you can reuse.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "python-loops",
+        "title": "Lists and loops",
+        "minutes": 30,
+        "kind": "code",
+        "outline": "Store many values in a list, loop over them with for, use range, and build totals step by step.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "python-strings",
+        "title": "Working with text",
+        "minutes": 30,
+        "kind": "code",
+        "outline": "String methods, slicing, split and join, and cleaning real-world text like names and phone numbers.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "python-dicts",
+        "title": "Dictionaries: data with labels",
+        "minutes": 30,
+        "kind": "code",
+        "outline": "Key-value data, looking things up, counting with dictionaries and lists of records.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "python-functions",
+        "title": "Functions in depth",
+        "minutes": 30,
+        "kind": "code",
+        "outline": "Default values, keyword arguments, returning several values, scope, docstrings and small reusable tools.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "python-errors",
+        "title": "Errors and defensive code",
+        "minutes": 30,
+        "kind": "code",
+        "outline": "Read tracebacks, catch exceptions with try / except, raise your own errors and validate input.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "python-csv",
+        "title": "Reading data files (CSV)",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "Read CSV data with the csv module, turn rows into records, clean values and build a summary report.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "python-classes",
+        "title": "Classes and objects",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "Model real things with classes: attributes, methods, __init__, and keeping data valid inside an object.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "python-pro",
+        "title": "Writing Python like a professional",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "List and dictionary comprehensions, sorting with key and lambda, the standard library and clean code habits.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "python-ai-career",
+        "title": "Python with AI, and your next steps",
+        "minutes": 25,
+        "kind": "prompt",
+        "outline": "Use AI to write, explain and debug code safely; what to learn next; building a portfolio and earning with Python.",
+        "body": "",
+        "paid": true
+      }
+    ]
+  },
+  {
     "id": "aieng",
     "title": "AI engineering: prompts, data and automation",
     "blurb": "Go beyond chatting: design reliable prompts, get structured answers, ground AI in your own documents, and automate work safely.",

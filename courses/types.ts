@@ -24,6 +24,19 @@ export type Course = {
   skills: string[]
   careers: string[]
   lessons: CourseLesson[]
+  /** the graded final project: marked by AI against the checklist; the certificate needs it passed */
+  project?: CourseProject
   /** the final exam (at least 15 questions); answers stay on the server */
   exam: Quiz[]
+}
+
+export type CourseProject = {
+  title: string
+  /** what to build (Markdown) */
+  brief: string
+  /** html: a Studio project; python / sql: pasted code; text: a written plan or report */
+  lang: 'html' | 'python' | 'sql' | 'text'
+  /** 5 to 12 items the marker checks, each one clear and visible in the work */
+  rubric: string[]
+  pass_pct?: number
 }

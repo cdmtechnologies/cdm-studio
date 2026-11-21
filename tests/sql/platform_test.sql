@@ -115,9 +115,15 @@ select pg_temp.ok(pg_temp.as_user(:b, $q$select body ->> 'body' from public.less
 select pg_temp.ok(pg_temp.as_user(:b, $q$select public.unlock_lesson('sec-1')$q$) like 'ERR:%free%', 'free lessons need no unlock');
 select pg_temp.ok(pg_temp.as_user(:b, $q$select count(*) from public.exam_questions$q$) like 'ERR:%', 'answers are hidden');
 select pg_temp.ok(pg_temp.as_user(:b, $q$select count(*) from public.exam_paper('sec')$q$) = '2', 'exam paper without answers');
-select pg_temp.ok(pg_temp.as_user(:b, $q$select passed::text || missing from public.submit_exam('sec', array[1,0], 'Bola Ade')$q$) = 'false2', 'full marks but lessons not done: no certificate');
+insert into public.course_projects (track, title, brief, rubric) values ('sec', 'Secure a page', 'Build it', '["has a form","validates input"]');
+select pg_temp.ok(pg_temp.as_user(:b, $q$select count(*) from public.course_projects$q$) = '1', 'project brief is public');
+select pg_temp.ok(pg_temp.as_user(:b, $q$insert into public.project_submissions (user_id, track, score, passed, feedback) values (auth.uid(), 'sec', 100, true, '{}') returning 1$q$) like 'ERR:%', 'learners cannot mark themselves');
+select pg_temp.ok(pg_temp.as_user(:b, $q$select passed::text || missing || project_ok::text from public.submit_exam('sec', array[1,0], 'Bola Ade')$q$) = 'false2false', 'full marks but lessons and project not done: no certificate');
 select pg_temp.ok(pg_temp.as_user(:b, $q$insert into public.progress (user_id, lesson_id) values (auth.uid(), 'sec-1'), (auth.uid(), 'sec-2') returning 1$q$) !~ '^ERR', 'lessons done');
 select pg_temp.ok(pg_temp.as_user(:b, $q$select passed::text from public.submit_exam('sec', array[0,1], 'Bola Ade')$q$) = 'false', 'wrong answers fail');
+insert into public.project_submissions (user_id, track, score, passed, feedback) values (:b, 'sec', 50, false, '{}');
+select pg_temp.ok(pg_temp.as_user(:a, $q$select count(*) from public.project_submissions$q$) = '0', 'others cannot see my marks');
+insert into public.project_submissions (user_id, track, score, passed, feedback) values (:b, 'sec', 100, true, '{}');
 select pg_temp.ok(pg_temp.as_user(:b, $q$select code from public.submit_exam('sec', array[1,0], 'Bola Ade')$q$) ~ '^CDM-[A-Z0-9]{4}-[A-Z0-9]{4}$', 'pass gives a certificate');
 select pg_temp.ok(pg_temp.as_user(:b, $q$select public.submit_exam('sec', array[1,0], 'Bola Ade')$q$) like 'ERR:%3 tries%', '3 tries a day');
 select pg_temp.ok(pg_temp.as_user(null, format($q$select name || '|' || title || '|' || score from public.verify_certificate(%L)$q$, (select lower(code) from public.certificates))) = 'Bola Ade|Cybersecurity|100', 'anyone verifies it');

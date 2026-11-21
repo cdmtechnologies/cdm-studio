@@ -4,6 +4,7 @@ import { cloud } from './cloud'
 import { cyber } from './cyber'
 import { ethhack } from './ethhack'
 import { ml } from './ml'
+import { python } from './python'
 import type { Course } from './types'
 
-export const COURSES: Course[] = [aieng, ml, analytics, cyber, ethhack, cloud]
+export const COURSES: Course[] = [python, aieng, ml, analytics, cyber, ethhack, cloud]
