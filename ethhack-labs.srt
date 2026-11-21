@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:09,650
+A medical student practises on models, never on strangers in the street. Security learners need practice targets too.
+
+2
+00:00:10,350 --> 00:00:19,100
+Build a home lab, and use apps made to be attacked, like OWASP Juice Shop, or platforms like TryHackMe.
+
+3
+00:00:20,800 --> 00:00:27,825
+Use virtual machines on a private network that cannot reach the internet or your home devices.
+
+4
+00:00:28,520 --> 00:00:33,845
+Take snapshots, so you can reset everything after each exercise.
+
+5
+00:00:35,550 --> 00:00:44,500
+Some companies invite you to find bugs, and pay rewards. Read the rules first, and use only your own test accounts.
+
+6
+00:00:45,200 --> 00:00:49,825
+Write up what you learn, and build a reputation the right way.
+
