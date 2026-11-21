@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:08,300
+The same app runs in development, testing and production. Settings change, but the code stays the same.
+
+2
+00:00:09,000 --> 00:00:13,450
+Keep settings in environment variables, not in the code.
+
+3
+00:00:15,150 --> 00:00:21,025
+Keep the same code everywhere, and change only the settings between environments.
+
+4
+00:00:21,730 --> 00:00:29,305
+Log to standard output, keep servers stateless, and store files and data in managed services.
+
+5
+00:00:31,000 --> 00:00:40,300
+Secrets are the keys to the kingdom. Store them in a secrets manager, never in Git, and give each app only the keys it needs.
+
+6
+00:00:41,000 --> 00:00:45,725
+Rotate them, like changing the locks when a staff member leaves.
+
