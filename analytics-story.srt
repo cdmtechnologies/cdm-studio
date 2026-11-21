@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:09,050
+People remember stories, not spreadsheets. Lead with the headline, then the evidence, then why it matters, then what to do.
+
+2
+00:00:09,750 --> 00:00:15,225
+A recommendation needs an owner and a deadline, and a way to check it worked.
+
+3
+00:00:16,930 --> 00:00:24,730
+Weak: sales by month. Strong: Garki sales fell eighteen percent after the price rise in August.
+
+4
+00:00:25,430 --> 00:00:35,255
+Then the recommendation: restore the old price on the top five products for one month, owned by the Garki manager, and measure weekly.
+
+5
+00:00:36,950 --> 00:00:47,250
+Spreadsheets, SQL, a dashboard tool and clear writing will take you far. Help small businesses with monthly reports to build a portfolio.
+
+6
+00:00:47,950 --> 00:00:53,075
+Your dashboard project is your first portfolio piece. Good luck!
+
