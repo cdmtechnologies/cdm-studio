@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:08,275
+Phishing is fishing for people: a fake message as bait, hoping you bite. Your account is suspended, click here.
+
+2
+00:00:08,980 --> 00:00:18,555
+Warning signs: urgency, fear, a strange sender address, a link that does not match, and requests for codes or passwords.
+
+3
+00:00:20,250 --> 00:00:28,075
+Attackers also phone, pretending to be the bank, IT support, or the boss who urgently needs a transfer.
+
+4
+00:00:28,780 --> 00:00:36,105
+Create a simple rule: any change to bank details is confirmed by phone, on a known number.
+
+5
+00:00:37,800 --> 00:00:44,575
+Hover over links before you click. Real banks never ask for your PIN or one-time code.
+
+6
+00:00:45,280 --> 00:00:50,930
+When in doubt, call back using a number you already know, not the one in the message.
+
