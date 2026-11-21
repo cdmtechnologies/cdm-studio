@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:09,050
+Your report is the product. Start with a short summary a manager understands, then the details for engineers.
+
+2
+00:00:09,750 --> 00:00:17,250
+Each finding needs steps to reproduce, evidence without private data, the impact, and a clear fix.
+
+3
+00:00:18,950 --> 00:00:29,200
+Title: invoices visible to other customers. Severity: high. Steps: sign in as user B, open invoice ten forty-two.
+
+4
+00:00:29,900 --> 00:00:38,400
+Impact: any customer can read others' bills. Fix: check ownership on the server for every invoice request.
+
+5
+00:00:40,100 --> 00:00:45,950
+Report privately, and give the owner time to fix before anything is public.
+
+6
+00:00:46,650 --> 00:00:52,125
+Your pen test report project is your first portfolio piece. Good luck!
+
