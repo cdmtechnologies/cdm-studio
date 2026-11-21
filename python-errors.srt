@@ -1,0 +1,32 @@
+1
+00:00:00,500 --> 00:00:09,300
+When Python cannot do something, it raises an exception, and prints a traceback. Errors are messages, not failures.
+
+2
+00:00:10,000 --> 00:00:16,000
+Read it from the bottom. The last line names the kind of error, and what went wrong.
+
+3
+00:00:16,700 --> 00:00:23,425
+Value error, type error, key error, name error: each tells you exactly where to look.
+
+4
+00:00:25,130 --> 00:00:35,105
+Try and except is a safety net, like the net under a trapeze artist. Usually it is not needed. When something slips, the show goes on.
+
+5
+00:00:35,800 --> 00:00:44,425
+Always catch a specific error. A bare except catches everything, even your own typos, and hides real bugs.
+
+6
+00:00:46,130 --> 00:00:56,405
+Sometimes your function should refuse to continue, like a bank teller refusing a cheque with no signature. Raise an error with a clear message.
+
+7
+00:00:57,110 --> 00:01:04,460
+Check data at the door. A clear error now is far better than a wrong total in next month's report.
+
+8
+00:01:05,150 --> 00:01:10,075
+Now write safe divide, parse quantity and total quantities.
+
