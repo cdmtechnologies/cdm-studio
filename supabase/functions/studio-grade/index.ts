@@ -1,3 +1,4 @@
+import { aiOff, aiOffResponse } from './ai_switch.ts'
 // Supabase Edge Function: studio-grade (marks a course's final project with AI against its checklist)
 //   { track, project_id }  one of the learner's Studio projects (their own or one they can edit)
 //   { track, code }        or pasted code (Python / SQL courses), up to 40,000 characters
@@ -14,6 +15,7 @@ const MODEL = Deno.env.get('GRADE_MODEL') ?? 'claude-sonnet-5-5'
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: cors })
+  if (await aiOff('cdmstudio')) return aiOffResponse(cors)
   if (req.method !== 'POST') return json({ error: 'Method not allowed' }, 405)
   const url = Deno.env.get('SUPABASE_URL')!
   const db = createClient(url, Deno.env.get('SUPABASE_ANON_KEY')!, { global: { headers: { Authorization: req.headers.get('Authorization') ?? '' } }, auth: { persistSession: false } })

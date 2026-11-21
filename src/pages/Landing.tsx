@@ -1,3 +1,4 @@
+import Family from '../components/Family'
 import { useEffect, useState } from 'react'
 import { TRACKS, LESSON_COUNT } from '../lessons'
 import { href } from '../lib/router'
@@ -114,6 +115,8 @@ export default function Landing() {
           </div>
         </div>
       </section>
+
+      <Family self="cdmstudio" />
 
       {/* faq */}
       <section>

@@ -1,3 +1,4 @@
+import { aiOff, aiOffResponse } from './ai_switch.ts'
 // Supabase Edge Function: social-ai (CDM Social's AI writer). Every result is a DRAFT that waits for approval.
 //   { action: 'plan', workspace, accounts: [ids], days, count, topics? } -> saves count draft posts with suggested times
 //   { action: 'write', workspace, idea, accounts: [ids] }                -> { text } one post for the idea (not saved)
@@ -23,6 +24,7 @@ function offsetMinutes(tz: string): number {
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: cors })
+  if (await aiOff('cdmsocial')) return aiOffResponse(cors)
   if (req.method !== 'POST') return json({ error: 'Method not allowed' }, 405)
   const url = Deno.env.get('SUPABASE_URL')!
   const db = createClient(url, Deno.env.get('SUPABASE_ANON_KEY')!, { global: { headers: { Authorization: req.headers.get('Authorization') ?? '' } }, auth: { persistSession: false } })

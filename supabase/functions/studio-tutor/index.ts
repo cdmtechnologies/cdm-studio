@@ -1,3 +1,4 @@
+import { aiOff, aiOffResponse } from './ai_switch.ts'
 // Supabase Edge Function: studio-tutor (the AI tutor)
 //   { mode: 'help', lesson_id, message, code?, history? }      lesson help: hints first, never the full answer straight away
 //   { mode: 'practice', lesson_id, message, history? }         answers the learner's prompt, then coaches how they asked
@@ -19,6 +20,7 @@ type Meta = { track: string; title: string; kind: string; task: string | null; p
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: cors })
+  if (await aiOff('cdmstudio')) return aiOffResponse(cors)
   if (req.method !== 'POST') return json({ error: 'Method not allowed' }, 405)
   const url = Deno.env.get('SUPABASE_URL')!
   const db = createClient(url, Deno.env.get('SUPABASE_ANON_KEY')!, { global: { headers: { Authorization: req.headers.get('Authorization') ?? '' } }, auth: { persistSession: false } })
