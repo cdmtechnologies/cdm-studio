@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:09,975
+Authentication asks who are you. Authorisation asks what may you do. Most breaches inside apps are authorisation mistakes.
+
+2
+00:00:10,670 --> 00:00:16,895
+Check permissions on the server for every request. Hiding a button is not security.
+
+3
+00:00:18,600 --> 00:00:27,375
+Group permissions into roles. A cashier can sell. A manager can sell and refund. The owner can do everything.
+
+4
+00:00:28,080 --> 00:00:33,855
+Default to deny: if a role or permission is unknown, the answer is no.
+
+5
+00:00:35,550 --> 00:00:43,775
+Attackers try thousands of passwords a minute. Rate limiting is a bouncer: after five wrong tries, wait.
+
+6
+00:00:44,470 --> 00:00:52,570
+Show the same message for a wrong email or a wrong password, so attackers cannot learn which accounts exist.
+
