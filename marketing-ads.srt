@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:10,175
+SEO is like growing your own vegetables: cheap, slow, lasting. Ads are buying at the market: instant, but you pay every time.
+
+2
+00:00:10,880 --> 00:00:19,980
+Search ads catch people already searching. Social ads show your product to people who match an audience, before they were searching.
+
+3
+00:00:21,680 --> 00:00:28,755
+On Google, add negative keywords, like free or jobs, so you do not pay for the wrong clicks.
+
+4
+00:00:29,460 --> 00:00:36,385
+On social ads, retarget people who visited your site. They are far more likely to buy.
+
+5
+00:00:37,080 --> 00:00:45,530
+Test one change at a time: headline, image, or audience. Let the numbers decide, and give tests enough time.
+
+6
+00:00:47,230 --> 00:00:58,730
+Spend fifty thousand, get four hundred clicks and twenty sales worth two hundred thousand. Cost per sale: two thousand five hundred. Return: four to one.
+
+7
+00:00:59,430 --> 00:01:08,855
+Always compare cost per sale with your profit per sale, not the price. And make sure the landing page keeps the ad's promise.
+
