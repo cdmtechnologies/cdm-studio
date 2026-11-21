@@ -1,0 +1,36 @@
+1
+00:00:00,500 --> 00:00:07,925
+One variable holds one value. A list holds many, in order, like a row of numbered lockers.
+
+2
+00:00:08,630 --> 00:00:14,355
+The first locker is number zero. Think of it as how many steps from the start.
+
+3
+00:00:15,050 --> 00:00:20,450
+Python can add up, count and find the biggest, for the whole list at once.
+
+4
+00:00:22,150 --> 00:00:28,500
+A for loop is a teacher walking down a row of desks, doing the same thing at each desk.
+
+5
+00:00:29,200 --> 00:00:36,500
+The indented lines run once for every item. And amount holds the current item each time round.
+
+6
+00:00:37,200 --> 00:00:45,275
+Range counts for you. Range one to five gives one, two, three and four, because the end is not included.
+
+7
+00:00:46,970 --> 00:00:54,895
+The most useful loop pattern of all is the running total. It is exactly how a cashier counts a pile of notes.
+
+8
+00:00:55,600 --> 00:01:03,000
+Start at zero, and add each amount as you go. The same pattern counts things, or builds a new list.
+
+9
+00:01:03,690 --> 00:01:12,915
+Never divide by zero: if the list is empty, return zero. Now write average, count above, running totals and biggest.
+
