@@ -1,0 +1,36 @@
+1
+00:00:00,500 --> 00:00:10,325
+Good programs are built like a car: engine, wheels, brakes. Each part made and tested on its own. Functions are those parts.
+
+2
+00:00:11,020 --> 00:00:18,095
+Each function should do one job, with a clear name, and be small enough to understand at a glance.
+
+3
+00:00:18,800 --> 00:00:26,475
+A coffee machine gives you a medium cup unless you choose otherwise. Parameters can have defaults too.
+
+4
+00:00:28,180 --> 00:00:34,230
+A function can return several values at once. Unpack them on the other side.
+
+5
+00:00:34,930 --> 00:00:42,980
+Print shows the answer, but gives nothing back. It is like a calculator that flashes the answer, then forgets it.
+
+6
+00:00:43,680 --> 00:00:53,955
+Variables inside a function are local: scribbles on a whiteboard, wiped clean after each meeting. Pass things in, and return results out.
+
+7
+00:00:55,660 --> 00:01:03,460
+Build big things from small, trusted pieces. Invoice total can call vat, which you already tested.
+
+8
+00:01:04,160 --> 00:01:12,535
+And a docstring, the first line inside a function, explains what it does, for your team and for AI assistants.
+
+9
+00:01:13,240 --> 00:01:17,215
+Now write vat, invoice total and split bill.
+
