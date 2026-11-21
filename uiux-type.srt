@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:11,650
+Most of what people see on a screen is text. Typography is like a voice: the same words can sound calm and trustworthy, or rushed and confusing.
+
+2
+00:00:12,350 --> 00:00:20,650
+Body text should be sixteen pixels or more. Smaller text tires the eyes, and on phones people give up.
+
+3
+00:00:22,350 --> 00:00:33,850
+Choose fonts made for screens: Inter, Roboto, Noto Sans, which supports Yoruba, Hausa and Igbo accents, or the system font, which loads instantly.
+
+4
+00:00:34,550 --> 00:00:44,425
+Use a few sizes that step up, like sixteen, twenty, twenty-four and thirty-two. Use bold for a few words, never whole paragraphs.
+
+5
+00:00:45,120 --> 00:00:49,995
+Avoid whole sentences in capitals. It reads like shouting.
+
+6
+00:00:51,700 --> 00:01:00,200
+Line height is space between lines. Too tight, and lines blur like a crowded bus. Aim for about one and a half.
+
+7
+00:01:00,900 --> 00:01:09,050
+Long lines are hard to follow: your eye loses its place. Keep lines to about sixty-five characters.
+
