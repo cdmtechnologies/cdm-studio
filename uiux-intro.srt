@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:08,800
+Have you ever pushed a door that needed to be pulled? You felt silly. But the mistake was the designer's, not yours.
+
+2
+00:00:09,500 --> 00:00:15,100
+Good design makes the right action obvious. That is the heart of this course.
+
+3
+00:00:16,800 --> 00:00:25,325
+Every confusing step loses customers. If checkout takes nine taps instead of four, some people simply give up.
+
+4
+00:00:26,020 --> 00:00:32,170
+Clear design means fewer support calls and fewer mistakes, like wrong transfers.
+
+5
+00:00:32,880 --> 00:00:38,805
+And people judge whether a bank or shop is safe within seconds of seeing its screen.
+
+6
+00:00:40,500 --> 00:00:51,800
+UX is the whole journey: can people find what they need, and finish without frustration? UI is the vehicle: buttons, colours, text and spacing.
+
+7
+00:00:52,500 --> 00:01:01,825
+Designers follow a loop: empathise, define, ideate, prototype, test, and round again. And remember: you are not your user.
+
