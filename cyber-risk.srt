@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:11,450
+A small business cannot protect everything equally. Like a doctor in a busy emergency room, treat the most serious, most likely problems first.
+
+2
+00:00:12,150 --> 00:00:18,600
+List what matters, what could go wrong, then score each risk: likelihood times impact.
+
+3
+00:00:20,300 --> 00:00:27,500
+Phishing of the accounts email: likelihood four, impact four, score sixteen. High: act now.
+
+4
+00:00:28,200 --> 00:00:32,800
+Website defaced: two times two, four. Low: monitor.
+
+5
+00:00:33,500 --> 00:00:39,950
+After adding two-step sign-in, phishing drops to medium. That is your residual risk.
+
+6
+00:00:41,650 --> 00:00:48,400
+Reduce it, avoid it, transfer it with insurance, or accept it on purpose, and write it down.
+
+7
+00:00:49,100 --> 00:00:53,400
+Keep a risk register, and review it every few months.
+
