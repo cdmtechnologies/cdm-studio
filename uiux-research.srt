@@ -1,0 +1,32 @@
+1
+00:00:00,500 --> 00:00:07,525
+A tailor measures before cutting the cloth. A designer studies people before drawing screens.
+
+2
+00:00:08,220 --> 00:00:15,595
+Ask about real past behaviour, not opinions about the future. People say yes to be polite.
+
+3
+00:00:16,300 --> 00:00:25,475
+Watch people too. You will see workarounds, like a notebook beside the till, that nobody mentions, because to them it is normal.
+
+4
+00:00:27,180 --> 00:00:32,205
+Turn research into a clear problem: who, what they need, and why.
+
+5
+00:00:32,910 --> 00:00:41,310
+Busy parents need a way to know at once that the school received their payment, because chasing the bursar wastes hours.
+
+6
+00:00:42,010 --> 00:00:48,635
+Then ask: how might we confirm payments instantly? Each question opens new ideas.
+
+7
+00:00:50,330 --> 00:00:59,730
+A journey map draws each step towards a goal, with what people do, think and feel. The low points are your design opportunities.
+
+8
+00:01:00,430 --> 00:01:08,055
+Then write the problem, not the solution: parents need to know at once that the school received their payment.
+
