@@ -1,0 +1,32 @@
+1
+00:00:00,500 --> 00:00:09,675
+Where is a sieve. When you pour rice through a sieve, only what fits passes. Only rows that make the condition true come through.
+
+2
+00:00:10,380 --> 00:00:16,105
+Select name and price from products where price is greater than ten thousand.
+
+3
+00:00:17,800 --> 00:00:26,500
+Comparisons work like maths: equals, not equals, less than, greater than. In SQL, equals is a single sign.
+
+4
+00:00:27,200 --> 00:00:35,275
+Dates stored as year, month, day sort correctly, so you can ask for orders on or after the first of October.
+
+5
+00:00:35,970 --> 00:00:43,645
+When you mix and with or, use brackets, so the meaning is clear to you, and to the next person who reads it.
+
+6
+00:00:45,350 --> 00:00:52,500
+Combine conditions with and, or. In checks a list. Between checks a range. Like finds a pattern.
+
+7
+00:00:53,200 --> 00:01:01,475
+And NULL means unknown. Is an unknown equal to anything? SQL cannot say. So always write: is null.
+
+8
+00:01:02,180 --> 00:01:04,830
+Now filter the paid orders.
+
