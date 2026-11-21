@@ -253,3 +253,165 @@ def _():
             ("Now add a running total, then build your final project. Good luck!", [turn(b2, 'Good luck!')]),
         ]),
     ]
+
+
+# ---------- extra worked examples, placed before each lesson's last scene ----------
+EXTRA = {}
+
+
+def extra(name):
+    def reg(f):
+        EXTRA[name] = f
+        return f
+    return reg
+
+
+def scenes(name):
+    s = LESSONS[name]()
+    e = EXTRA[name]() if name in EXTRA else None
+    return s[:-1] + [e] + s[-1:] if e else s
+
+
+@extra('sql-select')
+def _():
+    b = Board()
+    return ('2b-example', [
+        ("Let's read a real result. You ask for name and city from customers, and the database hands back a small table: one row for each customer.", [
+            b.title('What comes back'), b.code('select name, city from customers;', 66),
+            table(520, 480, ['name', 'city'], [['Ada Obi', 'Abuja'], ['Musa Bello', 'Kano'], ['Chika Eze', 'Lagos']], cw=440, size=50)]),
+        ("SQL does not care about capital letters in keywords. Select in capitals and select in small letters are the same. But text values must match exactly, inside single quotes.", [
+            b.space(330), b.line("SELECT = select       'Abuja' is not 'abuja'", 58, color=ORANGE)]),
+        ("Every bank, hospital, school and app keeps its data in a database. That is why SQL is one of the most requested skills in job adverts.", [
+            b.note('banks, hospitals, schools, apps', 66, GREEN)]),
+    ])
+
+
+@extra('sql-where')
+def _():
+    b = Board()
+    return ('1b-dates', [
+        ("Comparisons work like maths: equals, not equals, less than, greater than. In SQL, equals is a single sign.", [
+            b.title('Comparisons'), b.line('=     <>     <     <=     >     >=', 80, font='EMSNixish', color=BLUE)]),
+        ("Dates stored as year, month, day sort correctly, so you can ask for orders on or after the first of October.", [
+            b.code("where order_date >= '2026-10-01'", 70)]),
+        ("When you mix and with or, use brackets, so the meaning is clear to you, and to the next person who reads it.", [
+            b.code("status = 'paid' and (city = 'Lagos' or city = 'Abuja')", 54, color=GREEN), b.note('brackets make it clear', 64)]),
+    ])
+
+
+@extra('sql-sort')
+def _():
+    b = Board()
+    return ('1b-more', [
+        ("You can sort by more than one column. Order by city, then by name, sorts by city first, and alphabetically within each city.", [
+            b.title('Sort by two columns'), b.code('order by city, name', 80)]),
+        ("Offset skips rows. That is how apps show page two of the results.", [b.code('limit 10 offset 10', 76), b.note('page 2', 66)]),
+        ("And as renames a column in the result, so your reports read like plain English.", [b.code('select name as product, price as "price (NGN)"', 56, color=GREEN)]),
+    ])
+
+
+@extra('sql-aggregates')
+def _():
+    b = Board()
+    return ('1b-counting', [
+        ("Count carefully. Count star counts rows. Count city counts only rows where the city is known.", [
+            b.title('Counting carefully'), b.pair('count(*)', '7 rows', 70, lx=420, rx=1100), b.pair('count(city)', '6 known cities', 70, lx=420, rx=1100),
+            b.pair('count(distinct city)', '5 different cities', 64, lx=360, rx=1260)]),
+        ("Watch out with division. Seven divided by two gives three, because both are whole numbers. Write seven divided by two point zero to keep the decimals.", [
+            b.space(20), b.code('7 / 2  ->  3', 72, color=RED), b.code('7 / 2.0  ->  3.5', 72, color=GREEN)]),
+    ])
+
+
+@extra('sql-group')
+def _():
+    b = Board()
+    return ('1b-rule', [
+        ("There is one golden rule. Every column you select must be in the group by, or inside an aggregate like count or sum.", [
+            b.title('The golden rule'), b.code('select category, count(*) ... group by category', 58, color=GREEN)]),
+        ("Asking for the product name as well makes no sense: which of the many names in the Food pile should it show?", [
+            b.code('select category, name, count(*) ...', 62, color=RED), b.note('which name?', 66, RED)]),
+        ("You can group by two columns too: a pile for each customer and each status.", [b.code('group by customer_id, status', 70)]),
+    ])
+
+
+@extra('sql-joins')
+def _():
+    b = Board()
+    return ('1b-aliases', [
+        ("Long table names get tiring, so give each table a short nickname, an alias. Orders becomes o, customers becomes c.", [
+            b.title('Short names and many tables'), b.code('from orders o join customers c', 70)]),
+        ("Joins chain together. To see the products in each order, go from orders, to order items, to products.", [
+            b.line('orders  ->  order_items  ->  products', 70, color=ORANGE)]),
+        ("Join first, then group, and you can answer questions like revenue per city, or units sold per product.", [
+            b.note('join, then group', 72, GREEN)]),
+    ])
+
+
+@extra('sql-left-join')
+def _():
+    b = Board()
+    return ('1b-uses', [
+        ("Businesses run this kind of query every day: products that never sold, students who have not paid, staff with no timesheet this week.", [
+            b.title('Finding what is missing'), b.line('never sold      not paid      no timesheet', 62, color=ORANGE)]),
+        ("The table you write first, on the left, is the one whose rows are all kept.", [b.code('from customers c left join orders o', 68)]),
+        ("When counting, use count of the order id, not count star. Customers with no orders then correctly get zero.", [
+            b.code('count(o.id)', 72, color=GREEN), b.code('count(*)', 72, color=RED)]),
+    ])
+
+
+@extra('sql-case-dates')
+def _():
+    b = Board()
+    return ('1b-dates', [
+        ("Every database has date functions. The names differ a little, but the ideas are the same.", [
+            b.title('Working with dates'), b.pair("date('now')", 'today (SQLite)', 64, lx=320, rx=1080), b.pair('current_date', 'today (PostgreSQL)', 64, lx=320, rx=1080),
+            b.pair("date('now', '-30 days')", '30 days ago', 60, lx=320, rx=1260)]),
+        ("Case works like if and elif in Python: the first true when wins. Without an else, rows that match nothing get null.", [
+            b.space(10), b.note('first true WHEN wins', 70)]),
+    ])
+
+
+@extra('sql-subqueries')
+def _():
+    b = Board()
+    return ('1b-lists', [
+        ("A subquery can also return a list. Which customers have a pending order? The inner query lists their ids, and in checks each customer against the list.", [
+            b.title('Subqueries that return a list'), b.code('where id in (select customer_id', 66, x=360), b.code("            from orders where status = 'pending')", 58, x=360)]),
+        ("Exists keeps customers who have at least one order, and stops looking as soon as it finds one. That is fast on big tables.", [
+            b.code('where exists (select 1 from orders o where ...)', 58, color=GREEN)]),
+    ])
+
+
+@extra('sql-change')
+def _():
+    b = Board()
+    return ('1b-insert', [
+        ("Primary key: a unique id. Not null: a value is required. Unique: no two rows share it. Check: any rule you like. Code in an app can have bugs, but the guard at the gate still stops bad data.", [
+            b.title('The guards at the gate'), b.pair('primary key', 'unique id', 62, lx=360, rx=1100), b.pair('not null', 'required', 62, lx=360, rx=1100),
+            b.pair('unique', 'no repeats', 62, lx=360, rx=1100), b.pair('check (...)', 'your own rule', 62, lx=360, rx=1100)]),
+        ("Many real systems never delete business records. They mark them as archived, so history and audits stay intact.", [
+            b.code("status = 'archived'", 70, color=GREEN)]),
+    ])
+
+
+@extra('sql-design')
+def _():
+    b = Board()
+    return ('1b-relations', [
+        ("Start from the nouns: customers, products, orders, payments. Each thing usually becomes a table, and the facts about it become columns.", [
+            b.title('Relationships'), b.line('customers   products   orders   payments', 66, color=BLUE)]),
+        ("One customer has many orders, so the orders table holds the customer's id. An order has many products, and a product is in many orders, so a join table sits in the middle.", [
+            b.line('one-to-many:  orders.customer_id', 60, font='EMSNixish'), b.line('many-to-many:  order_items in the middle', 60, font='EMSNixish')]),
+        ("Store money as whole numbers or a numeric type, never as text, and store dates as dates.", [b.note('money as numbers, dates as dates', 66, GREEN)]),
+    ])
+
+
+@extra('sql-window')
+def _():
+    b = Board()
+    return ('1b-topn', [
+        ("Lag looks at the previous row. Total minus the previous total shows the change since last time, like growth month on month.", [
+            b.title('Looking at neighbours'), b.code('total - lag(total) over (order by order_date)', 58)]),
+        ("A classic interview question: the best seller in each category. Number the rows in each category, then keep number one.", [
+            b.code('row_number() over (partition by category', 60), b.code('                   order by price desc) = 1', 60, color=GREEN)]),
+    ])

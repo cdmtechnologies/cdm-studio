@@ -1,4 +1,4 @@
-from sql_all import LESSONS
+from sql_all import scenes
 
 LESSON = 'sql-left-join'
-SCENES = LESSONS[LESSON]()
+SCENES = scenes(LESSON)
