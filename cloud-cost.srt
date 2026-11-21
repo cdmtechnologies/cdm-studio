@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:07,900
+A cloud bill is like a running tap. Forgotten test servers and huge machines leak money all month.
+
+2
+00:00:08,600 --> 00:00:15,350
+Set budgets with alerts, tag resources by project, and switch off what you do not use.
+
+3
+00:00:17,050 --> 00:00:24,325
+Estimate before you build: servers, database, storage, bandwidth, and backups, each per month.
+
+4
+00:00:25,030 --> 00:00:31,005
+Then compare the bill each month with the estimate, and investigate any surprise.
+
+5
+00:00:32,700 --> 00:00:42,200
+Back up data, and test restoring it. Cloud engineers who keep systems reliable and costs low are always in demand.
+
+6
+00:00:42,900 --> 00:00:48,525
+Your operations plan project is your first portfolio piece. Good luck!
+
