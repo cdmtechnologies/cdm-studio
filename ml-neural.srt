@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:10,925
+A neuron is a tiny voter. It listens to several inputs, trusts some more than others, adds them up, and decides how strongly to speak.
+
+2
+00:00:11,630 --> 00:00:20,405
+Stack neurons in layers. Early layers learn simple patterns, like edges. Later layers combine them into faces.
+
+3
+00:00:22,100 --> 00:00:29,525
+Training repeats three steps: predict, measure how wrong, and nudge every weight to be a little less wrong.
+
+4
+00:00:30,230 --> 00:00:36,755
+Backpropagation works out, from the output backwards, how much each weight was to blame.
+
+5
+00:00:37,450 --> 00:00:43,275
+Libraries like PyTorch do this automatically, often on graphics cards.
+
+6
+00:00:44,980 --> 00:00:53,655
+ReLU keeps positives and zeroes negatives. Softmax turns scores into probabilities that add up to one.
+
+7
+00:00:54,360 --> 00:01:04,060
+Deep learning powers vision and language models. But for business tables, boosted trees are often just as good, and much cheaper.
+
