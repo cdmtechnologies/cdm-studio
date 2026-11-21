@@ -1,0 +1,40 @@
+1
+00:00:00,500 --> 00:00:09,350
+A database is like a school office's filing cabinet. One drawer for students, one for fees, one for teachers.
+
+2
+00:00:10,050 --> 00:00:17,100
+Each drawer is a table. Each folder in it is a row. And each field on the form is a column.
+
+3
+00:00:18,800 --> 00:00:25,500
+SQL is the language for asking a database questions. Read this query like a sentence.
+
+4
+00:00:26,200 --> 00:00:32,525
+Select the name and the city, from the customers table. Star means every column.
+
+5
+00:00:33,230 --> 00:00:38,880
+Select only reads. You cannot break anything with it, so explore freely.
+
+6
+00:00:40,580 --> 00:00:51,080
+Let's read a real result. You ask for name and city from customers, and the database hands back a small table: one row for each customer.
+
+7
+00:00:51,780 --> 00:01:05,130
+SQL does not care about capital letters in keywords. Select in capitals and select in small letters are the same. But text values must match exactly, inside single quotes.
+
+8
+00:01:05,830 --> 00:01:16,430
+Every bank, hospital, school and app keeps its data in a database. That is why SQL is one of the most requested skills in job adverts.
+
+9
+00:01:18,130 --> 00:01:22,805
+You can also calculate new columns, and name them with as.
+
+10
+00:01:23,510 --> 00:01:27,185
+Now write your first query on the shop database.
+
