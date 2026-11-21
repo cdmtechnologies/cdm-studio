@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:07,775
+The cloud is someone else's computers that you rent, like using a hotel instead of building a house.
+
+2
+00:00:08,480 --> 00:00:15,530
+You pay for what you use, grow in minutes, and someone else handles the power, cooling and hardware.
+
+3
+00:00:17,230 --> 00:00:25,180
+Clouds have regions around the world. Choose one close to your users, for speed, and to follow data laws.
+
+4
+00:00:25,880 --> 00:00:33,130
+Spread important systems across zones, so one data centre failing does not take you down.
+
+5
+00:00:34,830 --> 00:00:43,755
+Rent a bare machine, rent a ready platform, or rent finished software, like renting land, a kitchen, or ordering a meal.
+
+6
+00:00:44,460 --> 00:00:52,460
+Big providers include AWS, Google Cloud and Azure, plus simpler ones like Netlify and Supabase.
+
