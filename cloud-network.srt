@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:10,700
+An IP address is a house number, and ports are the flats in the building: 443 for websites, 22 for SSH.
+
+2
+00:00:11,400 --> 00:00:19,725
+CIDR describes a whole street of addresses. Slash twenty-four is two hundred and fifty-six addresses.
+
+3
+00:00:21,420 --> 00:00:27,070
+DNS is the internet's phone book: it turns names into addresses.
+
+4
+00:00:27,770 --> 00:00:35,770
+A records point to addresses, CNAME records point to other names, and changes take time to spread.
+
+5
+00:00:37,470 --> 00:00:46,670
+Like a bank: the public enters the banking hall, but the vault is behind locked doors. Keep databases in private subnets.
+
+6
+00:00:47,370 --> 00:00:53,620
+Firewall rules default to deny. Never open a database to the whole internet.
+
