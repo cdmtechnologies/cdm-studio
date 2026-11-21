@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:11,925
+An inner join is like listing only the children who are in the room. A left join lists every child on the register, with a blank beside those who are absent.
+
+2
+00:00:12,630 --> 00:00:18,730
+Keep the rows where the right side is null, and you find customers who have never ordered.
+
+3
+00:00:20,430 --> 00:00:30,330
+Businesses run this kind of query every day: products that never sold, students who have not paid, staff with no timesheet this week.
+
+4
+00:00:31,030 --> 00:00:36,480
+The table you write first, on the left, is the one whose rows are all kept.
+
+5
+00:00:37,180 --> 00:00:45,555
+When counting, use count of the order id, not count star. Customers with no orders then correctly get zero.
+
+6
+00:00:47,250 --> 00:00:52,150
+Coalesce fills the blanks: no orders becomes a clear zero.
+
+7
+00:00:52,850 --> 00:01:03,300
+Careful: a filter on the right table belongs in the on, not the where, or the blanks disappear again. Now list every customer's spending.
+
