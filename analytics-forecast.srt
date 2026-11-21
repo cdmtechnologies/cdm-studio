@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:11,850
+A weather forecast says seventy percent chance of rain, not a promise. Business forecasts help plan stock, staff and cash, and they are always uncertain.
+
+2
+00:00:12,550 --> 00:00:21,775
+Start simple. Next month equals this month. Or this December equals last December. These baselines are hard to beat.
+
+3
+00:00:23,480 --> 00:00:32,355
+Sales of three, five, seven and nine. The line goes up by two each month. The forecast for next month is eleven.
+
+4
+00:00:33,050 --> 00:00:40,950
+But straight lines never bend, and real growth always slows. Do not stretch a trend far into the future.
+
+5
+00:00:42,660 --> 00:00:52,410
+Compare forecasts with what really happened. MAPE is the average miss as a percentage: we are usually within eight percent.
+
+6
+00:00:53,110 --> 00:00:57,560
+Give a range, not a single number, and say your assumptions.
+
