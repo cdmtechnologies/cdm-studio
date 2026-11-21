@@ -7,6 +7,7 @@ import { marketing } from './marketing'
 import { ml } from './ml'
 import { python } from './python'
 import { sql } from './sql'
+import { uiux } from './uiux'
 import type { Course } from './types'
 
-export const COURSES: Course[] = [python, sql, marketing, aieng, ml, analytics, cyber, ethhack, cloud]
+export const COURSES: Course[] = [python, sql, marketing, uiux, aieng, ml, analytics, cyber, ethhack, cloud]

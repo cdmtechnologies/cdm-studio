@@ -573,6 +573,196 @@ export const COURSES: Track[] = [
     ]
   },
   {
+    "id": "uiux",
+    "title": "UI/UX design",
+    "blurb": "Design apps and websites people love to use: research, layout, typography, colour, accessibility, responsive design and design systems, built for real in HTML and CSS.",
+    "colour": "violet",
+    "emoji": "🎨",
+    "course": {
+      "level": "Beginner",
+      "hours": 13,
+      "free": 2,
+      "skills": [
+        "Design thinking and user research",
+        "Information architecture and user flows",
+        "Layout, spacing and visual hierarchy",
+        "Typography and colour (WCAG contrast)",
+        "Forms and interactive states",
+        "Responsive, mobile-first design",
+        "Accessibility",
+        "Design systems and tokens",
+        "Usability testing and case studies"
+      ],
+      "careers": [
+        "UI designer",
+        "UX designer",
+        "Product designer",
+        "UX researcher",
+        "Front-end developer with design skills"
+      ],
+      "examQuestions": 22,
+      "project": {
+        "title": "Redesign a real screen, with a case study",
+        "lang": "html",
+        "brief": "Choose a screen from a real app or website that frustrates people (a school portal login, a bus booking form, a food menu, a bank transfer screen). Research it with at least 3 real people, then **redesign it in CDM Studio** as a working, mobile-first page.\n\nThe same Studio project must include a short **case study section** below the design: the problem, what you learned from users (with at least one quote), the key design decisions and why, and how you tested it.\n\nUse design tokens (CSS custom properties), real content, and make it accessible. You may use the AI builder for a first draft, but the research, decisions and final design must be yours.",
+        "rubric": [
+          "Clearly states the original problem and who it affects, with evidence from at least 3 real users (including a quote)",
+          "The redesigned screen is mobile-first and responsive, with a viewport tag and layouts that adapt to wider screens",
+          "Has a clear visual hierarchy with one obvious primary action",
+          "Uses a consistent spacing and type scale through design tokens (CSS custom properties)",
+          "Text and controls meet WCAG AA contrast and touch targets are at least 44px",
+          "Uses semantic HTML: landmarks, ordered headings, labelled form fields and real buttons",
+          "Designs at least two states beyond the default (for example error, empty, loading or success)",
+          "Explains the key design decisions and the reasons for them",
+          "Describes how the design was tested with users and what changed as a result",
+          "Uses real, specific content rather than placeholder text"
+        ],
+        "pass_pct": 70
+      }
+    },
+    "lessons": [
+      {
+        "id": "uiux-intro",
+        "title": "What UI and UX really mean",
+        "minutes": 20,
+        "kind": "read",
+        "outline": "UX versus UI, why design matters to business, and the design thinking process.",
+        "body": "## The door test\n\nHave you ever pushed a door that needed to be pulled? The door had a handle shaped for pulling, but a sign said \"push\". You felt silly, but the mistake was the designer's, not yours. Good design makes the right action obvious. That is the heart of this course.\n\n## UX and UI\n\n- **UX (user experience)** is how it feels to use something from start to finish: can people find what they need, understand it, and finish their task without frustration? UX is the *journey*.\n- **UI (user interface)** is what people see and touch: buttons, colours, text, icons, spacing. UI is the *vehicle*.\n\nA beautiful app that confuses people has good UI and bad UX. A plain app that is quick and obvious has good UX, and good UI would make it even better. Product designers do both.\n\n## Why businesses pay for design\n\n- Every confusing step loses customers. If checkout takes 9 taps instead of 4, some people simply give up.\n- Clear design reduces support calls and mistakes (wrong transfers, wrong orders).\n- Accessible design reaches more people, including about 1 in 6 people worldwide who live with a disability, and it is a legal requirement in many places.\n- Trust: people judge whether a bank or shop is safe within seconds of seeing its screen.\n\n## Design thinking\n\nA process used by design teams worldwide. It is a loop, not a straight line:\n\n1. **Empathise**: learn about the people and their real situation.\n2. **Define**: write down the actual problem to solve.\n3. **Ideate**: generate many possible solutions before choosing.\n4. **Prototype**: make a cheap version quickly (paper sketches, then clickable screens).\n5. **Test**: watch real people use it, learn, and go round the loop again.\n\nThe big idea: **you are not your user.** What seems obvious to you, who built it, may be confusing to a market trader using a cheap Android phone with a cracked screen in bright sunlight.\n\n## What you will build\n\nThis course mixes thinking lessons with hands-on lessons where you design in real HTML and CSS, so your designs work in a browser, not just in a picture. Tools like **Figma** are used for drawing and prototyping in most companies; the principles you learn here apply in any tool.",
+        "quiz": [
+          {
+            "q": "UX is mainly about…",
+            "options": [
+              "The colours only",
+              "How it feels to use something from start to finish",
+              "The company logo"
+            ],
+            "answer": 1,
+            "why": "UX is the whole experience; UI is what you see and touch."
+          },
+          {
+            "q": "A person pushes a door that needs pulling. Whose mistake is it?",
+            "options": [
+              "The person",
+              "The designer",
+              "Nobody"
+            ],
+            "answer": 1,
+            "why": "Good design makes the right action obvious."
+          },
+          {
+            "q": "\"You are not your user\" means…",
+            "options": [
+              "Users are always wrong",
+              "Your own sense of what is obvious may not match your users",
+              "Never use your own product"
+            ],
+            "answer": 1,
+            "why": "Learn from the real people you design for."
+          }
+        ]
+      },
+      {
+        "id": "uiux-research",
+        "title": "Understanding users",
+        "minutes": 25,
+        "kind": "prompt",
+        "outline": "User interviews, observation, journey maps, problem statements and \"How might we\" questions.",
+        "body": "## Design starts with listening\n\nA tailor measures before cutting the cloth. A designer studies people before drawing screens. **User research** is that measuring tape.\n\n## Interviews\n\nTalk to 5 to 8 people who match your users. Good interviews:\n\n- Ask about **past behaviour**, not opinions about the future. \"Tell me about the last time you paid a school fee\" beats \"Would you use an app for school fees?\" (People say yes to be polite.)\n- Ask **open questions**: what, how, tell me about. Avoid yes / no questions.\n- Ask **\"why?\"** gently, several times, to reach the real reason.\n- Listen more than you talk. Silence makes people add the most useful details.\n- Never sell or defend your idea during research.\n\n## Observation\n\nWatch people do the task where they normally do it: at the shop counter, in a bus, at the office. You will see workarounds (a notebook beside the till, a WhatsApp screenshot of an account number) that people would never mention in an interview, because to them it is normal.\n\n## Journey maps\n\nA **journey map** draws the steps a person takes to reach a goal, with what they do, think and feel at each step. Imagine a parent paying school fees: get the fee notice → find the account number → go to the bank or transfer → screenshot the receipt → send it to the school → wait for confirmation → chase the bursar when nobody replies. The low points on the map (waiting, chasing, uncertainty) are your design opportunities.\n\n## Problem statements\n\nTurn research into a clear problem:\n\n> **[User]** needs a way to **[need]** because **[insight]**.\n> *Busy parents need a way to know instantly that the school received their payment, because chasing the bursar wastes hours and causes worry.*\n\nNotice: it does not mention an app or a solution. It describes the need.\n\n## How might we…?\n\nRephrase the problem as optimistic questions that invite many ideas: *How might we confirm payments instantly? How might we remove the need to send receipts at all?* Each question opens a different set of solutions.\n\n## Practise\n\nUse the tutor to rehearse an interview and write a problem statement.",
+        "practice": "Choose a real everyday task (paying school fees, booking a clinic visit, buying data, ordering food). Ask the tutor to play a realistic user, and interview them using open questions about the last time they did it. Afterwards, ask the tutor to help you draw a short journey map with the low points, write one problem statement using the template, and suggest three \"How might we\" questions."
+      },
+      {
+        "id": "uiux-structure",
+        "title": "Information architecture and user flows",
+        "minutes": 25,
+        "kind": "read",
+        "outline": "Organising content, navigation patterns, user flows, wireframes and why to sketch before you style.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "uiux-layout",
+        "title": "Layout, spacing and hierarchy",
+        "minutes": 30,
+        "kind": "code",
+        "outline": "Visual hierarchy, a spacing scale, alignment, grouping (proximity) and building a product card with flexbox and grid.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "uiux-type",
+        "title": "Typography that reads well",
+        "minutes": 30,
+        "kind": "code",
+        "outline": "Choosing fonts, a type scale, line height, line length, weights and readable text on every screen.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "uiux-colour",
+        "title": "Colour and contrast",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "Colour roles, the 60-30-10 idea, meaning and culture, WCAG contrast ratios, and coding a contrast checker.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "uiux-forms",
+        "title": "Buttons, forms and feedback",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "Interactive states, labels, helpful errors, keyboard focus and designing forms people can finish.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "uiux-responsive",
+        "title": "Responsive, mobile-first design",
+        "minutes": 30,
+        "kind": "code",
+        "outline": "Designing for small screens first, breakpoints with media queries, touch targets, thumb zones and slow networks.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "uiux-accessibility",
+        "title": "Accessibility: design for everyone",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "Semantic HTML, landmarks, keyboard access, names for icon buttons, skip links and the POUR principles.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "uiux-testing",
+        "title": "Prototyping and usability testing",
+        "minutes": 30,
+        "kind": "read",
+        "outline": "Clickable prototypes, running a usability test with 5 people, writing tasks, measuring success and acting on findings.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "uiux-systems",
+        "title": "Design systems and dark mode",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "Design tokens with CSS custom properties, reusable components, consistency at scale and theming for dark mode.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "uiux-career",
+        "title": "Case studies, portfolio and AI in design",
+        "minutes": 30,
+        "kind": "prompt",
+        "outline": "Writing a design case study, building a portfolio, working with developers, using AI tools well, and finding work.",
+        "body": "",
+        "paid": true
+      }
+    ]
+  },
+  {
     "id": "aieng",
     "title": "AI engineering: prompts, data and automation",
     "blurb": "Go beyond chatting: design reliable prompts, get structured answers, ground AI in your own documents, and automate work safely.",
