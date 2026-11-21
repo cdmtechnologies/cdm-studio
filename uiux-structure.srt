@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:11,950
+In a good supermarket, you find the rice without asking anyone. Information architecture does that for an app: organising content so people find things.
+
+2
+00:00:12,650 --> 00:00:21,275
+Card sorting shows how users think. They group the topics, and name the groups. Their labels are often better than yours.
+
+3
+00:00:22,980 --> 00:00:30,130
+On phones, put three to five main sections in a bottom tab bar, always reachable by thumb.
+
+4
+00:00:30,830 --> 00:00:39,230
+A hamburger menu saves space, but people use hidden things less. Keep the most important actions visible.
+
+5
+00:00:39,930 --> 00:00:45,855
+Keep labels short and plain: Orders, not transaction history management.
+
+6
+00:00:47,560 --> 00:00:55,460
+A user flow maps the steps for one task. Every step you remove is a step where nobody can give up.
+
+7
+00:00:56,160 --> 00:01:06,385
+A wireframe is a floor plan, not the paint: what goes where, in simple boxes. Sketch on paper first, and use real content early.
+
