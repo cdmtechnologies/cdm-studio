@@ -1,0 +1,36 @@
+1
+00:00:00,500 --> 00:00:08,525
+Until now, our programs followed one road. Real programs choose. Think of a road junction with a sign.
+
+2
+00:00:09,220 --> 00:00:16,645
+If the customer spent fifty thousand or more, take the discount road. Otherwise, take the normal road.
+
+3
+00:00:17,350 --> 00:00:22,200
+Your program checks the sign, and takes exactly one road.
+
+4
+00:00:23,900 --> 00:00:28,850
+In Python, it looks like this. The line ends with a colon.
+
+5
+00:00:29,550 --> 00:00:41,975
+And the lines inside each branch are indented by four spaces. In Python, indentation is not decoration. It is how Python knows what belongs inside.
+
+6
+00:00:42,680 --> 00:00:48,930
+Remember: two equals signs compare. One equals sign puts a value in a box.
+
+7
+00:00:50,630 --> 00:00:58,380
+Now, functions. A function is like a blender. You put things in, it does its job, and something comes out.
+
+8
+00:00:59,080 --> 00:01:06,705
+You build it once with def, and return sends the answer back. Then you can use it as often as you like.
+
+9
+00:01:07,400 --> 00:01:17,000
+Check the highest grade first, because Python takes the first true road. Now write grade, delivery fee and can vote in the editor.
+
