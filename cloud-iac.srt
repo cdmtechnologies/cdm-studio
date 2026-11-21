@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:10,450
+Setting up servers by clicking is like cooking a great meal without writing the recipe. Infrastructure as code writes the recipe.
+
+2
+00:00:11,150 --> 00:00:15,775
+Describe what should exist, and the tool works out the changes.
+
+3
+00:00:17,480 --> 00:00:24,505
+Drift happens when someone changes things by hand, so reality no longer matches the code.
+
+4
+00:00:25,200 --> 00:00:32,050
+The next plan will try to undo the change, which surprises people. All changes go through code.
+
+5
+00:00:33,760 --> 00:00:42,135
+The plan shows what would change before anything changes. Destroy one database should stop everyone in their tracks.
+
+6
+00:00:42,830 --> 00:00:47,280
+All changes through code, reviewed like any other code.
+
