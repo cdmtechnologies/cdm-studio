@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:11,125
+Public Wi-Fi is like shouting in a crowded market. Anyone nearby may be listening. Use HTTPS sites, or a trusted VPN.
+
+2
+00:00:11,820 --> 00:00:17,570
+At home and work, change the router's default password, and keep it updated.
+
+3
+00:00:19,280 --> 00:00:25,430
+Updates fix known holes, like repairing a broken window as soon as you notice it.
+
+4
+00:00:26,130 --> 00:00:34,955
+Turn on automatic updates for phones, laptops and routers. Many attacks use holes that were fixed months ago.
+
+5
+00:00:36,660 --> 00:00:44,510
+Every phone and laptop is a door. Lock screens, automatic updates, and encryption keep the doors shut.
+
+6
+00:00:45,210 --> 00:00:52,435
+Separate guest Wi-Fi from business systems, like a waiting room that does not open into the office.
+
