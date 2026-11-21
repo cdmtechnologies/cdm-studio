@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:09,850
+Logs are the building's CCTV. Attackers leave footprints: many failed logins, odd times, strange addresses.
+
+2
+00:00:10,550 --> 00:00:16,025
+Defenders read logs to spot attacks early, before damage is done.
+
+3
+00:00:17,730 --> 00:00:26,380
+Fifty failed logins from one address in one minute, then one success. That is a password-guessing attack that worked.
+
+4
+00:00:27,080 --> 00:00:33,080
+Lock the account, block the address, reset the password, and check what was accessed.
+
+5
+00:00:34,780 --> 00:00:43,705
+Count failures per address, look for logins from new countries, and watch for requests full of quote marks and script tags.
+
+6
+00:00:44,410 --> 00:00:48,785
+Understanding attacks makes you a far better defender.
+
