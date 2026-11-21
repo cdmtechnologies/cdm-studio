@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:10,475
+Most of the cloud runs on Linux, and servers have no screen. You talk to them by typing, like a skilled driver with a manual gearbox.
+
+2
+00:00:11,170 --> 00:00:18,245
+Logs live in var log. Tail dash f follows new lines live, and grep finds words.
+
+3
+00:00:19,950 --> 00:00:27,875
+Every file has an owner, and permissions to read, write and run, for the owner, the group and everyone else.
+
+4
+00:00:28,580 --> 00:00:36,605
+Secrets should be readable only by the app's user. Never fix a problem with chmod seven seven seven.
+
+5
+00:00:38,300 --> 00:00:46,650
+Use SSH keys, not passwords, and sudo only when needed, like a master key you return after use.
+
+6
+00:00:47,350 --> 00:00:51,275
+And check the path twice before you delete anything.
+
