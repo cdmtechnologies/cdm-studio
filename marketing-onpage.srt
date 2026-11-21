@@ -1,0 +1,36 @@
+1
+00:00:00,500 --> 00:00:08,775
+On-page SEO is arranging your shop window, so people and Google's robots understand at once what you sell.
+
+2
+00:00:09,480 --> 00:00:18,730
+The title tag is the blue headline in search results. Put the main keyword near the start, and keep it under sixty characters.
+
+3
+00:00:19,420 --> 00:00:27,770
+The meta description is the grey text underneath. It does not raise rankings, but a good one makes more people click.
+
+4
+00:00:29,480 --> 00:00:38,130
+Before: the title just says Home, there are two big headings, an image with no description, and a link that says click here.
+
+5
+00:00:38,830 --> 00:00:48,655
+After: a specific title with the city, one clear heading, sections underneath, every image described, and links that say where they go.
+
+6
+00:00:49,350 --> 00:00:55,500
+Same business, same products. Now both people and Google understand the page.
+
+7
+00:00:57,210 --> 00:01:03,710
+Use one main heading, then smaller headings for sections, like chapters in a textbook.
+
+8
+00:01:04,410 --> 00:01:13,135
+Google cannot see pictures, so describe every image with alt text. And never write click here: say where the link goes.
+
+9
+00:01:13,830 --> 00:01:17,955
+Write for people first. Now optimise the page.
+
