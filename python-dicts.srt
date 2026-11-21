@@ -1,0 +1,36 @@
+1
+00:00:00,500 --> 00:00:07,450
+A list finds things by position. A dictionary finds things by name, like a phone book.
+
+2
+00:00:08,150 --> 00:00:14,950
+You look up bread, and you get its price. The name is the key. What you get back is the value.
+
+3
+00:00:15,650 --> 00:00:21,975
+Get is a safe lookup. If the key is missing, you get the default instead of an error.
+
+4
+00:00:23,680 --> 00:00:32,080
+The counting pattern is a tally sheet. For each new name, start at zero. Each time you see it again, add one stroke.
+
+5
+00:00:32,780 --> 00:00:37,280
+Mango, orange, mango, gives mango two, and orange one.
+
+6
+00:00:37,980 --> 00:00:46,355
+Swap the one for an amount, and the same line gives sales per branch. That one line is the heart of every report.
+
+7
+00:00:48,060 --> 00:00:59,210
+Real data looks like a table, and in Python each row is a dictionary. This is the same shape as JSON, which websites use to send data.
+
+8
+00:00:59,910 --> 00:01:08,635
+To find the best branch, find the key with the biggest total. Max with key equals totals dot get does it in one line.
+
+9
+00:01:09,330 --> 00:01:14,005
+Now write word counts, sales by branch and top branch.
+
