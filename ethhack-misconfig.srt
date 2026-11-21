@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:11,650
+Many breaches need no clever hacking: a default password, a debug page, a database open to the internet. A strong lock with the key left in it.
+
+2
+00:00:12,350 --> 00:00:19,000
+Testers check for defaults, debug modes, open admin panels and file listings.
+
+3
+00:00:20,700 --> 00:00:26,375
+Benchmarks like the CIS checklists list safe settings for most systems.
+
+4
+00:00:27,080 --> 00:00:34,755
+Put settings in code, scan them automatically, and keep an up-to-date list of every system you run.
+
+5
+00:00:36,450 --> 00:00:48,000
+Old TLS versions and fast password hashes like MD5 are weak. Use TLS one point two or newer, and bcrypt or Argon2.
+
+6
+00:00:48,700 --> 00:00:54,525
+Fix it with a hardening checklist and automatic checks, not a one-off clean-up.
+
