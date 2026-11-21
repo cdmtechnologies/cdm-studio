@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:10,450
+Why split data into tables? If Ada's city is written on every order, when she moves, you must fix every order, and you will miss one.
+
+2
+00:00:11,150 --> 00:00:19,725
+Instead, each customer is stored once, and each order says which customer by id, like a student's admission number.
+
+3
+00:00:21,420 --> 00:00:31,095
+Long table names get tiring, so give each table a short nickname, an alias. Orders becomes o, customers becomes c.
+
+4
+00:00:31,800 --> 00:00:39,450
+Joins chain together. To see the products in each order, go from orders, to order items, to products.
+
+5
+00:00:40,140 --> 00:00:47,990
+Join first, then group, and you can answer questions like revenue per city, or units sold per product.
+
+6
+00:00:49,690 --> 00:00:54,365
+Join glues the matching rows back together, side by side.
+
+7
+00:00:55,070 --> 00:01:01,995
+A plain join keeps only rows with a match on both sides. Now find revenue per city.
+
