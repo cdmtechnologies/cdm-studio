@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:10,425
+Every token in and out costs money, like a taxi meter running. Long prompts and long answers add up across thousands of users.
+
+2
+00:00:11,130 --> 00:00:18,530
+Long documents must be split into chunks, like cutting a long cloth into pieces that fit the table.
+
+3
+00:00:20,230 --> 00:00:28,405
+Split a long handbook into chunks of a few hundred words, at paragraph breaks, not in the middle of sentences.
+
+4
+00:00:29,110 --> 00:00:35,735
+Let neighbouring chunks overlap a little, so an answer that spans the break is not lost.
+
+5
+00:00:36,430 --> 00:00:42,855
+Count tokens before you send, and refuse oversized input with a friendly message.
+
+6
+00:00:44,560 --> 00:00:49,535
+Overlap chunks a little, so a sentence is never cut in half.
+
+7
+00:00:50,240 --> 00:00:57,590
+Use the smallest model that does the job well, limit answer length, and cache repeated answers.
+
