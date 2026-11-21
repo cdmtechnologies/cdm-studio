@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:11,525
+HTTPS is an armoured van between browser and website. Security headers are extra locks on every door and window, and they cost nothing.
+
+2
+00:00:12,220 --> 00:00:21,045
+HSTS says: always use HTTPS. A content security policy blocks scripts you did not allow.
+
+3
+00:00:22,750 --> 00:00:30,350
+Attackers can hide your page inside theirs, and trick people into clicking your buttons. That is clickjacking.
+
+4
+00:00:31,050 --> 00:00:35,300
+One header line stops it: frame-ancestors none.
+
+5
+00:00:37,000 --> 00:00:44,775
+A session cookie is the key to a signed-in account. Mark it Secure, HttpOnly and SameSite.
+
+6
+00:00:45,480 --> 00:00:50,680
+Free scanners grade your site's headers. Now write your own header audit.
+
