@@ -1,4 +1,5 @@
 import type { Course } from './types'
+import { ethhackMore, ethhackProject } from './extra/ethhack'
 
 export const ethhack: Course = {
   id: 'ethhack',
@@ -519,6 +520,7 @@ Log lines look like the example above. Write:
   }
 </script>`,
     },
+    ...ethhackMore,
     {
       id: 'ethhack-report',
       title: 'Reporting, disclosure and your security career',
@@ -560,6 +562,7 @@ Ask the tutor to help you turn a lab finding into a professional write-up.`,
       practice: 'Describe a finding from a legal practice lab (for example: "In OWASP Juice Shop, the product search box showed a database error when I typed a single quote"). Ask the AI to help you write it up as a professional finding with title, severity and business impact, affected asset, description, safe reproduction steps, recommendation and references. Then ask it to write a 3-sentence executive summary.',
     },
   ],
+  project: ethhackProject,
   exam: [
     { q: 'What separates ethical hacking from a crime?', options: ['Good intentions', 'Written permission from the system owner, within an agreed scope', 'Using well-known tools', 'Not changing any data'], answer: 1, why: 'Authorisation and scope are what make testing legal.' },
     { q: 'Which Nigerian law makes unauthorised access to computer systems an offence?', options: ['The Cybercrimes (Prohibition, Prevention, etc.) Act 2015', 'The Companies and Allied Matters Act', 'The Evidence Act only', 'There is none'], answer: 0, why: 'The Cybercrimes Act covers unauthorised access.' },

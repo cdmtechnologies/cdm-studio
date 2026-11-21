@@ -1631,7 +1631,25 @@ export const COURSES: Track[] = [
         "Application security analyst",
         "SOC analyst"
       ],
-      "examQuestions": 20
+      "examQuestions": 20,
+      "project": {
+        "title": "Penetration test report on a practice target",
+        "lang": "text",
+        "brief": "Run an authorised test against a **practice target you are allowed to attack**: OWASP Juice Shop or DVWA running in your own lab, a TryHackMe or Hack The Box machine (following their rules on write-ups), or an app **you built yourself**. Do not test any system you do not own or have written permission to test.\n\nWrite a professional penetration test report (paste the text here, about 1,000 to 2,500 words):\n\n1. **Executive summary** for non-technical managers: overall risk and the top three fixes.\n2. **Scope and rules of engagement**: the target, dates, what was allowed and not allowed, and the written basis for authorisation (for a practice target, say which one and why it is allowed).\n3. **Methodology**: the phases you followed (reconnaissance, scanning, testing, reporting).\n4. **Findings**: at least 4, each with a title, severity (critical, high, medium or low) with your reasoning, affected component, steps to reproduce, evidence (describe it; do not paste real personal data or working exploit code), impact, and a clear **remediation**.\n5. **Positive observations**: what was done well.\n6. **Conclusion and retest plan**.",
+        "rubric": [
+          "Targets only an authorised practice system or the learner's own app, and states the basis for authorisation",
+          "Defines scope and rules of engagement clearly",
+          "Has an executive summary a non-technical manager can understand",
+          "Describes a structured methodology",
+          "Reports at least 4 findings, each with severity and a reasoned rating",
+          "Each finding has reproducible steps and evidence without real personal data or weaponised exploit code",
+          "Each finding explains the business impact",
+          "Each finding gives a specific, correct remediation",
+          "Includes positive observations and a retest plan",
+          "Is professional, clear and well organised"
+        ],
+        "pass_pct": 70
+      }
     },
     "lessons": [
       {
@@ -1756,6 +1774,42 @@ export const COURSES: Track[] = [
         "minutes": 25,
         "kind": "code",
         "outline": "What scans, brute force and probing look like in web server logs, and build a simple detector.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "ethhack-osint",
+        "title": "Passive reconnaissance and OSINT, within scope",
+        "minutes": 30,
+        "kind": "read",
+        "outline": "What public information reveals about an organisation, DNS and certificate records, staff exposure, and the legal and ethical limits.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "ethhack-authz",
+        "title": "Broken access control: finding and fixing IDOR",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "Why broken access control tops the OWASP Top 10, how testers check object-level and function-level permissions, and writing the fix.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "ethhack-misconfig",
+        "title": "Security misconfiguration and weak crypto",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "Default passwords, debug modes, directory listing, old TLS, exposed admin panels, and coding a configuration review.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "ethhack-labs",
+        "title": "Practising legally: labs, CTFs and bug bounties",
+        "minutes": 25,
+        "kind": "read",
+        "outline": "Building a home lab, deliberately vulnerable apps, capture-the-flag platforms, bug bounty rules and building a reputation.",
         "body": "",
         "paid": true
       },
