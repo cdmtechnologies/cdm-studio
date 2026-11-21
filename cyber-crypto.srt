@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:10,600
+A hash is like a fingerprint for data: the same input always gives the same print, but you cannot rebuild the person from the fingerprint.
+
+2
+00:00:11,300 --> 00:00:20,025
+Websites store password hashes, not passwords. A salt makes every hash unique, even for the same password.
+
+3
+00:00:21,730 --> 00:00:31,505
+Some encryption uses two keys: a public padlock anyone can use to lock a box, and a private key only you hold to open it.
+
+4
+00:00:32,210 --> 00:00:38,860
+That is how HTTPS starts a secure connection with a website you have never met.
+
+5
+00:00:40,560 --> 00:00:50,235
+Encryption is a locked box: only someone with the key can open it. HTTPS locks the box between your phone and the website.
+
+6
+00:00:50,940 --> 00:00:55,840
+Never invent your own encryption. Use well-tested tools.
+
