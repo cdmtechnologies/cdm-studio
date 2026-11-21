@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:12,250
+A student who memorises past papers word for word fails when the questions change. A model can do the same: perfect on training data, poor on new data.
+
+2
+00:00:12,950 --> 00:00:18,700
+Keep models simple enough, and always judge them on data they have never seen.
+
+3
+00:00:20,400 --> 00:00:27,375
+Ninety-nine percent on training data, but seventy percent on test data? The model memorised.
+
+4
+00:00:28,070 --> 00:00:35,870
+Simpler models, more data, and limits on depth help. Regularisation gently punishes complexity.
+
+5
+00:00:37,580 --> 00:00:44,605
+Cross-validation rotates which part is the test, like several mock exams instead of one.
+
+6
+00:00:45,300 --> 00:00:52,600
+Check results for each group of people. A model can be accurate overall, and unfair to one group.
+
