@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:11,300
+AI learns from human text, so it can repeat human bias. Test with different names, accents and situations, and fix what is unfair.
+
+2
+00:00:12,000 --> 00:00:19,675
+Protect privacy: send the minimum data, never passwords, and tell people when they are talking to AI.
+
+3
+00:00:21,380 --> 00:00:26,630
+Tell people when they are talking to AI, and when an answer might be wrong.
+
+4
+00:00:27,330 --> 00:00:33,580
+Keep a way to reach a human for important decisions, like loans, health and jobs.
+
+5
+00:00:34,280 --> 00:00:38,530
+Respect copyright, and never use AI to deceive.
+
+6
+00:00:40,230 --> 00:00:48,755
+AI engineers build useful, safe features on top of models: prompts, data, evaluations and guardrails.
+
+7
+00:00:49,450 --> 00:00:56,975
+Build a portfolio of small, real tools. Your final project is a great first one. Good luck!
+
