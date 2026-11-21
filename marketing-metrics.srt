@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:08,250
+A doctor does not prescribe without checking the temperature. A marketer should not spend without checking the numbers.
+
+2
+00:00:08,950 --> 00:00:19,450
+The most important number: how much can you afford to pay for one customer? If a sale makes four thousand profit, keep cost per sale below that.
+
+3
+00:00:21,150 --> 00:00:30,625
+A customer sees an Instagram post, searches on Google a week later, then buys after an email. Which channel gets the credit?
+
+4
+00:00:31,320 --> 00:00:38,995
+Last click gives it all to the email. Other models share the credit. Every model simplifies reality.
+
+5
+00:00:39,700 --> 00:00:44,750
+Look at trends over weeks, rather than arguing about one number.
+
+6
+00:00:46,450 --> 00:00:55,325
+UTM labels on your links tell analytics where each visitor came from: the source, the medium, and the campaign.
+
+7
+00:00:56,020 --> 00:01:06,295
+Use lowercase and the same spelling every time, or Instagram and instagram become two sources. Now build the campaign calculator.
+
