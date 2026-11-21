@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:14,800
+A model only writes text. It cannot check an order or send an SMS. With tool use, it asks your code to do it, like a receptionist who cannot leave the desk, but knows which extension to call.
+
+2
+00:00:15,500 --> 00:00:20,975
+You describe each tool with a name, a description and the inputs it needs.
+
+3
+00:00:22,680 --> 00:00:30,680
+The user asks, where is my order? The model replies with a tool call: get order, number ten forty-two.
+
+4
+00:00:31,380 --> 00:00:38,655
+Your code checks the request, runs it, and sends back the result. Then the model writes the answer.
+
+5
+00:00:39,350 --> 00:00:43,975
+Reject unknown tools and unknown fields, every time.
+
+6
+00:00:45,680 --> 00:00:55,855
+The model's request is only a suggestion. Check every argument, like a form from a stranger: right fields, right types, nothing extra.
+
+7
+00:00:56,560 --> 00:01:05,210
+And check permissions in your own code. The model asking for order ten forty-two does not mean this user may see it.
+
