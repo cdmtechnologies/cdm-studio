@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:12,775
+Almost every system can export a CSV file: bank statements, sales, school results. It is just text, one row per line, with commas between columns.
+
+2
+00:00:13,480 --> 00:00:22,730
+If a spreadsheet is a printed table, a CSV is that same table read out over the phone: plain, and understood everywhere.
+
+3
+00:00:24,430 --> 00:00:34,605
+Python comes with batteries included. The csv module reads each row as a dictionary, using the first line as the column names.
+
+4
+00:00:35,310 --> 00:00:42,835
+But notice: every value arrives as text, even the amount. You must convert numbers yourself.
+
+5
+00:00:44,530 --> 00:00:54,455
+Real exports have blank amounts and typos. The professional habit: never crash on one bad row, and never silently include it.
+
+6
+00:00:55,160 --> 00:01:01,510
+Skip it, count it, and report it. Now load the sales data and summarise it by branch.
+
