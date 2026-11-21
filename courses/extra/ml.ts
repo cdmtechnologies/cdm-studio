@@ -1,3 +1,4 @@
+import type { Quiz } from '../../src/lessons/types'
 import type { CourseLesson, CourseProject } from '../types'
 
 // Advanced lessons added to Machine learning foundations (before the final deployment and career lesson).
@@ -387,3 +388,12 @@ Add a short "Model card" section: what the model is for, the data, the results, 
     'Code is organised into clear functions with sensible names',
   ],
 }
+
+export const mlExam: Quiz[] = [
+  { q: 'The sigmoid function turns any score into…', options: ['A whole number', 'A probability between 0 and 1', 'A negative number', 'A category name'], answer: 1, why: 'It squashes scores into 0 to 1.' },
+  { q: 'Lowering the threshold of a fraud model usually…', options: ['Catches more fraud but raises more false alarms', 'Has no effect', 'Always improves accuracy', 'Removes all errors'], answer: 0, why: 'It trades precision for recall.' },
+  { q: 'Gini impurity of a group that is all one class is…', options: ['0', '0.5', '1', '100'], answer: 0, why: 'A pure group has no impurity.' },
+  { q: 'A random forest improves on one decision tree by…', options: ['Using a single very deep tree', 'Averaging many trees trained on random samples', 'Removing all features', 'Only using text data'], answer: 1, why: 'Many trees voting cancel out errors.' },
+  { q: 'Scaling statistics (mean and standard deviation) should be computed from…', options: ['All the data', 'The training data only', 'The test data only', 'Random numbers'], answer: 1, why: 'Otherwise test information leaks into training.' },
+  { q: 'Softmax is used in the output layer when…', options: ['Choosing between many classes', 'Predicting a price', 'Clustering', 'Cleaning data'], answer: 0, why: 'It turns scores into probabilities that add up to 1.' },
+]

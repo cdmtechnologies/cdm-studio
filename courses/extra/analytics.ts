@@ -1,3 +1,4 @@
+import type { Quiz } from '../../src/lessons/types'
 import type { CourseLesson, CourseProject } from '../types'
 
 const SALES = `
@@ -454,3 +455,12 @@ Finish with a short **written insight report** on the same page: the headline fi
     'The dashboard is clean and readable, including on a phone',
   ],
 }
+
+export const analyticsExam: Quiz[] = [
+  { q: 'Gross margin % for a group should be calculated as…', options: ['The average of each row\'s margin', 'Total gross profit ÷ total revenue × 100', 'Revenue − cost', 'Profit × 100'], answer: 1, why: 'Averaging row margins gives small sales too much weight.' },
+  { q: 'To compare 9 categories, the clearest chart is usually…', options: ['A pie chart', 'A sorted bar chart', 'A 3D pie', 'A scatter plot'], answer: 1, why: 'People compare lengths best.' },
+  { q: 'In an A/B test, visitors should be split…', options: ['By the analyst\'s choice', 'At random', 'By city only', 'Old visitors to A, new to B'], answer: 1, why: 'Randomness makes the groups comparable.' },
+  { q: 'A z score of 2.5 in a two-proportion test means the difference is…', options: ['Significant at 95%', 'Not significant', 'Certainly important for the business', 'An error'], answer: 0, why: 'Beyond ±1.96 is significant at 95%.' },
+  { q: 'A cohort is…', options: ['All customers ever', 'A group of customers who started at the same time', 'A type of chart', 'One product'], answer: 1, why: 'Cohorts share a starting point.' },
+  { q: 'A forecast model is worth using only if it…', options: ['Is complicated', 'Beats a simple baseline such as naive or seasonal naive', 'Uses AI', 'Has many charts'], answer: 1, why: 'Always compare with the baseline error.' },
+]

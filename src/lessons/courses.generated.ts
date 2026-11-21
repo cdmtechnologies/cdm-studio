@@ -770,7 +770,7 @@ export const COURSES: Track[] = [
     "emoji": "🤖",
     "course": {
       "level": "Intermediate",
-      "hours": 10,
+      "hours": 14,
       "free": 2,
       "skills": [
         "Prompt design and templates",
@@ -787,7 +787,7 @@ export const COURSES: Track[] = [
         "AI product assistant",
         "Operations analyst using AI"
       ],
-      "examQuestions": 20,
+      "examQuestions": 26,
       "project": {
         "title": "An AI tool for a real job",
         "lang": "html",
@@ -980,7 +980,7 @@ export const COURSES: Track[] = [
     "emoji": "🧠",
     "course": {
       "level": "Intermediate",
-      "hours": 10,
+      "hours": 14,
       "free": 2,
       "skills": [
         "Features, labels and datasets",
@@ -996,7 +996,7 @@ export const COURSES: Track[] = [
         "Data analyst using ML",
         "AI product analyst"
       ],
-      "examQuestions": 20,
+      "examQuestions": 26,
       "project": {
         "title": "Build and evaluate a model end to end",
         "lang": "html",
@@ -1189,7 +1189,7 @@ export const COURSES: Track[] = [
     "emoji": "📈",
     "course": {
       "level": "Beginner",
-      "hours": 9,
+      "hours": 14,
       "free": 2,
       "skills": [
         "Asking good business questions",
@@ -1206,7 +1206,7 @@ export const COURSES: Track[] = [
         "Finance / sales analyst",
         "Operations analyst"
       ],
-      "examQuestions": 20,
+      "examQuestions": 26,
       "project": {
         "title": "Business dashboard and insight report",
         "lang": "html",
@@ -1399,7 +1399,7 @@ export const COURSES: Track[] = [
     "emoji": "🛡️",
     "course": {
       "level": "Beginner",
-      "hours": 8,
+      "hours": 12,
       "free": 2,
       "skills": [
         "Threat thinking",
@@ -1415,7 +1415,7 @@ export const COURSES: Track[] = [
         "Security-aware developer",
         "Small business IT lead"
       ],
-      "examQuestions": 20,
+      "examQuestions": 25,
       "project": {
         "title": "Security assessment and 90-day plan for a real organisation",
         "lang": "text",
@@ -1613,7 +1613,7 @@ export const COURSES: Track[] = [
     "emoji": "🕵️",
     "course": {
       "level": "Intermediate",
-      "hours": 10,
+      "hours": 14,
       "free": 2,
       "skills": [
         "Ethics, law and rules of engagement",
@@ -1631,7 +1631,7 @@ export const COURSES: Track[] = [
         "Application security analyst",
         "SOC analyst"
       ],
-      "examQuestions": 20,
+      "examQuestions": 25,
       "project": {
         "title": "Penetration test report on a practice target",
         "lang": "text",
@@ -1832,7 +1832,7 @@ export const COURSES: Track[] = [
     "emoji": "☁️",
     "course": {
       "level": "Beginner",
-      "hours": 8,
+      "hours": 13,
       "free": 2,
       "skills": [
         "Cloud service models (IaaS, PaaS, SaaS)",
@@ -1849,7 +1849,24 @@ export const COURSES: Track[] = [
         "Site reliability (entry)",
         "IT administrator"
       ],
-      "examQuestions": 20
+      "examQuestions": 26,
+      "project": {
+        "title": "Deployment and operations plan for a real app",
+        "lang": "text",
+        "brief": "Pick a real app or website (one you built in CDM Studio, a project at work or school, or a realistic business app such as a clinic booking system) and write the **deployment and operations plan** a small team could follow to run it reliably in the cloud. Paste the text here (about 1,000 to 2,500 words). You may include short code or config snippets.\n\nInclude:\n\n1. **Architecture**: the parts (front end, API, database, storage, background jobs) and where each runs, with reasons. A simple text diagram is fine.\n2. **Network and security**: public and private parts, firewall rules, HTTPS, IAM roles with least privilege, and how secrets are stored.\n3. **CI/CD**: the pipeline steps from a Git push to production, including tests and how a bad release is rolled back.\n4. **Infrastructure as code**: which tool and what it manages, and how changes are reviewed.\n5. **Monitoring**: health checks, logs, metrics and alerts, with who gets alerted and an example alert threshold.\n6. **Backups and recovery**: what is backed up, how often, where, how restores are tested, and target recovery times.\n7. **Costs**: an estimated monthly cost and three ways to keep it down.\n8. **A runbook** for one likely incident (for example \"the site is down\" or \"the disk is full\"), step by step.",
+        "rubric": [
+          "Describes a clear architecture with reasons for where each part runs",
+          "Separates public and private parts with sensible firewall rules and HTTPS",
+          "Applies least privilege with roles and keeps secrets out of code",
+          "Defines a CI/CD pipeline with automated tests and a rollback method",
+          "Uses infrastructure as code with reviewed changes",
+          "Plans monitoring with health checks, logs, metrics and specific alerts",
+          "Defines backups following good practice, including restore testing and recovery targets",
+          "Estimates monthly costs and gives practical ways to reduce them",
+          "Includes a step-by-step runbook for a realistic incident"
+        ],
+        "pass_pct": 70
+      }
     },
     "lessons": [
       {
@@ -1965,6 +1982,51 @@ export const COURSES: Track[] = [
         "minutes": 25,
         "kind": "code",
         "outline": "SLAs, error budgets and alerting; compute uptime and find error spikes in logs.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "cloud-linux",
+        "title": "The Linux command line",
+        "minutes": 30,
+        "kind": "read",
+        "outline": "Why servers run Linux, moving around the file system, reading logs, permissions, processes, SSH and package managers.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "cloud-network",
+        "title": "Networking for the cloud",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "IP addresses, CIDR ranges, private networks, ports, DNS, load balancers and firewall rules, with a CIDR checker in code.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "cloud-iac",
+        "title": "Infrastructure as code",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "Why servers should be described in code, declarative tools like Terraform, plan and apply, drift, and coding a plan step.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "cloud-serverless",
+        "title": "Serverless, managed databases and scaling",
+        "minutes": 30,
+        "kind": "read",
+        "outline": "Functions as a service, managed databases, scaling up and out, caching, queues, and choosing the right building blocks.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "cloud-iam",
+        "title": "Cloud security and least privilege (IAM)",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "The shared responsibility model, identities and roles, policies with allow and deny, wildcards, and coding a policy evaluator.",
         "body": "",
         "paid": true
       },

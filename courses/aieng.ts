@@ -1,5 +1,5 @@
 import type { Course } from './types'
-import { aiengMore, aiengProject } from './extra/aieng'
+import { aiengExam, aiengMore, aiengProject } from './extra/aieng'
 
 export const aieng: Course = {
   id: 'aieng',
@@ -8,7 +8,7 @@ export const aieng: Course = {
   emoji: '🤖',
   colour: 'violet',
   level: 'Intermediate',
-  hours: 10,
+  hours: 14,
   free: 2,
   skills: ['Prompt design and templates', 'Structured output (JSON)', 'Tokens, context and cost', 'Retrieval (RAG) basics', 'Evaluating AI answers', 'Automation and AI agents', 'Responsible AI'],
   careers: ['AI automation specialist', 'Prompt engineer', 'AI product assistant', 'Operations analyst using AI'],
@@ -501,5 +501,6 @@ Use the tutor to design an AI workflow for a real job you know. A strong answer 
     { q: 'Where should an API key for a published web app live?', options: ['In the page\'s JavaScript', 'On a server (for example CDM Studio\'s studio.api)', 'In the page title', 'In local storage'], answer: 1, why: 'Anything in a public page can be copied.' },
     { q: 'Before pasting customer data into a public AI tool you should…', options: ['Do it freely', 'Have permission and a lawful basis, use a business account and remove identifiers where possible', 'Only do it at night', 'Translate it first'], answer: 1, why: 'Privacy law (NDPA, GDPR) applies.' },
     { q: 'A strong way to prove AI skills to an employer is…', options: ['Only listing "ChatGPT" on your CV', 'A portfolio of working AI tools with measured results', 'Copying others\' prompts', 'Avoiding certificates'], answer: 1, why: 'Working proof with numbers convinces employers.' },
+    ...aiengExam,
   ],
 }

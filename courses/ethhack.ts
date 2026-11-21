@@ -1,5 +1,5 @@
 import type { Course } from './types'
-import { ethhackMore, ethhackProject } from './extra/ethhack'
+import { ethhackExam, ethhackMore, ethhackProject } from './extra/ethhack'
 
 export const ethhack: Course = {
   id: 'ethhack',
@@ -8,7 +8,7 @@ export const ethhack: Course = {
   emoji: '🕵️',
   colour: 'emerald',
   level: 'Intermediate',
-  hours: 10,
+  hours: 14,
   free: 2,
   skills: ['Ethics, law and rules of engagement', 'Penetration testing methodology', 'Reading scan results', 'Injection flaws and their fixes', 'Session and token checks', 'Rating risk (CVSS-style)', 'Spotting attacks in logs', 'Writing findings and responsible disclosure'],
   careers: ['Junior penetration tester', 'Bug bounty hunter', 'Application security analyst', 'SOC analyst'],
@@ -584,5 +584,6 @@ Ask the tutor to help you turn a lab finding into a professional write-up.`,
     { q: 'Requests for /.env and /.git/config show someone…', options: ['Looking for leaked secrets and source code', 'Reading the blog', 'Updating the site', 'Testing fonts'], answer: 0, why: 'Those files often hold credentials.' },
     { q: 'Evidence in a pentest report should…', options: ['Include all customer data found', 'Prove the issue with personal data removed', 'Be left out', 'Be posted publicly'], answer: 1, why: 'Prove, minimise and protect data.' },
     { q: 'A respected, hands-on penetration testing certification with a practical exam is…', options: ['OSCP', 'PL-300', 'AZ-900', 'ICAN ATS'], answer: 0, why: 'OSCP is a well-known practical pentest certification.' },
+    ...ethhackExam,
   ],
 }

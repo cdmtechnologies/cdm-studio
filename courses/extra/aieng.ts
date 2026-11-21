@@ -1,3 +1,4 @@
+import type { Quiz } from '../../src/lessons/types'
 import type { CourseLesson, CourseProject } from '../types'
 
 // Advanced lessons added to AI engineering (they go before the final career lesson).
@@ -335,3 +336,12 @@ Use the AI features available in Studio projects. Add a short "How it works" sec
     'Explains how it works: the prompt design, validation and guardrail',
   ],
 }
+
+export const aiengExam: Quiz[] = [
+  { q: 'With tool use, who actually runs the function?', options: ['The model', 'Your code, after validating the arguments', 'The user', 'The AI provider\'s website'], answer: 1, why: 'The model only requests a call.' },
+  { q: 'A tool description should mainly say…', options: ['The programmer\'s name', 'When to use the tool and what its inputs mean', 'Nothing; the name is enough', 'The price'], answer: 1, why: 'The description is a prompt.' },
+  { q: 'Cosine similarity of 1 between two embeddings means…', options: ['They are unrelated', 'They point the same way: very similar meaning', 'They are opposites', 'One is empty'], answer: 1, why: '1 is the same direction.' },
+  { q: 'Embeddings for documents and questions should come from…', options: ['Any two models', 'The same embedding model', 'A random generator', 'A spreadsheet'], answer: 1, why: 'Different models are like different maps.' },
+  { q: 'An AI provider returns 429 (rate limited). The best response is…', options: ['Retry immediately in a loop', 'Retry with exponential backoff, a few times', 'Never retry', 'Delete the API key'], answer: 1, why: 'Back off so the service can recover.' },
+  { q: 'When a conversation exceeds the token budget, you should first drop…', options: ['The system prompt', 'The oldest whole messages', 'The latest user message', 'Half of each message'], answer: 1, why: 'Keep rules and recent context.' },
+]

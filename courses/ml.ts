@@ -1,5 +1,5 @@
 import type { Course } from './types'
-import { mlMore, mlProject } from './extra/ml'
+import { mlExam, mlMore, mlProject } from './extra/ml'
 
 export const ml: Course = {
   id: 'ml',
@@ -8,7 +8,7 @@ export const ml: Course = {
   emoji: '🧠',
   colour: 'rose',
   level: 'Intermediate',
-  hours: 10,
+  hours: 14,
   free: 2,
   skills: ['Features, labels and datasets', 'Train/test splits', 'Linear regression', 'Classification with k-nearest neighbours', 'Accuracy, precision and recall', 'Overfitting and fairness'],
   careers: ['Junior data scientist', 'ML engineer (entry)', 'Data analyst using ML', 'AI product analyst'],
@@ -472,5 +472,6 @@ Use simple rules or statistics when they work. ML is worth it when there is enou
     { q: 'k-means needs labels?', options: ['Yes, always', 'No, it is unsupervised', 'Only for regression', 'Only with k = 1'], answer: 1, why: 'It finds groups without labels.' },
     { q: 'In k-means, the update step moves each centroid to…', options: ['A random point', 'The mean of its assigned points', 'The origin', 'The farthest point'], answer: 1, why: 'Assign then average.' },
     { q: 'After deployment, why monitor a model?', options: ['Data drift can quietly reduce accuracy', 'Models get faster', 'It is required by HTML', 'To change its colour'], answer: 0, why: 'Monitor and retrain on fresh data.' },
+    ...mlExam,
   ],
 }

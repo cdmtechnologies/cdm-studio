@@ -1,4 +1,5 @@
 import type { Course } from './types'
+import { cloudExam, cloudMore, cloudProject } from './extra/cloud'
 
 export const cloud: Course = {
   id: 'cloud',
@@ -7,7 +8,7 @@ export const cloud: Course = {
   emoji: '☁️',
   colour: 'sky',
   level: 'Beginner',
-  hours: 8,
+  hours: 13,
   free: 2,
   skills: ['Cloud service models (IaaS, PaaS, SaaS)', 'Git and version control', 'CI/CD pipelines', 'Containers and Docker', 'Configuration and secrets', 'Monitoring, logs and uptime', 'Cloud cost control'],
   careers: ['Cloud support associate', 'Junior DevOps engineer', 'Site reliability (entry)', 'IT administrator'],
@@ -338,6 +339,7 @@ An **SLA** promises availability, for example **99.9%** a month. That allows abo
   function errorSpikes(lines, limit) { const n = {}; for (const l of lines) if (l.includes(' ERROR ')) { const m = l.slice(0, 16); n[m] = (n[m] || 0) + 1 } return Object.keys(n).filter((m) => n[m] > limit).sort() }
 </script>`,
     },
+    ...cloudMore,
     {
       id: 'cloud-cost',
       title: 'Cloud costs, backups and your cloud career',
@@ -378,6 +380,7 @@ Follow 3-2-1 (three copies, two media, one off-site), keep backups in a differen
       ],
     },
   ],
+  project: cloudProject,
   exam: [
     { q: 'Gmail and Microsoft 365 are examples of…', options: ['IaaS', 'PaaS', 'SaaS', 'On-premises'], answer: 2, why: 'You simply use the software.' },
     { q: 'Renting virtual machines and managing their operating system yourself is…', options: ['IaaS', 'PaaS', 'SaaS', 'Serverless'], answer: 0, why: 'Infrastructure as a service.' },
@@ -399,5 +402,6 @@ Follow 3-2-1 (three copies, two media, one off-site), keep backups in a differen
     { q: 'Which should never be written to logs?', options: ['Request times', 'Error messages', 'Passwords and card numbers', 'Status codes'], answer: 2, why: 'Logs are widely read.' },
     { q: 'RTO describes…', options: ['How long you can be down', 'How much data you can lose', 'Monthly cost', 'Number of servers'], answer: 0, why: 'Recovery time objective.' },
     { q: 'A simple way to avoid surprise cloud bills is…', options: ['Budgets with alerts', 'Bigger instances', 'Keeping all test servers on', 'Disabling tags'], answer: 0, why: 'Know before it is too late.' },
+    ...cloudExam,
   ],
 }

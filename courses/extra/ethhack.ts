@@ -1,3 +1,4 @@
+import type { Quiz } from '../../src/lessons/types'
 import type { CourseLesson, CourseProject } from '../types'
 
 // Advanced lessons added to Ethical hacking and penetration testing (before the final reporting and career lesson).
@@ -325,3 +326,11 @@ Write a professional penetration test report (paste the text here, about 1,000 t
     'Is professional, clear and well organised',
   ],
 }
+
+export const ethhackExam: Quiz[] = [
+  { q: 'Passive reconnaissance…', options: ['Sends exploit traffic to the target', 'Uses public information without touching the target\'s systems', 'Requires no authorisation ever, for any target', 'Means guessing passwords'], answer: 1, why: 'It studies what is already public, within scope.' },
+  { q: 'Changing /invoices/1042 to /invoices/1043 shows someone else\'s invoice. This is…', options: ['XSS', 'IDOR (broken access control)', 'Phishing', 'A DNS error'], answer: 1, why: 'The server did not check ownership.' },
+  { q: 'The correct fix for IDOR is…', options: ['Hide the invoice number', 'Check on the server that the user may access that object', 'Use longer URLs only', 'Disable the page'], answer: 1, why: 'Authorisation must be checked on every request.' },
+  { q: 'Passwords should be stored with…', options: ['MD5', 'Plain text', 'A slow salted algorithm such as bcrypt or Argon2', 'Base64'], answer: 2, why: 'Fast hashes are cracked quickly.' },
+  { q: 'A legal place to practise web attacks is…', options: ['Any company\'s website', 'OWASP Juice Shop in your own lab', 'A friend\'s bank account', 'A government portal'], answer: 1, why: 'Deliberately vulnerable apps exist for practice.' },
+]

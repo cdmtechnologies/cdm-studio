@@ -1,3 +1,4 @@
+import type { Quiz } from '../../src/lessons/types'
 import type { CourseLesson, CourseProject } from '../types'
 
 // Advanced lessons added to Cybersecurity essentials (before the final careers lesson).
@@ -305,3 +306,11 @@ Do not include any real passwords, account numbers or personal data in the repor
     'Contains no real passwords, account numbers or unnecessary personal data',
   ],
 }
+
+export const cyberExam: Quiz[] = [
+  { q: 'The copy that defeats ransomware in the 3-2-1 rule is…', options: ['The one on the same server', 'The offline or immutable copy', 'The one on the desktop', 'The printed copy'], answer: 1, why: 'Attackers cannot reach or delete it.' },
+  { q: 'The HttpOnly flag on a session cookie…', options: ['Stops JavaScript (and so XSS) from reading it', 'Makes it load faster', 'Sends it only over HTTP', 'Deletes it daily'], answer: 0, why: 'Scripts cannot read HttpOnly cookies.' },
+  { q: 'HSTS tells browsers to…', options: ['Always use HTTPS for the site', 'Block images', 'Cache passwords', 'Allow framing'], answer: 0, why: 'It stops downgrades to plain HTTP.' },
+  { q: 'A risk with likelihood 3 and impact 5 scores…', options: ['8', '15', '2', '35'], answer: 1, why: 'Likelihood × impact.' },
+  { q: 'Buying cyber insurance is an example of which risk treatment?', options: ['Avoid', 'Reduce', 'Transfer', 'Accept'], answer: 2, why: 'Part of the risk moves to the insurer.' },
+]

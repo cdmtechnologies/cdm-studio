@@ -1,5 +1,5 @@
 import type { Course } from './types'
-import { analyticsMore, analyticsProject } from './extra/analytics'
+import { analyticsExam, analyticsMore, analyticsProject } from './extra/analytics'
 
 export const analytics: Course = {
   id: 'analytics',
@@ -8,7 +8,7 @@ export const analytics: Course = {
   emoji: '📈',
   colour: 'amber',
   level: 'Beginner',
-  hours: 9,
+  hours: 14,
   free: 2,
   skills: ['Asking good business questions', 'Data cleaning', 'Descriptive statistics', 'Pivot tables and grouping', 'Trends, growth and moving averages', 'KPIs and dashboards', 'Data storytelling'],
   careers: ['Data analyst', 'Business analyst', 'Finance / sales analyst', 'Operations analyst'],
@@ -399,5 +399,6 @@ Ask the tutor to help you turn a set of numbers into a one-page story with a rec
     { q: 'A good dashboard top row shows…', options: ['Every metric you have', 'The 3 to 5 key numbers with comparisons', 'Only logos', 'Raw tables'], answer: 1, why: 'Few numbers, each with context.' },
     { q: 'The best chart title is…', options: ['"Sales by month"', '"Sales fell 18% after the price rise"', '"Chart 1"', '"Data"'], answer: 1, why: 'Titles should state the insight.' },
     { q: 'A data story should start with…', options: ['The methodology', 'The headline message', 'All the raw data', 'A long introduction'], answer: 1, why: 'Lead with the answer.' },
+    ...analyticsExam,
   ],
 }

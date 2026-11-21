@@ -1,5 +1,5 @@
 import type { Course } from './types'
-import { cyberMore, cyberProject } from './extra/cyber'
+import { cyberExam, cyberMore, cyberProject } from './extra/cyber'
 
 export const cyber: Course = {
   id: 'cyber',
@@ -8,7 +8,7 @@ export const cyber: Course = {
   emoji: '🛡️',
   colour: 'emerald',
   level: 'Beginner',
-  hours: 8,
+  hours: 12,
   free: 2,
   skills: ['Threat thinking', 'Password and account security', 'Phishing and scam spotting', 'Hashing and encryption', 'Secure web code (XSS, input checks)', 'Incident response'],
   careers: ['IT support', 'SOC analyst (junior)', 'Security-aware developer', 'Small business IT lead'],
@@ -583,5 +583,6 @@ Finish the final exam to earn your certificate, add it to LinkedIn and your CV, 
     { q: 'In the 3-2-1 backup rule, why keep one copy offline or off-site?', options: ['To save money', 'So ransomware, fire or theft cannot reach every copy', 'Because cloud is illegal', 'To make restores faster'], answer: 1, why: 'Isolation protects at least one copy.' },
     { q: 'A computer is infected. During containment you should…', options: ['Switch it off immediately and wipe it', 'Disconnect it from the network and record evidence', 'Keep using it', 'Email the malware to colleagues'], answer: 1, why: 'Isolate first; keep evidence for analysis.' },
     { q: 'Under Nigeria\'s NDPA 2023, a serious personal data breach should be reported to the regulator within…', options: ['72 hours', '30 days', '1 year', 'Never'], answer: 0, why: 'The NDPA sets a 72-hour notification duty for serious breaches.' },
+    ...cyberExam,
   ],
 }
