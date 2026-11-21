@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:09,350
+Empty a jar of coins on the table. Before counting, you sort them into piles. Then you count each pile. That is group by.
+
+2
+00:00:10,050 --> 00:00:12,875
+One row comes out for each group.
+
+3
+00:00:14,570 --> 00:00:23,495
+There is one golden rule. Every column you select must be in the group by, or inside an aggregate like count or sum.
+
+4
+00:00:24,200 --> 00:00:31,600
+Asking for the product name as well makes no sense: which of the many names in the Food pile should it show?
+
+5
+00:00:32,290 --> 00:00:37,990
+You can group by two columns too: a pile for each customer and each status.
+
+6
+00:00:39,690 --> 00:00:45,965
+Where filters rows before the piles are made. Having filters the piles afterwards.
+
+7
+00:00:46,670 --> 00:00:56,520
+Sales per branch, students per class, top customers: most dashboards are group by queries underneath. Now find your big customers.
+
