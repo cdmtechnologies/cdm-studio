@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:06,650
+Case is if and else inside a query, like a teacher turning scores into grades.
+
+2
+00:00:07,350 --> 00:00:16,225
+Put case inside sum, and you add only some rows: paid in one column, pending in another, just like a pivot table.
+
+3
+00:00:17,930 --> 00:00:24,955
+Every database has date functions. The names differ a little, but the ideas are the same.
+
+4
+00:00:25,650 --> 00:00:34,450
+Case works like if and elif in Python: the first true when wins. Without an else, rows that match nothing get null.
+
+5
+00:00:36,160 --> 00:00:43,485
+Group by the month, and you see the trend. It is the first report most business owners ask for.
+
+6
+00:00:44,190 --> 00:00:46,965
+Now build the monthly report.
+
