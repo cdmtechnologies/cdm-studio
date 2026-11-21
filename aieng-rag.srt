@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:11,900
+Ask a model about your shop's refund policy, and it will guess. Retrieval augmented generation gives it the right page first, like an open-book exam.
+
+2
+00:00:12,600 --> 00:00:20,725
+Find the few chunks that match the question, put only those into the prompt, and ask it to answer only from them.
+
+3
+00:00:22,430 --> 00:00:31,005
+A simple way: count how many of the question's important words appear in each chunk, ignoring words like the and is.
+
+4
+00:00:31,700 --> 00:00:39,475
+Better systems use embeddings, which match meaning, not just words. You will meet them later in this course.
+
+5
+00:00:40,180 --> 00:00:47,305
+Send only the top few chunks. More is not better: irrelevant text confuses the model.
+
+6
+00:00:49,000 --> 00:00:54,400
+Number the sources, and ask the model to cite them, so people can check.
+
+7
+00:00:55,100 --> 00:01:04,975
+And always add the rule: if the sources do not contain the answer, say I don't know. An honest gap is better than a confident guess.
+
