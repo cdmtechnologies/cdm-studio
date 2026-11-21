@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:09,475
+Plot house size against price, and the points rise together. Linear regression draws the straight line that fits them best.
+
+2
+00:00:10,170 --> 00:00:18,070
+The best line is the one where the squared misses are smallest, like a rope pulled tight through the middle of the points.
+
+3
+00:00:19,770 --> 00:00:27,395
+If the slope is fifty thousand, each extra square metre adds about fifty thousand naira to the price.
+
+4
+00:00:28,090 --> 00:00:36,315
+R squared tells you how much of the variation the line explains. One is perfect. Zero explains nothing.
+
+5
+00:00:37,020 --> 00:00:41,720
+A straight line cannot follow curves. Plot your data first.
+
+6
+00:00:43,420 --> 00:00:51,570
+Gradient descent is like walking down a hill in fog: feel the slope, take a small step downhill, and repeat.
+
+7
+00:00:52,270 --> 00:00:59,845
+Too big a step and you overshoot. Too small and you take forever. That step size is the learning rate.
+
