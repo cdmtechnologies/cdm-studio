@@ -1,0 +1,36 @@
+1
+00:00:00,500 --> 00:00:09,800
+Welcome to Python! A computer is a very fast, very obedient worker. But it understands nothing, unless you spell it out.
+
+2
+00:00:10,500 --> 00:00:17,925
+A program is like a recipe. The cook starts at the top, and follows one line at a time, in order.
+
+3
+00:00:18,620 --> 00:00:28,995
+Python is the language most people learn first, because it reads almost like English. Banks, Instagram and AI labs all use it.
+
+4
+00:00:30,700 --> 00:00:35,575
+Your first instruction is print. It shows something on the screen.
+
+5
+00:00:36,280 --> 00:00:42,930
+The words inside quotes are text. Programmers call it a string: a string of letters.
+
+6
+00:00:43,630 --> 00:00:51,630
+Without quotes, Python calculates. Print five plus three shows eight. With quotes, it just shows the words.
+
+7
+00:00:53,320 --> 00:01:01,895
+Anything after a hash sign is a comment. Python skips it. It is a sticky note you leave for yourself and your team.
+
+8
+00:01:02,590 --> 00:01:09,940
+Mistakes are normal. Forget a quote, and Python stops with a syntax error, and tells you the line.
+
+9
+00:01:10,640 --> 00:01:18,715
+Always read the last line of an error first. Now open the editor, and write your first three lines of Python.
+
