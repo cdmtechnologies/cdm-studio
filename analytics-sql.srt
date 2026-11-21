@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:08,825
+Spreadsheets run out of room. When data lives in company systems, analysts go to the source, and ask with SQL.
+
+2
+00:00:09,520 --> 00:00:16,520
+Nearly every report query has the same shape: choose rows, group them, summarise a measure.
+
+3
+00:00:18,230 --> 00:00:26,980
+Before sharing, sanity-check. Does the total match the finance report? Any negative quantities or zero prices?
+
+4
+00:00:27,680 --> 00:00:34,180
+Do the group totals add up to the grand total? If not, something was filtered or doubled.
+
+5
+00:00:35,880 --> 00:00:45,030
+Gross margin is gross profit divided by revenue. Calculate it from the totals, not by averaging each row's margin.
+
+6
+00:00:45,730 --> 00:00:50,355
+Write the business question as a comment at the top of the query.
+
