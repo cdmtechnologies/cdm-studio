@@ -1206,7 +1206,24 @@ export const COURSES: Track[] = [
         "Finance / sales analyst",
         "Operations analyst"
       ],
-      "examQuestions": 20
+      "examQuestions": 20,
+      "project": {
+        "title": "Business dashboard and insight report",
+        "lang": "html",
+        "brief": "Take a real or realistic business dataset (sales, school fees, clinic visits, farm output, church giving, delivery times: at least 60 rows over at least 3 months, kept in the page) and build an **analytics dashboard in CDM Studio** that a manager could use on a Monday morning.\n\n**It must:** clean the data in code (show how many rows were fixed or skipped), show 3 to 5 KPI tiles with comparisons to the previous period, include at least 3 well-chosen charts with insight titles, break results down by a useful group (branch, product, class), and include one deeper analysis: a cohort or retention view, an A/B comparison, or a simple forecast with its error.\n\nFinish with a short **written insight report** on the same page: the headline finding, the evidence, a recommendation with an owner and a deadline, and how to check whether it worked.",
+        "rubric": [
+          "Uses a realistic dataset of at least 60 rows over at least 3 months",
+          "Cleans the data in code and reports how many rows were fixed or skipped",
+          "Shows 3 to 5 KPI tiles, each compared with a previous period or target",
+          "Includes at least 3 charts of the right type for their questions, with insight titles",
+          "Breaks results down by a meaningful group such as branch, product or class",
+          "Includes one deeper analysis: cohorts or retention, an A/B comparison, or a forecast with its error",
+          "Calculations are correct (for example margins from totals, growth rates, averages)",
+          "The written report states a headline, evidence, a recommendation with owner and deadline, and how to measure success",
+          "The dashboard is clean and readable, including on a phone"
+        ],
+        "pass_pct": 70
+      }
     },
     "lessons": [
       {
@@ -1315,6 +1332,51 @@ export const COURSES: Track[] = [
         "minutes": 25,
         "kind": "code",
         "outline": "Choose the right KPIs and compute average basket, repeat rate, gross margin and stock cover.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "analytics-sql",
+        "title": "Getting data with SQL",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "Why analysts use SQL, revenue and margin by group, and turning a business question into a query.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "analytics-charts",
+        "title": "Choosing the right chart",
+        "minutes": 25,
+        "kind": "read",
+        "outline": "Matching charts to questions, common chart mistakes, honest axes, colour and annotation.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "analytics-ab",
+        "title": "A/B tests: did the change really work?",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "Conversion rates, lift, random variation, a two-proportion z-test and how to read p-values honestly.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "analytics-cohorts",
+        "title": "Customers over time: cohorts and retention",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "Why averages hide churn, building a cohort retention table, repeat rate and customer lifetime value.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "analytics-forecast",
+        "title": "Simple forecasting",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "Naive and seasonal forecasts, a linear trend, measuring forecast error with MAPE, and communicating uncertainty.",
         "body": "",
         "paid": true
       },

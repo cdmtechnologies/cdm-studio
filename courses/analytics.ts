@@ -1,4 +1,5 @@
 import type { Course } from './types'
+import { analyticsMore, analyticsProject } from './extra/analytics'
 
 export const analytics: Course = {
   id: 'analytics',
@@ -338,6 +339,7 @@ Orders look like \`{ customer, revenue, cost }\`.
   function stockCover(stock, sold30) { return sold30 === 0 ? Infinity : Math.floor(stock / (sold30 / 30)) }
 </script>`,
     },
+    ...analyticsMore,
     {
       id: 'analytics-story',
       title: 'Data storytelling and your analyst career',
@@ -375,6 +377,7 @@ Ask the tutor to help you turn a set of numbers into a one-page story with a rec
       practice: 'Give the AI some numbers from a business you know (for example, monthly sales for 3 branches for 4 months, with one branch falling), and ask it to help you write a one-page story: headline, the evidence, why it matters, a recommendation with owner and deadline, and how to check it worked. Then ask it to critique your headline.',
     },
   ],
+  project: analyticsProject,
   exam: [
     { q: 'An analyst\'s main output is…', options: ['As many charts as possible', 'Decisions people can act on, backed by data', 'Raw data exports', 'New software'], answer: 1, why: 'Analysis exists to support decisions.' },
     { q: '"Why did Garki\'s sales fall?" is which kind of analysis?', options: ['Descriptive', 'Diagnostic', 'Predictive', 'Prescriptive'], answer: 1, why: 'It explains why.' },
