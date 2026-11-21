@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:09,475
+Tell me who your neighbours are, and I will tell you who you are. To classify something new, look at the closest known examples.
+
+2
+00:00:10,170 --> 00:00:15,570
+Measure distance between points, find the k nearest, and let them vote.
+
+3
+00:00:17,280 --> 00:00:23,880
+A new customer is close to three others. Two of them repaid their loans, and one did not.
+
+4
+00:00:24,580 --> 00:00:29,505
+With k equals three, the vote is two to one: predict repaid.
+
+5
+00:00:30,200 --> 00:00:37,150
+k nearest neighbours is simple and needs no training, but it slows down as the data grows.
+
+6
+00:00:38,860 --> 00:00:47,885
+With k equals one, a single odd neighbour can fool you. A larger k is steadier. Use an odd k to avoid ties.
+
+7
+00:00:48,580 --> 00:00:53,955
+And scale your features first, or the biggest numbers decide everything.
+
