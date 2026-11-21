@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:04,225
+Want to learn tech? Meet CDM Studio.
+
+2
+00:00:05,920 --> 00:00:11,620
+Ten courses: Python, SQL, AI, data, cybersecurity and more.
+
+3
+00:00:12,320 --> 00:00:17,845
+Every lesson has a short video like this, and you practise in your browser.
+
+4
+00:00:19,550 --> 00:00:24,450
+Pass the final project and exam, and earn your certificate.
+
+5
+00:00:25,150 --> 00:00:28,750
+The first lessons are free. Start today.
+
+6
+00:00:29,450 --> 00:00:31,400
+See you in class.
+
