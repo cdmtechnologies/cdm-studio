@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:06,575
+A penetration test is a planned health check for a system, done in clear phases.
+
+2
+00:00:07,280 --> 00:00:15,080
+First agree the scope and rules. Then learn about the target, look for weaknesses, and confirm them carefully.
+
+3
+00:00:16,780 --> 00:00:25,855
+Test like a careful doctor: confirm a weakness gently, never destroy data, and avoid slowing down a live business.
+
+4
+00:00:26,550 --> 00:00:32,950
+Keep notes of everything you do, with times, so the client can match it to their logs.
+
+5
+00:00:34,660 --> 00:00:41,035
+The client pays for the report: what was found, how serious it is, and how to fix it.
+
+6
+00:00:41,740 --> 00:00:47,890
+A great tester is also a great teacher. Write so a busy manager understands.
+
