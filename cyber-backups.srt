@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:08,475
+Ransomware locks your files and demands money for the key. Hospitals, schools and shops have all been hit.
+
+2
+00:00:09,170 --> 00:00:19,370
+Backups are the seatbelt of computing: boring, until the day they save you. Keep three copies, on two kinds of storage, with one offline.
+
+3
+00:00:21,070 --> 00:00:29,020
+Use separate admin accounts. Do daily work with a normal account, like keeping the master key in the safe.
+
+4
+00:00:29,720 --> 00:00:36,670
+Remove access the day someone leaves, and get alerts for new sign-ins and new forwarding rules.
+
+5
+00:00:38,370 --> 00:00:45,570
+A backup you have never restored is a hope, not a backup. Test restoring every few months.
+
+6
+00:00:46,270 --> 00:00:53,620
+Protect email above all, because it can reset every other password. Two-step sign-in everywhere.
+
