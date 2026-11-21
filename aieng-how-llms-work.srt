@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:11,200
+A large language model is like the autocomplete on your phone, trained on a huge library of text. It predicts the next word, again and again.
+
+2
+00:00:11,900 --> 00:00:20,975
+It does not look facts up. It predicts what sounds right. That is why it can be confidently wrong, which we call hallucinating.
+
+3
+00:00:22,670 --> 00:00:31,670
+Temperature controls how adventurous the model is. Low temperature picks the most likely words: good for facts and data.
+
+4
+00:00:32,370 --> 00:00:38,445
+Higher temperature takes more chances: good for brainstorming and creative writing.
+
+5
+00:00:39,150 --> 00:00:41,850
+For business tasks, start low.
+
+6
+00:00:43,550 --> 00:00:51,750
+Models read text in small pieces called tokens, roughly three quarters of a word each. You pay per token.
+
+7
+00:00:52,450 --> 00:01:04,325
+Everything the model knows about your conversation must fit in its context window, like a desk with limited space. Clear instructions in, better answers out.
+
