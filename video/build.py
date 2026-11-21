@@ -170,7 +170,10 @@ class Board:
         return a
 
     def pair(self, left, right, size=66, lfont='EMSNixish', rfont='EMSFelix', lx=360, rx=1000, lcolor=BLUE, rcolor=INK):
-        out = [text(left, lx, self.y, size, lfont, color=lcolor), arrow(rx - 190, self.y - size * 0.3, rx - 40, self.y - size * 0.3, INK, 5, head=20), text(right, rx, self.y, size, rfont, color=rcolor)]
+        lw = width(left, lfont, size)
+        a0 = max(rx - 190, lx + lw + 30)
+        rx = max(rx, a0 + 150)
+        out = [text(left, lx, self.y, size, lfont, color=lcolor), arrow(a0, self.y - size * 0.3, rx - 40, self.y - size * 0.3, INK, 5, head=20), text(right, rx, self.y, size, rfont, color=rcolor)]
         self.y += size * 1.5
         return out
 
