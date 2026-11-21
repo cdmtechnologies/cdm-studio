@@ -1,4 +1,5 @@
 import type { Course } from './types'
+import { cyberMore, cyberProject } from './extra/cyber'
 
 export const cyber: Course = {
   id: 'cyber',
@@ -519,6 +520,7 @@ Keep screenshots, emails (with full headers), logs, transaction references and a
 Use the tutor to build a one-page incident response plan for a real or imagined business. A good plan names people, phone numbers to call, and the first 5 actions in order.`,
       practice: 'Write a prompt asking the AI to create a one-page incident response plan for a business you know (say what the business is, how many staff, what systems it uses, and what format you want). Then ask it what the first 5 actions should be if a staff member reports clicking a phishing link.',
     },
+    ...cyberMore,
     {
       id: 'cyber-career',
       title: 'Security careers, certifications and your portfolio',
@@ -559,6 +561,7 @@ Finish the final exam to earn your certificate, add it to LinkedIn and your CV, 
       ],
     },
   ],
+  project: cyberProject,
   exam: [
     { q: 'Ransomware encrypts a company\'s files. Which part of the CIA triad is hit first?', options: ['Confidentiality', 'Integrity', 'Availability', 'Authorisation'], answer: 2, why: 'The data cannot be used when needed.' },
     { q: 'Risk is best described as…', options: ['Any attacker', 'Likelihood × impact', 'A weakness in software', 'A firewall rule'], answer: 1, why: 'Risk combines how likely and how bad.' },

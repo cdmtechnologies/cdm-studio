@@ -1415,7 +1415,25 @@ export const COURSES: Track[] = [
         "Security-aware developer",
         "Small business IT lead"
       ],
-      "examQuestions": 20
+      "examQuestions": 20,
+      "project": {
+        "title": "Security assessment and 90-day plan for a real organisation",
+        "lang": "text",
+        "brief": "Choose a real small organisation you know well (a family business, a school, a church, a clinic, a shop, a club) and, **with the owner's permission**, assess its security. Do not test or attack any systems: this is an interview and observation assessment, using only what the owner shows and tells you.\n\nWrite a report (paste the text here, about 800 to 2,000 words) with:\n\n1. **Summary** for the owner in plain language: the three biggest risks and what to do first.\n2. **Assets**: the important data, systems and accounts, and who owns them.\n3. **Risk register**: at least 8 risks, each with likelihood, impact, score, level, treatment and an owner.\n4. **Findings** on passwords and two-step sign-in, phishing awareness, backups (3-2-1 and restore testing), device updates and encryption, access for staff and leavers, and the website (HTTPS and headers, if it has one).\n5. **A 90-day action plan**: what to do in weeks 1 to 2, by day 30, and by day 90, with costs where known.\n6. **An incident response card**: who to call and the first five steps if something goes wrong.\n\nDo not include any real passwords, account numbers or personal data in the report.",
+        "rubric": [
+          "States that the owner gave permission and that no systems were attacked or tested without consent",
+          "Has a clear plain-language summary with the three biggest risks and first actions",
+          "Lists the key assets with owners",
+          "Includes a risk register of at least 8 risks scored as likelihood times impact, with levels and treatments",
+          "Assesses passwords, two-step sign-in and phishing awareness with specific findings",
+          "Assesses backups against the 3-2-1 rule and whether restores are tested",
+          "Covers devices (updates, encryption, screen locks) and staff access including leavers",
+          "Gives a realistic 90-day plan with priorities, owners and timing",
+          "Includes an incident response card with contacts and first steps",
+          "Contains no real passwords, account numbers or unnecessary personal data"
+        ],
+        "pass_pct": 70
+      }
     },
     "lessons": [
       {
@@ -1546,6 +1564,33 @@ export const COURSES: Track[] = [
         "minutes": 20,
         "kind": "prompt",
         "outline": "The 6 steps of incident response, and practise writing a response plan with the AI tutor.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "cyber-backups",
+        "title": "Ransomware, backups and cloud accounts",
+        "minutes": 30,
+        "kind": "read",
+        "outline": "How ransomware works, the 3-2-1 backup rule, testing restores, and securing email and cloud accounts.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "cyber-headers",
+        "title": "HTTPS, security headers and safe cookies",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "What HTTPS protects, the security headers every site should send, cookie flags, and coding a header audit.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "cyber-risk",
+        "title": "Risk assessment for a small business",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "Assets, threats and controls, likelihood times impact, a risk register, treatment options and simple security policies.",
         "body": "",
         "paid": true
       },
