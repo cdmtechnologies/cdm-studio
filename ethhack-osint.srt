@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:11,175
+Before touching any system, testers study what the organisation has already made public, like a consultant walking round the outside of a bank branch.
+
+2
+00:00:11,880 --> 00:00:19,705
+Websites, job adverts, public certificates and code can reveal forgotten systems and leaked keys.
+
+3
+00:00:21,400 --> 00:00:30,700
+Mature organisations run this research on themselves, all the time: new certificates, DNS changes and leaked keys.
+
+4
+00:00:31,400 --> 00:00:35,400
+They find forgotten systems before attackers do.
+
+5
+00:00:37,100 --> 00:00:44,975
+Only research the organisation that authorised you. Never use leaked passwords, and never trick staff.
+
+6
+00:00:45,670 --> 00:00:50,895
+Turn each finding into a fix, like revoking a leaked key at once.
+
