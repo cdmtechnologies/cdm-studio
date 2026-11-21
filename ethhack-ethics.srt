@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:11,750
+A locksmith opening your door because you asked is a service. Opening a stranger's door is burglary. Ethical hacking is the same skill, with permission.
+
+2
+00:00:12,450 --> 00:00:17,675
+Get written permission, and a clear scope: what you may test, when, and how.
+
+3
+00:00:19,380 --> 00:00:27,755
+Before testing, agree in writing: the targets, the dates and times, what is not allowed, and who to call if something breaks.
+
+4
+00:00:28,450 --> 00:00:35,275
+If you find real personal data, stop, keep the minimum evidence, and report it at once.
+
+5
+00:00:36,980 --> 00:00:44,655
+Stay inside the scope, protect any data you see, and report everything to the owner, not to the internet.
+
+6
+00:00:45,360 --> 00:00:52,810
+Laws like Nigeria's Cybercrimes Act apply to everyone. Permission is what makes testing legal.
+
