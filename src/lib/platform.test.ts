@@ -105,3 +105,12 @@ describe('courses', () => {
     }
   })
 })
+
+import { youtubeId } from '../../supabase/functions/studio-control/lib'
+describe('YouTube links', () => {
+  it('finds the video id in usual links', () => {
+    for (const u of ['https://youtu.be/dQw4w9WgXcQ', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=10s', 'https://m.youtube.com/watch?v=dQw4w9WgXcQ', 'https://youtube.com/shorts/dQw4w9WgXcQ', 'https://www.youtube.com/embed/dQw4w9WgXcQ', 'dQw4w9WgXcQ']) expect(youtubeId(u)).toBe('dQw4w9WgXcQ')
+    expect(youtubeId('https://evil.com/watch?v=dQw4w9WgXcQ')).toBe(null)
+    expect(youtubeId('javascript:alert(1)')).toBe(null)
+  })
+})

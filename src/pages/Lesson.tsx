@@ -5,6 +5,7 @@ import { dropCode, keepCode, markDone, savedCode } from '../lib/progress'
 import { href } from '../lib/router'
 import { buildDoc, cleanError, listen, newNonce, runChecks, SANDBOX, type CheckResult } from '../lib/sandbox'
 import Tutor from '../components/Tutor'
+import LessonVideo from '../components/LessonVideo'
 import { supabase } from '../lib/supabase'
 import { Alert, CodeEditor, Icon, Md } from '../components/ui'
 
@@ -98,6 +99,7 @@ function LessonView({ lesson, trackTitle, index, total, exam }: { lesson: Lesson
         {header}
         <div className="mx-auto grid max-w-6xl gap-6 px-4 py-6 lg:grid-cols-[1fr_380px]">
           <article className="card space-y-6 p-6">
+            <LessonVideo lessonId={lesson.id} title={lesson.title} />
             <Md text={lesson.body} />
             {lesson.quiz && <Quiz lesson={lesson} onPass={() => { if (lesson.kind === 'read') complete() }} />}
             {lesson.kind === 'prompt' && !finished && <p className="text-sm text-slate-500">Try it with the tutor, then press <strong>I've practised this</strong>.</p>}
@@ -156,6 +158,7 @@ function CodeLesson({ lesson, header, done, finished, complete }: { lesson: Less
 
   const left = (
     <div className="space-y-5">
+      <LessonVideo lessonId={lesson.id} title={lesson.title} />
       <Md text={lesson.body} />
       <div className="rounded-2xl border border-violet-200 bg-violet-50 p-4">
         <p className="text-xs font-bold uppercase tracking-wide text-violet-700">Your task</p>

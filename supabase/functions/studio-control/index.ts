@@ -9,7 +9,7 @@
 //
 // Deploy with "Verify JWT" OFF (the checks above are done here). Secret: CDM_CONTROL_KEY (optional, for Partners).
 import { createClient } from 'npm:@supabase/supabase-js@2'
-import { cleanSettings, claims, safeEqual } from './lib.ts'
+import { cleanSettings, youtubeId, claims, safeEqual } from './lib.ts'
 
 const cors = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-cdm-control-key', 'Access-Control-Allow-Methods': 'POST, OPTIONS' }
 const json = (b: unknown, status = 200) => new Response(JSON.stringify(b), { status, headers: { ...cors, 'Content-Type': 'application/json' } })
@@ -60,6 +60,24 @@ const ACTIONS: Record<string, { partners?: boolean; run: (a: Admin, b: Record<st
       if (error) throw new Error(error.message)
       await log(a, w, paid ? 'payout paid' : 'payout refused', String(id), {})
       return { done: true }
+    },
+  },
+  video: {
+    run: async (a, b, w) => {
+      const lesson = String(b.lesson_id ?? '')
+      if (!/^[a-z0-9-]{1,60}$/.test(lesson)) throw new Error('Pick a lesson first')
+      const raw = String(b.url ?? '').trim()
+      if (!raw) {
+        await a.from('lesson_videos').delete().eq('lesson_id', lesson)
+        await log(a, w, 'video removed', lesson, {})
+        return { removed: true }
+      }
+      const id = youtubeId(raw)
+      if (!id) throw new Error('Paste a YouTube link, like https://youtu.be/abc123XYZ_0')
+      const { error } = await a.from('lesson_videos').upsert({ lesson_id: lesson, youtube_id: id, title: typeof b.title === 'string' ? b.title.slice(0, 120) : null, updated_at: new Date().toISOString() })
+      if (error) throw new Error(error.message)
+      await log(a, w, 'video set', lesson, { id })
+      return { youtube_id: id }
     },
   },
   hide: {

@@ -27,3 +27,18 @@ export function cleanSettings(raw: unknown): Record<string, number | boolean> {
   for (const [k, [lo, hi]] of Object.entries(NUMS)) { const n = Number(s[k]); if (k in s && Number.isFinite(n)) out[k] = Math.min(hi, Math.max(lo, Math.round(n * 1000) / 1000)) }
   return out
 }
+
+/** The 11-character video id from any usual YouTube link (watch, youtu.be, shorts, embed, live) or the id itself. */
+export function youtubeId(raw: string): string | null {
+  const s = raw.trim()
+  if (/^[A-Za-z0-9_-]{11}$/.test(s)) return s
+  let u: URL
+  try { u = new URL(s) } catch { return null }
+  const host = u.hostname.replace(/^(www\.|m\.)/, '')
+  let id: string | null = null
+  if (host === 'youtu.be') id = u.pathname.slice(1).split('/')[0]
+  else if (host === 'youtube.com' || host === 'youtube-nocookie.com') {
+    id = u.searchParams.get('v') ?? (/^\/(embed|shorts|live)\/([^/?#]+)/.exec(u.pathname)?.[2] ?? null)
+  }
+  return id && /^[A-Za-z0-9_-]{11}$/.test(id) ? id : null
+}

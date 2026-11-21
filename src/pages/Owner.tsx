@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { href } from '../lib/router'
+import { COURSES, TRACKS } from '../lessons'
+import { loadVideos } from '../components/LessonVideo'
 import { callFunction } from '../lib/supabase'
 import { Alert, fmtDate, Spinner } from '../components/ui'
 
@@ -79,6 +81,7 @@ export default function Owner() {
       </section>
 
       <Payouts />
+      <Videos />
 
       <section className="card p-5">
         <h2 className="mb-3 font-semibold">Reported projects</h2>
@@ -140,6 +143,45 @@ function Payouts() {
           </li>
         ))}
       </ul>
+    </section>
+  )
+}
+
+/** A YouTube link for each lesson: paste a link (watch, youtu.be or shorts) and save; empty removes it. */
+function Videos() {
+  const [all, setAll] = useState<Record<string, { youtube_id: string }>>({})
+  const [draft, setDraft] = useState<Record<string, string>>({})
+  const [open, setOpen] = useState<string | null>(null)
+  const [msg, setMsg] = useState('')
+  useEffect(() => { loadVideos(true).then(setAll) }, [])
+  const tracks = [...COURSES, ...TRACKS]
+  async function save(id: string) {
+    setMsg('')
+    try { await owner('video', { lesson_id: id, url: draft[id] ?? '' }); setAll(await loadVideos(true)); setMsg('Saved.') } catch (e) { setMsg((e as Error).message) }
+  }
+  const count = Object.keys(all).length, total = tracks.reduce((n, t) => n + t.lessons.length, 0)
+  return (
+    <section className="card p-5">
+      <h2 className="mb-1 font-semibold">Course videos</h2>
+      <p className="mb-3 text-sm text-slate-600">{count} of {total} lessons have a video. Upload to your YouTube channel (Public or Unlisted), then paste the link here. It shows at the top of the lesson.</p>
+      <div className="space-y-2">
+        {tracks.map((t) => (
+          <details key={t.id} open={open === t.id} onToggle={(e) => (e.currentTarget as HTMLDetailsElement).open && setOpen(t.id)} className="rounded-xl border border-slate-200">
+            <summary className="cursor-pointer px-3 py-2 text-sm font-semibold">{t.emoji} {t.title} <span className="font-normal text-slate-500">({t.lessons.filter((l) => all[l.id]).length}/{t.lessons.length})</span></summary>
+            <ul className="divide-y divide-slate-100">
+              {t.lessons.map((l) => (
+                <li key={l.id} className="flex flex-wrap items-center gap-2 px-3 py-2 text-sm">
+                  <span className="min-w-0 flex-1">{l.title}</span>
+                  <input className="input w-72 max-w-full" placeholder={all[l.id] ? `youtu.be/${all[l.id].youtube_id}` : 'https://youtu.be/…'} value={draft[l.id] ?? ''} onChange={(e) => setDraft({ ...draft, [l.id]: e.target.value })} aria-label={`Video link for ${l.title}`} />
+                  <button className="btn btn-primary px-3 py-1.5" onClick={() => save(l.id)}>{draft[l.id] === '' && all[l.id] ? 'Remove' : 'Save'}</button>
+                  {all[l.id] && <a className="text-xs font-semibold text-violet-700 underline" href={`https://youtu.be/${all[l.id].youtube_id}`} target="_blank" rel="noreferrer">watch</a>}
+                </li>
+              ))}
+            </ul>
+          </details>
+        ))}
+      </div>
+      {msg && <p className="mt-2 text-sm text-slate-600">{msg}</p>}
     </section>
   )
 }
