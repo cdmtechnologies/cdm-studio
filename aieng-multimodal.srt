@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:10,525
+Modern models can see images and hear speech. Photograph a receipt, and get back the vendor, date, items and total as data.
+
+2
+00:00:11,220 --> 00:00:19,470
+But models can misread numbers, which matters a lot for money. Always check that the items add up to the total.
+
+3
+00:00:21,180 --> 00:00:31,180
+Decide what to extract, ask for structured output with an unsure option, validate it in code, and send doubtful cases to a person.
+
+4
+00:00:31,880 --> 00:00:38,505
+Images and audio cost more tokens than text, so resize images to what you need.
+
+5
+00:00:39,210 --> 00:00:45,860
+Photos and voices are personal data. Get consent, and keep as little as possible.
+
+6
+00:00:47,560 --> 00:00:56,385
+Speech to text gives you meeting notes and captions. Text to speech reads aloud. Test with your real users' accents.
+
+7
+00:00:57,080 --> 00:01:03,805
+Never present generated images as real photos, and respect copyright and consent.
+
