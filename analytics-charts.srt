@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:09,800
+A chart is a picture of an answer. Start from the question, then pick the tool: a line for change over time, bars to compare.
+
+2
+00:00:10,500 --> 00:00:16,775
+Pie charts with many slices are hard to read. Use a sorted bar chart instead.
+
+3
+00:00:18,480 --> 00:00:24,355
+Use grey for most of the data, and one strong colour to highlight what matters.
+
+4
+00:00:25,060 --> 00:00:29,910
+Use the same colour for the same thing on every chart in a report.
+
+5
+00:00:30,610 --> 00:00:34,160
+Check that it still works for colour-blind readers.
+
+6
+00:00:35,860 --> 00:00:40,610
+Bars must start at zero, or small differences look huge.
+
+7
+00:00:41,310 --> 00:00:48,460
+Give each chart a title that says the insight: revenue fell eighteen percent after the price rise.
+
