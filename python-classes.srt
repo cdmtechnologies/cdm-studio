@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:10,875
+An architect draws one blueprint, and builders use it to put up many houses. Each house is separate: paint one blue, and the others stay white.
+
+2
+00:00:11,570 --> 00:00:17,745
+In Python, the blueprint is a class, and each house built from it is an object.
+
+3
+00:00:19,450 --> 00:00:27,350
+init runs when an object is built, and sets up its starting data. Self means this particular object.
+
+4
+00:00:28,050 --> 00:00:35,750
+Methods are functions that belong to the object. Deposit changes this account's balance, not everyone's.
+
+5
+00:00:37,450 --> 00:00:46,750
+Keep the rules next to the data. The only way to change a balance is through deposit and withdraw, and they check the rules first.
+
+6
+00:00:47,450 --> 00:00:54,300
+A history list gives you a statement for free, like a bank's ledger. Now build your Account class.
+
