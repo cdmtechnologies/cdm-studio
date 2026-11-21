@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:10,400
+Real data is messy, like a kitchen after a party. Money typed as text, names typed five ways, and rows exported twice.
+
+2
+00:00:11,100 --> 00:00:15,775
+If you add up before cleaning, the totals are simply wrong.
+
+3
+00:00:17,480 --> 00:00:24,805
+Money like naira one comma two hundred: remove the symbol and commas, then convert to a number.
+
+4
+00:00:25,510 --> 00:00:31,485
+Names like space indomie space: trim, then use one consistent case.
+
+5
+00:00:32,180 --> 00:00:38,755
+Two identical rows? Check before deleting. Two identical sales might be real.
+
+6
+00:00:40,460 --> 00:00:49,010
+Keep the raw file untouched. Make each column one type. Trim and standardise text. Remove true duplicates.
+
+7
+00:00:49,710 --> 00:00:55,110
+And write down every rule you applied, so others can trust your numbers.
+
