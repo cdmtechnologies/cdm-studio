@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:09,675
+A scan of an in-scope server is like walking around a building and noting every door: which are open, and what is behind them.
+
+2
+00:00:10,380 --> 00:00:17,005
+Some doors should never face the street: databases, remote desktop, and old telnet.
+
+3
+00:00:18,700 --> 00:00:28,475
+A line like vsftpd two point three point four tells you the software and version. Old versions may have known weaknesses.
+
+4
+00:00:29,180 --> 00:00:35,055
+Filtered means a firewall is answering. Closed means nothing is listening.
+
+5
+00:00:36,750 --> 00:00:44,000
+Old software versions are like old locks with known weaknesses. Note them, and check for updates.
+
+6
+00:00:44,700 --> 00:00:50,650
+Turn the scan into a clear list of exposed services, and the risky ones first.
+
