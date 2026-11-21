@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:09,325
+Changing a sketch costs minutes. Changing a finished app costs weeks. A prototype is a rehearsal before opening night.
+
+2
+00:00:10,020 --> 00:00:17,645
+Testing with about five people finds most of the biggest problems. Test, fix, then test again.
+
+3
+00:00:19,350 --> 00:00:25,775
+List every problem, then rate it: how many people hit it, and how badly it blocked them.
+
+4
+00:00:26,480 --> 00:00:33,980
+Fix the severe, common problems first. Look for patterns, not one person's opinion about colours.
+
+5
+00:00:34,670 --> 00:00:41,695
+Other methods help too: A B tests, analytics, surveys, and testing with screen readers.
+
+6
+00:00:43,400 --> 00:00:50,325
+Give a goal, not instructions: you want to send five thousand naira to your sister. Show me how.
+
+7
+00:00:51,030 --> 00:00:59,180
+Ask them to think aloud, and do not help, however painful. Where they struggle is exactly what you came to find.
+
