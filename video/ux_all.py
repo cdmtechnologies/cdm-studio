@@ -64,7 +64,7 @@ def _():
     return [
         ('1-hierarchy', [
             ("Open a newspaper, and your eyes jump to the biggest headline, then the photo, then the small text. That order is visual hierarchy.", [
-                a.title('Layout and hierarchy'), a.line('BIG headline', 100, width=8), a.line('then the photo, then the small text', 48)]),
+                a.title('Layout and hierarchy'), a.line('BIG headline', 100), a.line('then the photo, then the small text', 48)]),
             ("On every screen, ask: what is the one most important thing here? Make that the most visible.", [a.note('one most important thing', 70)]),
         ]),
         ('2-space', [
