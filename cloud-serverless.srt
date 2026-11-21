@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:07,725
+Owning a car costs money even when parked. Serverless is a taxi: pay only for each trip.
+
+2
+00:00:08,420 --> 00:00:16,445
+Upload a function, and the cloud runs it when a request arrives. Perfect for webhooks and uneven traffic.
+
+3
+00:00:18,150 --> 00:00:27,350
+Running a database yourself means backups, updates and failover at three in the morning. Managed databases do that for you.
+
+4
+00:00:28,050 --> 00:00:32,875
+You still own the design, the security rules and the queries.
+
+5
+00:00:34,580 --> 00:00:41,155
+Scale up with a bigger machine, or scale out with more machines behind a load balancer.
+
+6
+00:00:41,860 --> 00:00:49,835
+Caches keep popular answers close, and queues hold slow jobs for later, like tickets at a busy bank.
+
