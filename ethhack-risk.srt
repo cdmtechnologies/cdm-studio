@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:09,175
+Not every finding is an emergency. Rate each one by how easy it is to exploit, and how bad the damage would be.
+
+2
+00:00:09,880 --> 00:00:16,705
+Critical, high, medium, low: a shared scale helps managers decide what to fix first.
+
+3
+00:00:18,400 --> 00:00:26,100
+An admin page open to the internet, with no password: easy to exploit, huge damage. Critical.
+
+4
+00:00:26,800 --> 00:00:32,900
+A missing header on a brochure page: hard to exploit, small damage. Low.
+
+5
+00:00:34,600 --> 00:00:41,650
+A weakness on a public payment page matters more than the same one on an internal test server.
+
+6
+00:00:42,350 --> 00:00:45,700
+Explain your rating, so people trust it.
+
