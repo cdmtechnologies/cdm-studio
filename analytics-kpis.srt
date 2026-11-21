@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:09,250
+A car dashboard shows a few numbers that matter: speed, fuel, warnings. A business dashboard should do the same.
+
+2
+00:00:09,950 --> 00:00:15,750
+Pick three to five key numbers, each compared with last period or a target.
+
+3
+00:00:17,450 --> 00:00:25,325
+A good KPI connects to money or customers, changes with your actions, and is easy to understand.
+
+4
+00:00:26,020 --> 00:00:32,820
+Revenue, gross margin, returning customers and stock cover are common choices for a shop.
+
+5
+00:00:33,530 --> 00:00:37,755
+Too many KPIs means no focus. Pick a few.
+
+6
+00:00:39,450 --> 00:00:45,775
+Put the most important numbers at the top, trends below, and details at the bottom.
+
+7
+00:00:46,480 --> 00:00:51,680
+A number without a comparison means nothing. Always show against what.
+
