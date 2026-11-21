@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:08,425
+Daily sales jump up and down like waves on the sea. A moving average looks at the tide, not the waves.
+
+2
+00:00:09,130 --> 00:00:16,630
+December always beats March. Compare December with last December, so the season cancels out.
+
+3
+00:00:18,330 --> 00:00:28,030
+Three days of sales: ten, fourteen and twelve. The three-day average is twelve. Next day, drop the oldest and add the newest.
+
+4
+00:00:28,730 --> 00:00:33,205
+The line becomes smooth, and the real trend shows through.
+
+5
+00:00:34,900 --> 00:00:41,675
+Sales up twenty percent in a year of twenty-five percent inflation means real sales fell.
+
+6
+00:00:42,380 --> 00:00:48,355
+And a fall of fifty percent needs a rise of one hundred percent to recover.
+
