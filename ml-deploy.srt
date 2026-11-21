@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:08,325
+A model in a notebook helps nobody. Deploy it behind an API, so an app can ask for predictions.
+
+2
+00:00:09,030 --> 00:00:17,130
+Watch it in the real world. Data drifts as customers and prices change, so retrain on fresh data.
+
+3
+00:00:18,830 --> 00:00:26,305
+Write a short model card: what the model is for, the data, the results, the limits, and fairness risks.
+
+4
+00:00:27,000 --> 00:00:33,450
+It helps people use the model wisely, and helps you remember why you built it that way.
+
+5
+00:00:35,150 --> 00:00:43,900
+Learn Python, pandas and scikit-learn, practise on real datasets, and explain your results in plain language.
+
+6
+00:00:44,600 --> 00:00:52,025
+Your final project, built and evaluated end to end, is your first portfolio piece. Good luck!
+
