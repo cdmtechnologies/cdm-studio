@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:07,300
+Fire drills happen before fires. Plan your response before an incident, not during it.
+
+2
+00:00:08,000 --> 00:00:12,925
+Prepare, detect, contain, remove the cause, recover, and learn.
+
+3
+00:00:14,620 --> 00:00:24,095
+Someone clicked a bad link and typed their password. First: change that password from a clean device, and sign out all sessions.
+
+4
+00:00:24,790 --> 00:00:31,115
+Then check for new forwarding rules, new logins, and sent messages you did not write.
+
+5
+00:00:32,820 --> 00:00:41,070
+Disconnect affected machines, keep the evidence, change passwords from a clean device, and tell the right people.
+
+6
+00:00:41,770 --> 00:00:47,870
+Afterwards, write down what happened and what you will change. No blame, just better.
+
