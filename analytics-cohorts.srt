@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:08,750
+Picture filling a bucket with a hole in it. New customers are the water. Customers who never return are the leak.
+
+2
+00:00:09,450 --> 00:00:16,425
+A cohort is a group who started in the same month. Follow each group, and see how many come back.
+
+3
+00:00:18,120 --> 00:00:27,845
+In September, one hundred and twenty new customers. Fifty came back in October. That is forty-two percent month one retention.
+
+4
+00:00:28,540 --> 00:00:37,540
+In October, one hundred and fifty new customers, and seventy-two came back. Forty-eight percent. Retention is improving.
+
+5
+00:00:39,240 --> 00:00:47,265
+Read across to see one group fade. Read down to see if newer groups stay longer: then your changes are working.
+
+6
+00:00:47,960 --> 00:00:55,910
+Compare a customer's lifetime value with the cost to win them. If winning costs more, growth loses money.
+
