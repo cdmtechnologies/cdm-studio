@@ -384,6 +384,195 @@ export const COURSES: Track[] = [
     ]
   },
   {
+    "id": "marketing",
+    "title": "Digital marketing and SEO",
+    "blurb": "Get found on Google, grow on social media, run ads that pay for themselves and measure what works. Practical skills every business needs.",
+    "colour": "rose",
+    "emoji": "📣",
+    "course": {
+      "level": "Beginner",
+      "hours": 12,
+      "free": 2,
+      "skills": [
+        "Audience research and positioning",
+        "Search engine optimisation (on-page and technical)",
+        "Content and social media strategy",
+        "Email marketing",
+        "Paid ads (Google and Meta)",
+        "Marketing metrics: CTR, CPA, ROAS",
+        "Local SEO and WhatsApp marketing",
+        "Building a marketing plan"
+      ],
+      "careers": [
+        "Digital marketing executive",
+        "SEO specialist",
+        "Social media manager",
+        "Performance (paid ads) marketer",
+        "Freelance marketer for small businesses"
+      ],
+      "examQuestions": 22,
+      "project": {
+        "title": "Launch page and 30-day marketing plan",
+        "lang": "html",
+        "brief": "Pick a real business (yours, a family business, a church, a school, a friend's shop) and build its **launch page** in CDM Studio, then put a **30-day marketing plan** on a second section of the same page (or the bottom of it).\n\n**The launch page** must be search-friendly and persuasive: a clear value proposition, what you sell, proof (reviews, numbers or photos), and one clear call to action (WhatsApp, call, order or sign-up).\n\n**The plan** must include: the target persona, a SMART goal, 3 channels with reasons, a content calendar for at least 2 weeks, a budget, the KPIs you will track, and UTM links for at least two channels.\n\nBuild it as a Studio project (use the AI builder if you like, but make sure the words and the plan are yours and specific to the business), then choose it below.",
+        "rubric": [
+          "Has a clear, specific value proposition near the top that names the audience and benefit",
+          "Has a descriptive title tag and a meta description written for search",
+          "Uses one h1, a logical heading structure and alt text on images",
+          "Includes mobile viewport and Open Graph tags for sharing",
+          "Shows proof or trust (reviews, numbers, photos or guarantees) and one clear call to action",
+          "Describes a target persona and a SMART goal",
+          "Chooses 3 channels with reasons and a content calendar covering at least 2 weeks",
+          "States a budget and KPIs with targets, including cost per acquisition or ROAS",
+          "Includes correctly built UTM links for at least two channels",
+          "Content is specific to a real business rather than generic filler"
+        ],
+        "pass_pct": 70
+      }
+    },
+    "lessons": [
+      {
+        "id": "marketing-foundations",
+        "title": "What marketing really is",
+        "minutes": 20,
+        "kind": "read",
+        "outline": "Marketing versus selling, value propositions, the funnel and the 4 Ps, online and offline.",
+        "body": "## Marketing is not shouting\n\nMany people think marketing means posting adverts everywhere. That is like a farmer throwing seeds onto a road and hoping. Real marketing is more like good farming: you choose the right field (the **audience**), plant the right seed (the **offer**), water at the right time (the **message** and **channel**), and keep checking what grows (the **measurement**).\n\nA simple definition: **marketing is finding people who have a problem you can solve, and helping them choose you.** Selling is the last step of that journey. Marketing is everything that makes the sale easy.\n\n## The value proposition\n\nBefore any post or advert, answer one question in one sentence: *why should this person choose you over every other option, including doing nothing?*\n\n> For busy parents in Abuja who have no time to shop, *Mama's Market* delivers fresh food in 2 hours, so dinner is never a crisis.\n\nA good value proposition names **who** it is for, the **problem**, the **benefit**, and what makes it **different**. If you cannot write it, no amount of advertising will fix the business.\n\n## The funnel\n\nPeople rarely buy the first time they hear of you. They move through stages, like water through a funnel that is wide at the top and narrow at the bottom:\n\n1. **Awareness**: they discover you exist (a post, a search result, a friend's recommendation).\n2. **Consideration**: they compare you, read reviews, visit your page.\n3. **Conversion**: they buy, book or sign up.\n4. **Loyalty**: they come back and tell others.\n\nEach stage needs different content. An advert that says \"Buy now!\" to someone who has never heard of you is like proposing marriage on a first meeting.\n\n## The 4 Ps\n\nA classic checklist that still works:\n\n- **Product**: what you sell, and does it truly solve the problem?\n- **Price**: what it costs, and how that compares.\n- **Place**: where people can get it (online shop, WhatsApp, a market stall, delivery apps).\n- **Promotion**: how people hear about it.\n\nDigital marketing is mostly about promotion and place, but if the product or price is wrong, the best campaign only makes more people disappointed, faster.\n\n## Digital channels in this course\n\nSearch (SEO and Google Ads), social media (organic and paid), email and WhatsApp, content (articles, videos), and local listings (Google Business Profile). The skills are the same worldwide; the examples include Nigerian and global businesses.",
+        "quiz": [
+          {
+            "q": "A strong value proposition names…",
+            "options": [
+              "Only the price",
+              "Who it is for, the problem, the benefit and what is different",
+              "The company history"
+            ],
+            "answer": 1,
+            "why": "It tells one kind of customer why to choose you."
+          },
+          {
+            "q": "Someone reading reviews and comparing prices is at which stage?",
+            "options": [
+              "Awareness",
+              "Consideration",
+              "Loyalty"
+            ],
+            "answer": 1,
+            "why": "They know you and are deciding."
+          },
+          {
+            "q": "If customers hate the product, more advertising will…",
+            "options": [
+              "Fix it",
+              "Disappoint more people, faster",
+              "Make no difference"
+            ],
+            "answer": 1,
+            "why": "Promotion cannot fix product or price problems."
+          }
+        ]
+      },
+      {
+        "id": "marketing-audience",
+        "title": "Know your audience",
+        "minutes": 25,
+        "kind": "prompt",
+        "outline": "Customer personas, research methods, jobs to be done and positioning, practised with the AI tutor.",
+        "body": "## You cannot talk to \"everyone\"\n\nImagine giving a speech to a crowd where half are children and half are bank managers. Whatever you say, you lose one half. Marketing to \"everyone\" fails the same way. The narrower and clearer your audience, the sharper your message.\n\n## Personas\n\nA **persona** is a short, realistic description of one typical customer, built from real research:\n\n> **Ngozi, 34, nurse in Lagos.** Works 12-hour shifts. Shops on her phone during breaks, mostly on Instagram and WhatsApp. Wants healthy meals for her two children but has no time to cook on weekdays. Worries about food hygiene and late deliveries. Trusts recommendations from other mothers.\n\nNotice what matters: **goals**, **frustrations**, **where they spend time**, **what they trust**. Age and job are just context.\n\n## Research: ask, watch, read\n\n- **Talk to 5 to 10 real customers.** Ask about the last time they bought something like yours: what triggered it, what almost stopped them, what they compared.\n- **Read reviews** of you and your competitors. Complaints are a gold mine of unmet needs.\n- **Watch search behaviour**: the words people type into Google and YouTube (lesson 3 shows how).\n- **Look at your own data**: which products sell, when, to whom.\n\nNever invent a persona in an office and treat it as fact. A persona is a summary of evidence.\n\n## Jobs to be done\n\nPeople do not buy a drill; they buy a hole in the wall, so they can hang a family photo. Ask: *what job is the customer hiring this product to do?* A customer \"hires\" a food delivery app to avoid an argument about who cooks tonight. That insight changes your adverts completely.\n\n## Positioning\n\nPositioning is the place you want to own in the customer's mind. Use this template:\n\n> For **[audience]** who **[need]**, **[brand]** is the **[category]** that **[key benefit]**, unlike **[alternative]**, because **[reason to believe]**.\n\n## Practise\n\nUse the tutor to build a persona and positioning statement for a real business.",
+        "practice": "Pick a real business (yours, a family business or one you know). Tell the tutor what it sells and to whom. Ask it to interview you, one question at a time, to build a persona (goals, frustrations, channels, trust). Then ask it to draft a positioning statement using the template in the lesson, and to point out which parts are assumptions you should check with real customers."
+      },
+      {
+        "id": "marketing-seo-basics",
+        "title": "How search engines work",
+        "minutes": 30,
+        "kind": "read",
+        "outline": "Crawling, indexing and ranking, search intent, and keyword research with free tools.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "marketing-onpage",
+        "title": "On-page SEO: build a page Google understands",
+        "minutes": 30,
+        "kind": "code",
+        "outline": "Title tags, meta descriptions, one clear H1, headings, image alt text and descriptive links, built in HTML.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "marketing-technical-seo",
+        "title": "Technical SEO and rich results",
+        "minutes": 30,
+        "kind": "code",
+        "outline": "Mobile viewport, language, canonical URLs, Open Graph tags for sharing, structured data (JSON-LD) and speed.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "marketing-content",
+        "title": "Content that people want",
+        "minutes": 30,
+        "kind": "prompt",
+        "outline": "Content pillars, formats, writing headlines and hooks, a content calendar, and using AI without losing your voice.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "marketing-social",
+        "title": "Social media marketing",
+        "minutes": 30,
+        "kind": "read",
+        "outline": "Choosing platforms, organic versus paid, algorithms, engagement, community management and handling complaints.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "marketing-email",
+        "title": "Email and WhatsApp marketing",
+        "minutes": 30,
+        "kind": "read",
+        "outline": "Owning your audience, consent and data protection, list building, subject lines, segmentation and automated journeys.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "marketing-ads",
+        "title": "Paid ads: Google and Meta",
+        "minutes": 35,
+        "kind": "read",
+        "outline": "Search versus social ads, targeting, budgets and bidding, ad copy, landing pages and the key ad metrics.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "marketing-metrics",
+        "title": "Measure what works",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "Build a campaign calculator in JavaScript: CTR, CPA, ROAS and break-even, plus UTM tracking links.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "marketing-local",
+        "title": "Local SEO, reviews and influencers",
+        "minutes": 30,
+        "kind": "read",
+        "outline": "Google Business Profile, maps rankings, reviews and how to answer them, influencer marketing and honest disclosure.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "marketing-plan",
+        "title": "Your marketing plan and career",
+        "minutes": 30,
+        "kind": "prompt",
+        "outline": "Goals and KPIs, budget split, a 90-day plan, testing and reporting, plus certifications, portfolio and freelancing.",
+        "body": "",
+        "paid": true
+      }
+    ]
+  },
+  {
     "id": "aieng",
     "title": "AI engineering: prompts, data and automation",
     "blurb": "Go beyond chatting: design reliable prompts, get structured answers, ground AI in your own documents, and automate work safely.",
