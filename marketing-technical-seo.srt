@@ -1,0 +1,32 @@
+1
+00:00:00,500 --> 00:00:07,675
+Technical SEO is the plumbing. Customers never see it, but if it fails, the shop closes.
+
+2
+00:00:08,380 --> 00:00:18,480
+Most people browse on phones, so every page needs the viewport tag. A canonical link names the one official address of a page.
+
+3
+00:00:19,170 --> 00:00:28,245
+Open Graph tags decide how your link looks when it is shared on WhatsApp or Facebook: a picture and a title get far more clicks.
+
+4
+00:00:29,950 --> 00:00:41,025
+A slow page loses visitors before it even appears. Compress images, use modern formats like WebP, and do not autoplay big videos.
+
+5
+00:00:41,720 --> 00:00:48,145
+Use https: browsers warn people away from sites without the padlock.
+
+6
+00:00:48,850 --> 00:00:57,600
+A sitemap lists your pages for search engines. Search Console tells you which pages Google could not index, and why.
+
+7
+00:00:59,300 --> 00:01:06,175
+Structured data is like filling in Google's form, instead of making it guess from your paragraphs.
+
+8
+00:01:06,880 --> 00:01:18,980
+It can earn rich results: stars, prices or opening hours, right in Google. Compress images, use https, and check your site in PageSpeed Insights.
+
