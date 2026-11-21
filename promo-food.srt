@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:05,325
+What should I eat today? CDM Food plans your meals for you.
+
+2
+00:00:07,030 --> 00:00:10,705
+Pick your country, and its local menu loads.
+
+3
+00:00:11,410 --> 00:00:15,910
+Ask the AI to change it for your taste, budget or health.
+
+4
+00:00:17,610 --> 00:00:21,910
+Track your weight and goals, and tick off the meals you eat.
+
+5
+00:00:22,610 --> 00:00:25,810
+Start free today, at CDM Food.
+
+6
+00:00:26,510 --> 00:00:28,610
+Enjoy your meal!
+
