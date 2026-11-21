@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:12,700
+Employers hire designers for how they think. A case study tells a project like a short detective story: the problem, the investigation, the answer, and the proof.
+
+2
+00:00:13,400 --> 00:00:20,350
+Three strong case studies beat ten weak ones. Your final project here is a great first one.
+
+3
+00:00:22,050 --> 00:00:31,150
+Talk to developers early, not at the end. Share your tokens, and design every state: loading, empty, error and success.
+
+4
+00:00:31,850 --> 00:00:39,800
+Designers who understand a little HTML and CSS, like you now do, are much easier to work with.
+
+5
+00:00:41,500 --> 00:00:50,950
+Use AI to explore faster, then apply your judgement: AI does not know your users, and often misses accessibility.
+
+6
+00:00:51,650 --> 00:00:58,375
+Learn Figma next, join design communities, and start building your portfolio. Good luck!
+
