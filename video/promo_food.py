@@ -22,10 +22,12 @@ def s2():
 def s3():
     b = Board(top=200)
     return ('3-track', [
-        ("Track your weight and goals, tick off the meals you eat, and start free today.", [
+        ("Track your weight and goals, and tick off the meals you eat.", [
             b.line('Breakfast', 72, x=560), tick(1200, b.y - 120, 40), b.line('Lunch', 72, x=560), tick(1200, b.y - 120, 40),
-            b.line('Dinner', 72, x=560), b.space(40), b.line('Start free', 84, color=GREEN),
+            b.line('Dinner', 72, x=560)]),
+        ("Start free today, at CDM Food.", [b.space(40), b.line('Start free', 84, color=GREEN),
             b.line('cdm-food.netlify.app', 64, font='EMSNixish', color=BLUE)]),
+        ("Enjoy your meal!", []),
     ])
 
 

@@ -6,7 +6,7 @@ LESSON = 'promo-studio'
 def s1():
     b = Board(top=260)
     return ('1-hello', [
-        ("Want to learn tech, but not sure where to start? Meet CDM Studio.", [b.title('CDM Studio', 140), b.space(40), b.note('Learn. Build. Get certified.', 80)]),
+        ("Want to learn tech? Meet CDM Studio.", [b.title('CDM Studio', 140), b.space(40), b.note('Learn. Build. Get certified.', 80)]),
     ])
 
 
@@ -24,10 +24,11 @@ def s2():
 def s3():
     b = Board(top=230)
     return ('3-certificate', [
-        ("Pass the final project and exam, and earn your certificate. The first lessons are free.", [
-            box(560, 160, 800, 300, INK, 7), text('CERTIFICATE', 960, 290, 84, 'EMSFelix', align='center', width=8),
-            tick(960, 400, 50), b.space(380), b.line('First lessons free', 80, color=GREEN),
+        ("Pass the final project and exam, and earn your certificate.", [
+            box(560, 160, 800, 300, INK, 7), text('CERTIFICATE', 960, 290, 84, 'EMSFelix', align='center', width=8), tick(960, 400, 50)]),
+        ("The first lessons are free. Start today.", [b.space(380), b.line('First lessons free', 80, color=GREEN),
             b.line('cdmtechnologies.github.io/cdm-studio', 58, font='EMSNixish', color=BLUE)]),
+        ("See you in class.", []),
     ])
 
 
