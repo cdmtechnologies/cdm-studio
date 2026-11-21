@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:11,875
+A factory checks every product on the line before it ships. CI CD does the same for code: every change is tested and deployed automatically.
+
+2
+00:00:12,570 --> 00:00:18,070
+If a test fails, the line stops, and nothing broken reaches customers.
+
+3
+00:00:19,780 --> 00:00:27,280
+Every push runs the same steps: install, test, build, and deploy, only if everything passed.
+
+4
+00:00:27,980 --> 00:00:34,580
+CDM Studio itself works this way: every change is tested before it goes live.
+
+5
+00:00:36,280 --> 00:00:44,055
+Small, frequent releases are safer than one giant release, like small steps instead of a big jump.
+
+6
+00:00:44,760 --> 00:00:48,035
+And always have a quick way to roll back.
+
