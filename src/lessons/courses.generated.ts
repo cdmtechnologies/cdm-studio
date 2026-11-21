@@ -203,6 +203,187 @@ export const COURSES: Track[] = [
     ]
   },
   {
+    "id": "sql",
+    "title": "SQL and databases",
+    "blurb": "Ask questions of data with SQL, the language behind every bank, shop, school and app database. From your first SELECT to joins, reports and database design.",
+    "colour": "amber",
+    "emoji": "🗄️",
+    "course": {
+      "level": "Beginner",
+      "hours": 12,
+      "free": 2,
+      "skills": [
+        "SELECT, WHERE and ORDER BY",
+        "Aggregates and GROUP BY",
+        "Joins",
+        "CASE and dates",
+        "Subqueries and CTEs",
+        "Creating and changing tables",
+        "Database design and keys",
+        "Window functions"
+      ],
+      "careers": [
+        "Data analyst",
+        "Business intelligence analyst",
+        "Back-end developer",
+        "Database administrator (junior)",
+        "Product / operations analyst"
+      ],
+      "examQuestions": 22,
+      "project": {
+        "title": "A database for a real business",
+        "lang": "sql",
+        "brief": "Design and query a database for a business you know: a pharmacy, a school, a hotel, a farm, a church, a logistics company, anything real.\n\n**Part 1, design:** write the `create table` statements for **at least 3 related tables** with primary keys, foreign keys and sensible constraints, then `insert` enough rows to make the answers interesting (at least 10 rows in the main table).\n\n**Part 2, questions:** write **at least 6 queries** that answer real business questions, each with a comment above it saying the question in plain English. Include at least one join, one `group by`, one left join that finds something missing, and one CTE or window function.\n\nTest the whole script in a SQL lesson's editor (it runs SQLite) or on your own computer, then paste it all here.",
+        "rubric": [
+          "Creates at least 3 related tables with primary keys and foreign keys",
+          "Uses sensible column types and at least two other constraints (not null, unique or check)",
+          "Inserts realistic data, with at least 10 rows in the main table",
+          "Has at least 6 queries, each with a comment stating the business question",
+          "Uses at least one join correctly on the keys",
+          "Uses group by with an aggregate (and having or order by where it helps)",
+          "Uses a left join (or not exists) to find something missing, handling NULLs correctly",
+          "Uses a CTE or a window function in a meaningful way",
+          "Queries are readable: aliases, consistent formatting and clear column names"
+        ],
+        "pass_pct": 70
+      }
+    },
+    "lessons": [
+      {
+        "id": "sql-select",
+        "title": "Databases and your first query",
+        "minutes": 20,
+        "kind": "code",
+        "lang": "sql",
+        "setup": "\ncreate table customers (id integer primary key, name text not null, city text, joined text not null);\ninsert into customers values\n (1, 'Ada Obi', 'Abuja', '2026-01-10'), (2, 'Musa Bello', 'Kano', '2026-02-03'), (3, 'Chika Eze', 'Lagos', '2026-02-20'),\n (4, 'Tunde Ade', 'Lagos', '2026-03-15'), (5, 'Fatima Sani', 'Abuja', '2026-04-01'), (6, 'Grace Okon', 'Port Harcourt', '2026-05-12'),\n (7, 'Emeka Nwosu', null, '2026-06-30');\ncreate table products (id integer primary key, name text not null, category text not null, price integer not null);\ninsert into products values\n (1, 'Rice 50kg', 'Food', 72000), (2, 'Vegetable oil 5L', 'Food', 15500), (3, 'Bread', 'Food', 1200),\n (4, 'Phone case', 'Electronics', 2500), (5, 'Power bank', 'Electronics', 18000), (6, 'Earbuds', 'Electronics', 9500),\n (7, 'Notebook', 'Stationery', 800), (8, 'Pen pack', 'Stationery', 1500);\ncreate table orders (id integer primary key, customer_id integer not null references customers(id), order_date text not null, status text not null, total integer not null);\ninsert into orders values\n (1, 1, '2026-09-02', 'paid', 72000), (2, 2, '2026-09-05', 'paid', 27500), (3, 1, '2026-09-18', 'paid', 6000),\n (4, 3, '2026-10-01', 'cancelled', 5000), (5, 4, '2026-10-07', 'paid', 31000), (6, 3, '2026-10-15', 'paid', 11000),\n (7, 5, '2026-10-28', 'paid', 19000), (8, 2, '2026-11-03', 'pending', 87500), (9, 1, '2026-11-10', 'paid', 18000),\n (10, 4, '2026-11-12', 'paid', 12000);\ncreate table order_items (order_id integer not null references orders(id), product_id integer not null references products(id), qty integer not null);\ninsert into order_items values\n (1, 1, 1), (2, 5, 1), (2, 6, 1), (3, 3, 5), (4, 4, 2), (5, 2, 2), (6, 7, 10), (6, 8, 2), (7, 6, 2), (8, 1, 1), (8, 2, 1), (9, 5, 1), (10, 3, 10);\n",
+        "outline": "What a database is, tables, rows and columns, and SELECT to read data.",
+        "body": "## What is a database?\n\nPicture a school office with a big filing cabinet. One drawer holds student records, another holds fees paid, another holds teachers. Every folder in a drawer has the same layout. A **database** is that cabinet, kept by a computer: it stores information in **tables**, and it can answer questions about millions of records in a fraction of a second.\n\n- A **table** is a drawer: customers, products, orders.\n- A **row** is one folder: one customer.\n- A **column** is one field on the form: name, city, date joined.\n\nBanks, hospitals, schools, shops and apps like WhatsApp and Uber all keep their data in databases. **SQL** (say *\"S-Q-L\"* or *\"sequel\"*) is the language you use to ask them questions. It has been around since the 1970s, and it is still one of the most requested skills in job adverts, because nearly every company has a database.\n\n## Your first query\n\n```sql\nselect name, city from customers;\n```\n\nRead it as a sentence: *\"select the name and city from the customers table\"*.\n\n- `select` lists the columns you want, separated by commas.\n- `*` means every column: `select * from customers;`\n- `from` names the table.\n- The semicolon `;` ends the statement.\n\nSQL does not care about capital letters in keywords: `SELECT` and `select` are the same. Many people write keywords in capitals to make queries easier to scan. Text values, though, must match exactly and go in **single quotes**: `'Abuja'`.\n\n## Calculations in a query\n\nYou can calculate new columns and give them a name with `as`:\n\n```sql\nselect name, price, price * 1.075 as price_with_vat from products;\n```\n\nThe database does not change: `select` only **reads**. You cannot break anything with it, so explore freely.\n\n## The shop database\n\nEvery lesson in this course uses the same small database of an online shop. It has four tables:\n\n| Table | Columns |\n|---|---|\n| `customers` | id, name, city, joined |\n| `products` | id, name, category, price |\n| `orders` | id, customer_id, order_date, status (paid, pending or cancelled), total |\n| `order_items` | order_id, product_id, qty |\n\nYou can always look around with `select * from products;` in the editor. Only the result of your **last** statement is checked.\n\n## Your task\n\nWrite a query that shows each product's `name`, `category` and `price`, in that order, plus a fourth column called `price_in_usd` that is the price divided by 1600 (use `price / 1600.0` so you get decimals).",
+        "task": "Select name, category, price and price_in_usd from products.",
+        "starter": "-- Look around first, then write your query\nselect * from products;\n",
+        "checks": [
+          {
+            "label": "shows name, category and price for every product",
+            "test": "return await same(\"select name, category, price, price / 1600.0 from products\")"
+          },
+          {
+            "label": "has 8 rows",
+            "test": "return (await result()).length === 8"
+          }
+        ],
+        "hint": "select name, category, price, price / 1600.0 as price_in_usd from products;"
+      },
+      {
+        "id": "sql-where",
+        "title": "Filtering rows with WHERE",
+        "minutes": 25,
+        "kind": "code",
+        "lang": "sql",
+        "setup": "\ncreate table customers (id integer primary key, name text not null, city text, joined text not null);\ninsert into customers values\n (1, 'Ada Obi', 'Abuja', '2026-01-10'), (2, 'Musa Bello', 'Kano', '2026-02-03'), (3, 'Chika Eze', 'Lagos', '2026-02-20'),\n (4, 'Tunde Ade', 'Lagos', '2026-03-15'), (5, 'Fatima Sani', 'Abuja', '2026-04-01'), (6, 'Grace Okon', 'Port Harcourt', '2026-05-12'),\n (7, 'Emeka Nwosu', null, '2026-06-30');\ncreate table products (id integer primary key, name text not null, category text not null, price integer not null);\ninsert into products values\n (1, 'Rice 50kg', 'Food', 72000), (2, 'Vegetable oil 5L', 'Food', 15500), (3, 'Bread', 'Food', 1200),\n (4, 'Phone case', 'Electronics', 2500), (5, 'Power bank', 'Electronics', 18000), (6, 'Earbuds', 'Electronics', 9500),\n (7, 'Notebook', 'Stationery', 800), (8, 'Pen pack', 'Stationery', 1500);\ncreate table orders (id integer primary key, customer_id integer not null references customers(id), order_date text not null, status text not null, total integer not null);\ninsert into orders values\n (1, 1, '2026-09-02', 'paid', 72000), (2, 2, '2026-09-05', 'paid', 27500), (3, 1, '2026-09-18', 'paid', 6000),\n (4, 3, '2026-10-01', 'cancelled', 5000), (5, 4, '2026-10-07', 'paid', 31000), (6, 3, '2026-10-15', 'paid', 11000),\n (7, 5, '2026-10-28', 'paid', 19000), (8, 2, '2026-11-03', 'pending', 87500), (9, 1, '2026-11-10', 'paid', 18000),\n (10, 4, '2026-11-12', 'paid', 12000);\ncreate table order_items (order_id integer not null references orders(id), product_id integer not null references products(id), qty integer not null);\ninsert into order_items values\n (1, 1, 1), (2, 5, 1), (2, 6, 1), (3, 3, 5), (4, 4, 2), (5, 2, 2), (6, 7, 10), (6, 8, 2), (7, 6, 2), (8, 1, 1), (8, 2, 1), (9, 5, 1), (10, 3, 10);\n",
+        "outline": "Comparisons, AND / OR, IN, BETWEEN, LIKE and the special case of NULL.",
+        "body": "## WHERE is a sieve\n\nWhen you pour rice through a sieve, only what fits passes. `where` is a sieve for rows: only rows that make the condition **true** come through.\n\n```sql\nselect name, price from products where price > 10000;\nselect * from orders where status = 'paid';\n```\n\n## Comparisons\n\n`=` equal (just one sign in SQL), `<>` or `!=` not equal, `<`, `<=`, `>`, `>=`.\n\n## Combining conditions\n\n```sql\nselect * from products where category = 'Food' and price < 20000;\nselect * from customers where city = 'Lagos' or city = 'Abuja';\n```\n\nWhen you mix `and` with `or`, use brackets so the meaning is clear: `where status = 'paid' and (city = 'Lagos' or city = 'Abuja')`.\n\n## Handy shortcuts\n\n- `in`: matches any value in a list: `where city in ('Lagos', 'Abuja')`\n- `between`: a range, including both ends: `where price between 1000 and 5000`\n- `like`: a text pattern. `%` means \"anything\", `_` means \"exactly one character\": `where name like 'P%'` finds names that start with P; `like '%bank%'` finds names containing *bank*.\n- `not`: flips a condition: `where status not in ('cancelled')`\n\n## NULL: the empty box\n\n`NULL` means **unknown or missing**, not zero and not empty text. Emeka's city is NULL: we simply do not know it. Because NULL is unknown, `city = NULL` is never true (is an unknown thing equal to another unknown thing? SQL cannot say). Always write:\n\n```sql\nselect * from customers where city is null;\nselect * from customers where city is not null;\n```\n\nThis trips up experienced people too, so remember it.\n\n## Dates as text\n\nIn this database dates are text in the form `YYYY-MM-DD`, which sorts and compares correctly: `where order_date >= '2026-10-01'`.\n\n## The shop database\n\nEvery lesson in this course uses the same small database of an online shop. It has four tables:\n\n| Table | Columns |\n|---|---|\n| `customers` | id, name, city, joined |\n| `products` | id, name, category, price |\n| `orders` | id, customer_id, order_date, status (paid, pending or cancelled), total |\n| `order_items` | order_id, product_id, qty |\n\nYou can always look around with `select * from products;` in the editor. Only the result of your **last** statement is checked.\n\n## Your task\n\nShow the `id`, `order_date` and `total` (in that order) of orders that are **paid**, placed **on or after 1 October 2026**, with a total of **at least 12,000**.",
+        "task": "Filter the paid orders from October 2026 onwards with a total of at least 12,000.",
+        "starter": "select id, order_date, total from orders;\n",
+        "checks": [
+          {
+            "label": "only paid orders from 2026-10-01 with total >= 12000",
+            "test": "return await same(\"select id, order_date, total from orders where status = 'paid' and order_date >= '2026-10-01' and total >= 12000\")"
+          }
+        ],
+        "hint": "Three conditions joined with and: status = 'paid', order_date >= '2026-10-01', total >= 12000."
+      },
+      {
+        "id": "sql-sort",
+        "title": "Sorting, limiting and unique values",
+        "minutes": 25,
+        "kind": "code",
+        "outline": "ORDER BY, LIMIT and OFFSET, DISTINCT, and readable aliases.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "sql-aggregates",
+        "title": "Counting and adding up",
+        "minutes": 25,
+        "kind": "code",
+        "outline": "COUNT, SUM, AVG, MIN, MAX and ROUND turn many rows into one answer.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "sql-group",
+        "title": "GROUP BY: totals per group",
+        "minutes": 30,
+        "kind": "code",
+        "outline": "Summaries per category, customer or month with GROUP BY, and filtering groups with HAVING.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "sql-joins",
+        "title": "Joining tables",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "Why data is split into tables, keys, and INNER JOIN to combine them, including joins across three or four tables.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "sql-left-join",
+        "title": "LEFT JOIN and finding what is missing",
+        "minutes": 30,
+        "kind": "code",
+        "outline": "Keep every row with LEFT JOIN, find customers with no orders, and replace NULLs with COALESCE.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "sql-case-dates",
+        "title": "CASE, dates and monthly reports",
+        "minutes": 30,
+        "kind": "code",
+        "outline": "Label rows with CASE WHEN, group by month with date functions, and build a pivot-style report.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "sql-subqueries",
+        "title": "Subqueries and CTEs",
+        "minutes": 30,
+        "kind": "code",
+        "outline": "Queries inside queries, IN with a subquery, and WITH (common table expressions) for readable step-by-step SQL.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "sql-change",
+        "title": "Creating and changing data",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "CREATE TABLE with constraints, INSERT, UPDATE, DELETE, and transactions to keep data safe.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "sql-design",
+        "title": "Designing a good database",
+        "minutes": 30,
+        "kind": "read",
+        "outline": "Normalisation, choosing keys, relationships, indexes, SQL injection and access rules in real systems.",
+        "body": "",
+        "paid": true
+      },
+      {
+        "id": "sql-window",
+        "title": "Window functions and where SQL takes you",
+        "minutes": 35,
+        "kind": "code",
+        "outline": "Rank rows, running totals and comparisons with the previous row using OVER (...), plus SQL careers and next steps.",
+        "body": "",
+        "paid": true
+      }
+    ]
+  },
+  {
     "id": "aieng",
     "title": "AI engineering: prompts, data and automation",
     "blurb": "Go beyond chatting: design reliable prompts, get structured answers, ground AI in your own documents, and automate work safely.",
