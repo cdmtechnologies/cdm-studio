@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:08,675
+A manager does not want every receipt. She wants: how many orders, how much money, what was the average sale?
+
+2
+00:00:09,380 --> 00:00:17,205
+Aggregates squeeze many rows into one answer, like a cashier counting the day's takings into one figure.
+
+3
+00:00:18,900 --> 00:00:25,975
+Count carefully. Count star counts rows. Count city counts only rows where the city is known.
+
+4
+00:00:26,680 --> 00:00:38,030
+Watch out with division. Seven divided by two gives three, because both are whole numbers. Write seven divided by two point zero to keep the decimals.
+
+5
+00:00:39,730 --> 00:00:46,930
+Where runs first, so the sums only see paid orders. Cancelled orders are not money in the bank.
+
+6
+00:00:47,630 --> 00:00:53,455
+Round the average to two decimals for money. Now build the paid orders summary.
+
