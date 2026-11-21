@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:09,325
+A great cook with rotten tomatoes still makes a bad stew. In machine learning, good features matter more than the algorithm.
+
+2
+00:00:10,020 --> 00:00:19,295
+Turn categories into yes or no columns, and pull hidden features out of dates: the month, the weekday, the days to payday.
+
+3
+00:00:21,000 --> 00:00:29,600
+For anything over time, train on earlier dates and test on later ones. Never shuffle the future into training.
+
+4
+00:00:30,300 --> 00:00:38,575
+And never use a feature known only after the outcome, like the number of debt collection calls, to predict default.
+
+5
+00:00:40,270 --> 00:00:49,370
+Scale with statistics from the training data only. Using test data is like letting students see the exam while revising.
+
+6
+00:00:50,070 --> 00:00:54,770
+If a score looks too good to be true, suspect leakage first.
+
