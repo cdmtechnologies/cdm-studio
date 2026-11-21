@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:10,200
+AI can write a working Python function in seconds. But it is like a very fast junior colleague who is confident, even when wrong.
+
+2
+00:00:10,900 --> 00:00:17,100
+You are the senior. Read it, test it, and understand every line before you trust it.
+
+3
+00:00:17,800 --> 00:00:25,650
+Ask it to explain code, to debug with the full error, to write test cases, and to review your work.
+
+4
+00:00:27,350 --> 00:00:31,900
+A strong prompt has context. Fix my code is weak.
+
+5
+00:00:32,600 --> 00:00:42,700
+Strong: say what the function should do, what it does instead, and paste the code and the input. Never paste passwords or customers' data.
+
+6
+00:00:44,400 --> 00:00:53,375
+Next steps: pandas for data, FastAPI or Django for websites, automation for office work, and AI apps.
+
+7
+00:00:54,070 --> 00:01:02,895
+Put three to five small, real projects on GitHub. Your final project in this course is a great first one. Good luck!
+
