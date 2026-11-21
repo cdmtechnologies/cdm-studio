@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:09,625
+Which products cost more than average? First ask a friend for the average, then compare. A subquery does exactly that.
+
+2
+00:00:10,320 --> 00:00:15,545
+The inner query runs first, and gives one number to the outer query.
+
+3
+00:00:17,250 --> 00:00:28,375
+A subquery can also return a list. Which customers have a pending order? The inner query lists their ids, and in checks each customer against the list.
+
+4
+00:00:29,070 --> 00:00:38,170
+Exists keeps customers who have at least one order, and stops looking as soon as it finds one. That is fast on big tables.
+
+5
+00:00:39,870 --> 00:00:48,570
+Long nested queries are like sentences with five brackets. With, lets you name each step, then use it like a table.
+
+6
+00:00:49,270 --> 00:00:54,770
+Read it top to bottom. Now find customers who spend more than average.
+
