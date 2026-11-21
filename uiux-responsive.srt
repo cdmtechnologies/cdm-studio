@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:08,275
+Most people reach the internet through a phone, often an affordable one with a small screen and expensive data.
+
+2
+00:00:08,980 --> 00:00:20,205
+Designing for a big laptop, then squeezing it onto phones, is like building a house for a giant and asking a child to live in it. Start small, then add.
+
+3
+00:00:21,900 --> 00:00:30,700
+Most people hold a phone in one hand. The bottom middle of the screen is easiest to reach. The top corners are hardest.
+
+4
+00:00:31,400 --> 00:00:35,325
+That is why important app actions sit at the bottom.
+
+5
+00:00:36,030 --> 00:00:40,955
+Test on a real, inexpensive phone, outdoors, with one hand.
+
+6
+00:00:42,650 --> 00:00:50,550
+Fingers are less precise than a mouse. Make buttons at least forty-four pixels tall, with space between them.
+
+7
+00:00:51,250 --> 00:00:59,925
+Media queries add columns as the screen grows. And compress images: every megabyte costs your users money.
+
