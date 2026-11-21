@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:11,025
+You would not sell a medicine without testing it. Do not ship an AI feature without an evaluation: a set of real questions with known good answers.
+
+2
+00:00:11,720 --> 00:00:17,820
+Run the set every time you change the prompt or the model, and compare the scores.
+
+3
+00:00:19,530 --> 00:00:27,780
+Collect fifty real questions, with the answers a good expert would give, including tricky and off-topic ones.
+
+4
+00:00:28,480 --> 00:00:35,980
+Score each answer: correct, partly correct, or wrong. Track the score every time you change something.
+
+5
+00:00:36,680 --> 00:00:42,655
+Include attacks too, like ignore your instructions, and check the model refuses.
+
+6
+00:00:44,350 --> 00:00:55,900
+Guardrails are the barriers on a mountain road: block personal data from leaking, refuse off-topic requests, and check the output before it reaches a user.
+
+7
+00:00:56,600 --> 00:01:04,225
+Treat text from users and websites as data, never as instructions. That stops prompt injection.
+
