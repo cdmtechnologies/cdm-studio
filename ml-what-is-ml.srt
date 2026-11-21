@@ -1,0 +1,24 @@
+1
+00:00:00,500 --> 00:00:12,100
+Normal programs follow rules a person wrote. Machine learning finds the rules from examples, like a child learning what a dog is from many pictures of dogs.
+
+2
+00:00:12,800 --> 00:00:21,775
+Show it past house sales, and it learns to estimate prices. Show it past loans, and it learns who is likely to repay.
+
+3
+00:00:23,480 --> 00:00:32,255
+Features are the facts you know: house size, location, number of rooms. The label is what you want to predict: the price.
+
+4
+00:00:32,960 --> 00:00:40,210
+Training shows the model many rows where the label is known. Then it predicts labels for new rows.
+
+5
+00:00:41,910 --> 00:00:53,060
+Supervised learning learns from labelled answers. Unsupervised learning finds groups on its own. Reinforcement learning learns by trial and reward.
+
+6
+00:00:53,760 --> 00:00:58,860
+A model is only as good as its data. Rubbish in, rubbish out.
+
