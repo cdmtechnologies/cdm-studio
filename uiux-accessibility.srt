@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:10,825
+A ramp was built for wheelchair users, but parents with buggies and travellers with suitcases use it too. Accessible design helps everyone.
+
+2
+00:00:11,520 --> 00:00:21,820
+Some people use screen readers, some use only a keyboard, some zoom to two hundred percent. Design so all of them can finish the task.
+
+3
+00:00:23,520 --> 00:00:32,520
+The accessibility guidelines group everything under four ideas: perceivable, operable, understandable and robust.
+
+4
+00:00:33,220 --> 00:00:41,120
+Can people see or hear it? Can they use it with any input? Is it clear? Does it work with assistive tools?
+
+5
+00:00:41,820 --> 00:00:47,570
+Try your page with only the keyboard. Can you reach everything, and see where you are?
+
+6
+00:00:49,270 --> 00:00:57,970
+Use the right element and you get accessibility for free. A real button works with the keyboard. A clickable div does not.
+
+7
+00:00:58,670 --> 00:01:05,570
+Give icon buttons a name, keep headings in order, and add a skip link. Now fix the page.
+
