@@ -1,0 +1,28 @@
+1
+00:00:00,500 --> 00:00:10,525
+Open a newspaper, and your eyes jump to the biggest headline, then the photo, then the small text. That order is visual hierarchy.
+
+2
+00:00:11,220 --> 00:00:18,345
+On every screen, ask: what is the one most important thing here? Make that the most visible.
+
+3
+00:00:20,050 --> 00:00:29,800
+On most screens there is one main action: buy, pay, or continue. Make it the most obvious button: filled colour, clear words.
+
+4
+00:00:30,500 --> 00:00:36,850
+Secondary actions like cancel or back are quieter: an outline or plain text.
+
+5
+00:00:37,550 --> 00:00:44,650
+CSS grid with auto-fill makes a grid that fits any screen, without a single media query.
+
+6
+00:00:46,350 --> 00:00:55,925
+Things that belong together sit together. A price close to its product name reads as one unit. Space is how people see groups.
+
+7
+00:00:56,620 --> 00:01:08,520
+Use a few spacing sizes, like four, eight, sixteen, twenty-four and thirty-two pixels, the way builders use standard bricks. Then lay out your product cards.
+
